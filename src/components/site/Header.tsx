@@ -42,7 +42,7 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden lg:flex items-center gap-3">
-          <button onClick={onOpenCatalogue} className="btn-outline-ink hover:bg-ink hover:text-bone">Catalogue</button>
+          <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Catalogue</button>
           <button onClick={onOpenInquiry} className="btn-gold hover:brightness-95">Get Quote</button>
         </div>
         <button className="lg:hidden p-2" onClick={() => setOpen((v) => !v)} aria-label="Menu">
