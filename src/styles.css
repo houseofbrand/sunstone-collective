@@ -248,24 +248,44 @@
   background: var(--color-surface);
 }
 
+.bg-ink,
+.bg-primary {
+  color: #FFFFFF;
+}
+
 .bg-ink .eyebrow,
-.bg-primary .eyebrow,
-.bg-ink .text-gold,
-.bg-primary .text-gold,
+.bg-primary .eyebrow {
+  color: var(--color-gold);
+}
+
+.bg-ink .text-muted-foreground,
+.bg-primary .text-muted-foreground,
+.bg-ink .text-secondary-foreground,
+.bg-primary .text-secondary-foreground,
+.bg-ink .text-foreground,
+.bg-primary .text-foreground,
+.bg-ink .text-primary,
+.bg-primary .text-primary,
+.bg-ink .text-ink,
+.bg-primary .text-ink,
 .bg-ink .text-bone\/50,
 .bg-ink .text-bone\/60,
 .bg-ink .text-bone\/70,
 .bg-ink .text-bone\/75,
 .bg-ink .text-bone\/80,
 .bg-ink .text-bone\/90,
-.bg-primary .text-bone,
-.bg-primary .text-primary,
-.bg-primary .text-ink {
+.bg-primary .text-bone {
   color: #FFFFFF;
 }
 
-.bg-ink a:not([class*="btn-"]):hover {
+.bg-ink a:not([class*="btn-"]),
+.bg-primary a:not([class*="btn-"]) {
   color: #FFFFFF;
+}
+
+.bg-ink a:not([class*="btn-"]):hover,
+.bg-primary a:not([class*="btn-"]):hover {
+  color: var(--color-gold);
   text-decoration-color: currentColor;
 }
 
