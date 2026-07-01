@@ -21,8 +21,8 @@ const downloadSchema = z.object({
 export const submitDownload = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => downloadSchema.parse(d))
   .handler(async ({ data }) => {
-    const sb = publicClient();
-    const { data: row, error } = await sb.from("catalogue_downloads").insert({
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row, error } = await supabaseAdmin.from("catalogue_downloads").insert({
       name: data.name,
       company: data.company,
       mobile: data.mobile,
