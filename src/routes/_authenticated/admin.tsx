@@ -97,7 +97,7 @@ function AdminPage() {
           <button onClick={signOut} className="btn-outline-ink inline-flex"><LogOut size={14} /> Sign out</button>
         </div>
         <nav className="max-w-7xl mx-auto px-6 flex gap-6 -mb-px">
-          {(["catalogues", "events", "leads"] as const).map((t) => (
+          {(["products", "catalogues", "events", "leads"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
