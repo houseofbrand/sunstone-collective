@@ -66,10 +66,11 @@
   --secondary: oklch(0.97 0.005 260);
   --secondary-foreground: oklch(0.28 0.07 258);
   --muted: oklch(0.97 0.005 260);
-  --muted-foreground: oklch(0.48 0.008 260);     /* #666 medium grey */
-  --accent: oklch(0.74 0.11 82);                 /* #C9A227 champagne gold */
+  --muted-foreground: oklch(0.42 0.008 260);     /* #4B5563 secondary text */
+  --accent: oklch(0.74 0.11 82);                 /* #C9A227 champagne gold — decorative */
   --accent-foreground: oklch(0.18 0.005 260);
-  --destructive: oklch(0.58 0.22 27);
+  --destructive: oklch(0.55 0.22 27);
+
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.92 0.005 260);               /* soft light border */
   --input: oklch(0.92 0.005 260);
@@ -122,9 +123,10 @@
     text-transform: uppercase;
     letter-spacing: 0.22em;
     font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--color-accent);
+    font-weight: 700;
+    color: var(--color-ink);
   }
+
   .rule-gold {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--color-gold) 40%, var(--color-gold) 60%, transparent);

@@ -146,7 +146,7 @@ export function CatalogueDialog({ open, onClose, categorySlug }: { open: boolean
                     </div>
                     <div className="text-right flex-shrink-0">
                       <div className="text-[11px] text-muted-foreground">{fmt(c.file_size)}</div>
-                      <div className="text-xs text-gold flex items-center gap-1 mt-0.5">
+                      <div className="text-xs text-ink font-semibold flex items-center gap-1 mt-0.5">
                         <Download size={12} /> {downloadingId === c.id ? "…" : "PDF"}
                       </div>
                     </div>
