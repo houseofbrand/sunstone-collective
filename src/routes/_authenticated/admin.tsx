@@ -347,36 +347,148 @@ function Field({ label, value, onChange, type = "text", required }: { label: str
   );
 }
 
-function EventsPanel({ events }: { events: Array<{ id: string; catalogue_slug: string | null; lead_id: string | null; user_agent: string | null; created_at: string }> }) {
+function toCsv(rows: Record<string, unknown>[], filename: string) {
+  if (!rows.length) return;
+  const cols = Array.from(new Set(rows.flatMap((r) => Object.keys(r))));
+  const esc = (v: unknown) => {
+    if (v === null || v === undefined) return "";
+    const s = String(v).replace(/"/g, '""');
+    return /[",\n]/.test(s) ? `"${s}"` : s;
+  };
+  const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => esc(r[c])).join(","))].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+type EventRow = { id: string; catalogue_slug: string | null; lead_id: string | null; user_agent: string | null; referrer?: string | null; created_at: string };
+
+function EventsPanel({ events, leads }: { events: EventRow[]; leads: { downloads: any[] } }) {
+  // Analytics
+  const total = events.length;
+  const leadsCount = leads.downloads.length;
+  const bySlug = new Map<string, number>();
+  const byDate = new Map<string, number>();
+  events.forEach((e) => {
+    const s = e.catalogue_slug ?? "unknown";
+    bySlug.set(s, (bySlug.get(s) ?? 0) + 1);
+    const d = new Date(e.created_at).toISOString().slice(0, 10);
+    byDate.set(d, (byDate.get(d) ?? 0) + 1);
+  });
+  const topCatalogue = [...bySlug.entries()].sort((a, b) => b[1] - a[1])[0];
+
+  // Category & country breakdowns come from joining lead_id -> download lead
+  const leadById = new Map(leads.downloads.map((l) => [l.id, l]));
+  const byCountry = new Map<string, number>();
+  events.forEach((e) => {
+    const l = e.lead_id ? leadById.get(e.lead_id) : null;
+    const c = l?.country ?? "Unknown";
+    byCountry.set(c, (byCountry.get(c) ?? 0) + 1);
+  });
+
+  const last30 = [...byDate.entries()].sort().slice(-30);
+  const maxDate = Math.max(1, ...last30.map(([, n]) => n));
+
   return (
-    <div>
-      <div className="flex items-center gap-2 mb-4">
-        <DL size={18} className="text-gold" />
-        <h2 className="font-display text-xl text-ink">Download events</h2>
-        <span className="text-xs text-muted-foreground">({events.length})</span>
+    <div className="space-y-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <Stat label="Total downloads" value={total} />
+        <Stat label="Leads captured" value={leadsCount} />
+        <Stat label="Most downloaded" value={topCatalogue ? `${topCatalogue[0]} (${topCatalogue[1]})` : "—"} />
+        <Stat label="Countries" value={byCountry.size} />
       </div>
-      <div className="border border-border overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead className="bg-muted/50">
-            <tr className="text-left">
-              <Th>When</Th><Th>Catalogue</Th><Th>Lead</Th><Th>User agent</Th>
-            </tr>
-          </thead>
-          <tbody>
-            {events.map((e) => (
-              <tr key={e.id} className="border-t border-border">
-                <Td>{new Date(e.created_at).toLocaleString()}</Td>
-                <Td>{e.catalogue_slug ?? "—"}</Td>
-                <Td className="font-mono text-xs">{e.lead_id?.slice(0, 8) ?? "—"}</Td>
-                <Td className="text-xs text-muted-foreground truncate max-w-xs">{e.user_agent ?? "—"}</Td>
-              </tr>
-            ))}
-            {events.length === 0 && (
-              <tr><Td colSpan={4} className="text-center text-muted-foreground py-8">No downloads yet.</Td></tr>
-            )}
-          </tbody>
-        </table>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        <BreakdownList title="Downloads by catalogue" items={[...bySlug.entries()].sort((a, b) => b[1] - a[1])} />
+        <BreakdownList title="Downloads by country" items={[...byCountry.entries()].sort((a, b) => b[1] - a[1])} />
       </div>
+
+      <div>
+        <div className="eyebrow mb-2">Downloads by day (last 30)</div>
+        <div className="border border-border p-4 bg-muted/20">
+          {last30.length === 0 ? (
+            <p className="text-xs text-muted-foreground text-center py-6">No downloads yet.</p>
+          ) : (
+            <div className="flex items-end gap-1 h-32">
+              {last30.map(([d, n]) => (
+                <div key={d} className="flex-1 flex flex-col items-center gap-1" title={`${d}: ${n}`}>
+                  <div className="w-full bg-gold" style={{ height: `${(n / maxDate) * 100}%` }} />
+                  <div className="text-[9px] text-muted-foreground rotate-45 origin-left translate-y-2">{d.slice(5)}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <DL size={18} className="text-gold" />
+            <h2 className="font-display text-xl text-ink">Download history</h2>
+            <span className="text-xs text-muted-foreground">({events.length})</span>
+          </div>
+          <button onClick={() => toCsv(events as any, `catalogue-downloads-${Date.now()}.csv`)} className="btn-outline-ink">
+            <DL size={14} /> Export CSV
+          </button>
+        </div>
+        <div className="border border-border overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="bg-muted/50">
+              <tr className="text-left"><Th>When</Th><Th>Catalogue</Th><Th>Lead</Th><Th>Country</Th><Th>User agent</Th></tr>
+            </thead>
+            <tbody>
+              {events.map((e) => {
+                const l = e.lead_id ? leadById.get(e.lead_id) : null;
+                return (
+                  <tr key={e.id} className="border-t border-border">
+                    <Td>{new Date(e.created_at).toLocaleString()}</Td>
+                    <Td>{e.catalogue_slug ?? "—"}</Td>
+                    <Td className="text-xs">{l ? `${l.name} · ${l.company}` : (e.lead_id?.slice(0, 8) ?? "—")}</Td>
+                    <Td>{l?.country ?? "—"}</Td>
+                    <Td className="text-xs text-muted-foreground truncate max-w-xs">{e.user_agent ?? "—"}</Td>
+                  </tr>
+                );
+              })}
+              {events.length === 0 && (
+                <tr><Td colSpan={5} className="text-center text-muted-foreground py-8">No downloads yet.</Td></tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div className="border border-border p-4">
+      <div className="text-[11px] uppercase tracking-widest text-muted-foreground">{label}</div>
+      <div className="font-display text-2xl text-ink mt-1 truncate">{value}</div>
+    </div>
+  );
+}
+
+function BreakdownList({ title, items }: { title: string; items: [string, number][] }) {
+  const max = Math.max(1, ...items.map(([, n]) => n));
+  return (
+    <div className="border border-border p-4">
+      <div className="eyebrow mb-3">{title}</div>
+      {items.length === 0 ? (
+        <p className="text-xs text-muted-foreground">No data yet.</p>
+      ) : (
+        <ul className="space-y-2">
+          {items.slice(0, 10).map(([k, n]) => (
+            <li key={k} className="text-sm">
+              <div className="flex justify-between mb-1"><span className="truncate">{k}</span><span className="tabular-nums text-muted-foreground">{n}</span></div>
+              <div className="h-1 bg-muted"><div className="h-full bg-gold" style={{ width: `${(n / max) * 100}%` }} /></div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
@@ -385,15 +497,18 @@ function LeadsPanel({ leads }: { leads: { downloads: any[]; inquiries: any[] } }
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="font-display text-xl text-ink mb-3">Catalogue download leads ({leads.downloads.length})</h2>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="font-display text-xl text-ink">Catalogue download leads ({leads.downloads.length})</h2>
+          <button onClick={() => toCsv(leads.downloads, `download-leads-${Date.now()}.csv`)} className="btn-outline-ink"><DL size={14} /> Export CSV</button>
+        </div>
         <div className="border border-border overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-muted/50"><tr className="text-left"><Th>When</Th><Th>Name</Th><Th>Company</Th><Th>Email</Th><Th>Mobile</Th><Th>City</Th></tr></thead>
+            <thead className="bg-muted/50"><tr className="text-left"><Th>When</Th><Th>Name</Th><Th>Company</Th><Th>Email</Th><Th>Mobile</Th><Th>City</Th><Th>Country</Th><Th>GST</Th></tr></thead>
             <tbody>
               {leads.downloads.map((l: any) => (
                 <tr key={l.id} className="border-t border-border">
                   <Td>{new Date(l.created_at).toLocaleString()}</Td>
-                  <Td>{l.name}</Td><Td>{l.company}</Td><Td>{l.email}</Td><Td>{l.mobile}</Td><Td>{l.city}</Td>
+                  <Td>{l.name}</Td><Td>{l.company}</Td><Td>{l.email}</Td><Td>{l.mobile}</Td><Td>{l.city}</Td><Td>{l.country}</Td><Td>{l.gst ?? "—"}</Td>
                 </tr>
               ))}
             </tbody>
@@ -401,7 +516,10 @@ function LeadsPanel({ leads }: { leads: { downloads: any[]; inquiries: any[] } }
         </div>
       </div>
       <div>
-        <h2 className="font-display text-xl text-ink mb-3">Inquiries ({leads.inquiries.length})</h2>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="font-display text-xl text-ink">Inquiries ({leads.inquiries.length})</h2>
+          <button onClick={() => toCsv(leads.inquiries, `inquiries-${Date.now()}.csv`)} className="btn-outline-ink"><DL size={14} /> Export CSV</button>
+        </div>
         <div className="border border-border overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-muted/50"><tr className="text-left"><Th>When</Th><Th>Name</Th><Th>Company</Th><Th>Email</Th><Th>Product</Th><Th>Qty</Th></tr></thead>
