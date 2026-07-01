@@ -109,7 +109,7 @@ function Home() {
             <Link key={c.slug} to="/category/$slug" params={{ slug: c.slug }} className="group block relative overflow-hidden bg-secondary aspect-[3/4]">
               <img src={c.image} alt={c.name} loading="lazy" width={900} height={1200} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-x-0 bottom-0 bg-primary text-primary-foreground p-5">
-                <div className="eyebrow">{c.short}</div>
+                <div className="eyebrow text-bone">{c.short}</div>
                 <div className="font-display text-lg mt-1">{c.name}</div>
               </div>
             </Link>
