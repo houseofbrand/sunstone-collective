@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { SITE, waLink } from "@/lib/site";
+import { useDialogs } from "./DialogsProvider";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -15,7 +16,10 @@ const nav = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-export function Header({ onOpenCatalogue, onOpenInquiry }: { onOpenCatalogue: () => void; onOpenInquiry: () => void }) {
+export function Header() {
+  const { openCatalogue, openInquiry } = useDialogs();
+  const onOpenCatalogue = openCatalogue;
+  const onOpenInquiry = () => openInquiry();
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
