@@ -8,6 +8,7 @@ import { categories, productPrimaryImage, type Product } from "@/lib/products";
 import { listPublicProducts } from "@/lib/products.functions";
 import { getFounder } from "@/lib/founder.functions";
 import { FounderSection } from "@/components/site/FounderSection";
+import { CollectionCatalogues } from "@/components/site/CollectionCatalogues";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import { SITE, waLink } from "@/lib/site";
 
@@ -120,6 +121,10 @@ function Home() {
 
         </div>
       </Section>
+
+      <div className="mt-24">
+        <CollectionCatalogues />
+      </div>
 
       <section className="section-surface mt-24 border-y border-border">
         <div className="container-luxe grid lg:grid-cols-2 gap-16 py-24 items-center">
