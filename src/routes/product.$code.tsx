@@ -112,6 +112,7 @@ function ProductPage() {
           <div className="mt-10 grid grid-cols-2 gap-3">
             <button onClick={() => openInquiry({ productCode: p.code, category: cat?.name })} className="btn-gold hover:brightness-95"><ShoppingBag size={14} /> Get OEM Quote</button>
             <button onClick={() => openInquiry({ productCode: p.code, category: cat?.name })} className="btn-outline-ink hover:bg-ink hover:text-bone"><Send size={14} /> Request Sample</button>
+            <button onClick={() => openCatalogue(p.category_slug)} className="btn-outline-ink hover:bg-ink hover:text-bone col-span-2"><Download size={14} /> Download Catalogue</button>
             <a href={waLink(`Hi, I'm interested in ${p.name} (${p.code}). Please share wholesale pricing & customisation options.`)} target="_blank" rel="noreferrer" className="btn-ink hover:brightness-110 col-span-2"><MessageCircle size={14} /> WhatsApp Inquiry</a>
           </div>
         </div>
