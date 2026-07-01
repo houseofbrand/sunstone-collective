@@ -6,11 +6,16 @@ import oemImg from "@/assets/oem-process.jpg";
 import customImg from "@/assets/customization.jpg";
 import { categories, productPrimaryImage, type Product } from "@/lib/products";
 import { listPublicProducts } from "@/lib/products.functions";
+import { getFounder } from "@/lib/founder.functions";
+import { FounderSection } from "@/components/site/FounderSection";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import { SITE, waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
-  loader: async () => ({ products: (await listPublicProducts()) as Product[] }),
+  loader: async () => ({
+    products: (await listPublicProducts()) as Product[],
+    founder: await getFounder(),
+  }),
   component: Home,
   head: () => ({
     meta: [{ property: "og:url", content: "/" }],
@@ -20,7 +25,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { openCatalogue, openInquiry } = useDialogs();
-  const { products } = Route.useLoaderData();
+  const { products, founder } = Route.useLoaderData();
   const featured = products.slice(0, 4);
   return (
     <>
