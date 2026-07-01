@@ -21,8 +21,8 @@ const downloadSchema = z.object({
 export const submitDownload = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => downloadSchema.parse(d))
   .handler(async ({ data }) => {
-    const sb = publicClient();
-    const { error } = await sb.from("catalogue_downloads").insert({
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row, error } = await supabaseAdmin.from("catalogue_downloads").insert({
       name: data.name,
       company: data.company,
       mobile: data.mobile,
@@ -30,9 +30,9 @@ export const submitDownload = createServerFn({ method: "POST" })
       gst: data.gst || null,
       country: data.country,
       city: data.city,
-    });
+    }).select("id").single();
     if (error) throw new Error(error.message);
-    return { ok: true };
+    return { ok: true, id: row.id as string };
   });
 
 const inquirySchema = z.object({
