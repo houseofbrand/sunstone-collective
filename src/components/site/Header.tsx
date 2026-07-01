@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { SITE, waLink } from "@/lib/site";
 import { useDialogs } from "./DialogsProvider";
+import logoAsset from "@/assets/oem-sunglasses-logo.png.asset.json";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -25,9 +26,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="container-luxe flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-center gap-3">
-          <span className="grid h-9 w-9 place-items-center rounded-full border border-ink text-ink font-display text-lg">O</span>
-          <span className="font-display text-lg tracking-tight text-ink">OEM<span className="text-gold">Sunglasses</span></span>
+        <Link to="/" className="flex items-center" aria-label="OEMSunglasses.com home">
+          <img src={logoAsset.url} alt="OEMSunglasses.com" className="h-12 md:h-14 w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-7">
           {nav.map((n) => (
