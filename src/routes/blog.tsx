@@ -29,7 +29,7 @@ function BlogIndex() {
         {blogPosts.map((p) => (
           <Link key={p.slug} to="/blog/$slug" params={{ slug: p.slug }} className="group block">
             <div className="eyebrow">{p.category}</div>
-            <h2 className="font-display text-2xl mt-2 group-hover:text-gold transition-colors">{p.title}</h2>
+            <h2 className="font-display text-2xl mt-2 group-hover:text-primary transition-colors">{p.title}</h2>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.excerpt}</p>
             <div className="mt-4 text-xs text-muted-foreground">{p.readTime} min read</div>
           </Link>

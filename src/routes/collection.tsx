@@ -30,9 +30,8 @@ function CollectionPage() {
         {categories.map((c) => (
           <Link key={c.slug} to="/category/$slug" params={{ slug: c.slug }} className="group block relative overflow-hidden bg-secondary aspect-[4/5]">
             <img src={c.image} alt={c.name} loading="lazy" width={900} height={1125} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
-            <div className="absolute inset-x-6 bottom-6 text-bone">
-              <div className="eyebrow text-gold/90">{c.short}</div>
+            <div className="absolute inset-x-0 bottom-0 bg-primary text-primary-foreground p-6">
+              <div className="eyebrow text-bone">{c.short}</div>
               <div className="font-display text-xl mt-1">{c.name}</div>
             </div>
           </Link>

@@ -140,7 +140,7 @@ export function CatalogueDialog({ open, onClose, categorySlug }: { open: boolean
                     <div className="flex-1 min-w-0">
                       <div className="font-display text-base text-ink flex items-center gap-2">
                         {c.title}
-                        {c.is_primary && <span className="text-[9px] uppercase tracking-widest bg-gold text-ink px-1.5 py-0.5">Primary</span>}
+                        {c.is_primary && <span className="text-[9px] uppercase tracking-widest bg-primary text-primary-foreground px-1.5 py-0.5">Primary</span>}
                       </div>
                       {c.description && <div className="text-xs text-muted-foreground truncate">{c.description}</div>}
                     </div>

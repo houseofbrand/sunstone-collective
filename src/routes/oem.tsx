@@ -34,11 +34,11 @@ function OemPage() {
       <header className="container-luxe pt-8 pb-14 grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <div className="eyebrow">OEM Manufacturing</div>
-          <h1 className="font-display text-4xl md:text-5xl mt-3">From sketch to shipment.<br/><span className="text-gold italic font-normal">Six deliberate steps.</span></h1>
+          <h1 className="font-display text-4xl md:text-5xl mt-3">From sketch to shipment.<br/><span className="text-primary italic font-normal">Six deliberate steps.</span></h1>
           <p className="mt-5 text-muted-foreground max-w-xl">Our OEM programme is built for founders, D2C brands, exporters and corporate buyers who want a manufacturing partner — not just a supplier.</p>
           <div className="rule-gold mt-6 w-16" />
           <div className="mt-8 flex flex-wrap gap-3">
-            <button onClick={() => openInquiry()} className="btn-gold hover:brightness-95">Start OEM Project</button>
+            <button onClick={() => openInquiry()} className="btn-gold">Start OEM Project</button>
             <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
           </div>
         </div>
@@ -47,13 +47,13 @@ function OemPage() {
         </div>
       </header>
 
-      <section className="bg-ink text-bone">
+      <section className="section-surface border-y border-border">
         <div className="container-luxe py-20 grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {steps.map(([t, d], i) => (
             <div key={t}>
-              <div className="font-display text-gold text-4xl">{String(i + 1).padStart(2, "0")}</div>
+              <div className="font-display text-primary text-4xl">{String(i + 1).padStart(2, "0")}</div>
               <div className="font-display text-xl mt-3">{t}</div>
-              <p className="text-sm text-bone/70 mt-2 leading-relaxed">{d}</p>
+              <p className="text-sm text-secondary-foreground mt-2 leading-relaxed">{d}</p>
             </div>
           ))}
         </div>

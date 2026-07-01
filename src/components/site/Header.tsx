@@ -24,7 +24,7 @@ export function Header() {
   const onOpenInquiry = () => openInquiry();
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border bg-background shadow-soft">
       <div className="container-luxe flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center" aria-label="OEMSunglasses.com home">
           <img src={logoAsset.url} alt="OEMSunglasses.com" className="h-12 md:h-14 w-auto" />
@@ -34,7 +34,7 @@ export function Header() {
             <Link
               key={n.to}
               to={n.to}
-              className="text-[13px] tracking-wide text-foreground/80 hover:text-ink transition-colors"
+              className="text-[13px] tracking-wide text-foreground hover:text-primary transition-colors"
               activeProps={{ className: "text-ink font-medium" }}
               activeOptions={{ exact: n.to === "/" }}
             >
@@ -44,7 +44,7 @@ export function Header() {
         </nav>
         <div className="hidden lg:flex items-center gap-3">
           <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Catalogue</button>
-          <button onClick={onOpenInquiry} className="btn-gold hover:brightness-95">Get Quote</button>
+          <button onClick={onOpenInquiry} className="btn-gold">Get Quote</button>
         </div>
         <button className="lg:hidden p-2" onClick={() => setOpen((v) => !v)} aria-label="Menu">
           {open ? <X size={22} /> : <Menu size={22} />}
