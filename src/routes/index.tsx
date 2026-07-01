@@ -92,12 +92,15 @@ function Home() {
             { icon: Globe2, t: "Worldwide export ready", d: "Documentation, packaging and freight partners for 40+ countries including EU, US, UAE, LATAM." },
             { icon: Award, t: "Certified quality", d: "UV400 tested lenses, CE-grade materials, drop-tested frames, in-house QC on every shipment." },
           ].map((c) => (
-            <div key={c.t} className="group border border-border p-7 bg-card hover:border-gold transition-colors">
-              <c.icon className="text-gold" size={26} />
-              <h3 className="font-display text-xl mt-5">{c.t}</h3>
-              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{c.d}</p>
+            <div key={c.t} className="card-luxe p-7 hover:card-luxe-hover">
+              <div className="w-11 h-11 rounded-md bg-secondary flex items-center justify-center text-royal">
+                <c.icon size={22} />
+              </div>
+              <h3 className="font-display text-lg mt-5 text-foreground">{c.t}</h3>
+              <p className="text-sm text-secondary-foreground mt-2 leading-relaxed">{c.d}</p>
             </div>
           ))}
+
         </div>
       </Section>
 
