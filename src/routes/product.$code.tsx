@@ -4,7 +4,7 @@ import { findCategory, productPrimaryImage, type Product } from "@/lib/products"
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import { SITE, waLink } from "@/lib/site";
-import { MessageCircle, Send, ShoppingBag } from "lucide-react";
+import { MessageCircle, Send, ShoppingBag, Download } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/product/$code")({
