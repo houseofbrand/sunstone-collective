@@ -4,22 +4,24 @@ import heroImg from "@/assets/hero-sunglasses.jpg";
 import collectionImg from "@/assets/collection-grid.jpg";
 import oemImg from "@/assets/oem-process.jpg";
 import customImg from "@/assets/customization.jpg";
-import { categories, products, featuredCodes, findProduct } from "@/lib/products";
+import { categories, productPrimaryImage, type Product } from "@/lib/products";
+import { listPublicProducts } from "@/lib/products.functions";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import { SITE, waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
+  loader: async () => ({ products: (await listPublicProducts()) as Product[] }),
   component: Home,
   head: () => ({
-    meta: [
-      { property: "og:url", content: "/" },
-    ],
+    meta: [{ property: "og:url", content: "/" }],
     links: [{ rel: "canonical", href: "/" }],
   }),
 });
 
 function Home() {
   const { openCatalogue, openInquiry } = useDialogs();
+  const { products } = Route.useLoaderData();
+  const featured = products.slice(0, 4);
   return (
     <>
       {/* HERO */}
@@ -58,7 +60,7 @@ function Home() {
               <img src={heroImg} alt="Premium OEM aviator sunglasses" width={1600} height={1200} className="w-full h-full object-cover" />
               <div className="absolute -bottom-1 -right-1 bg-bone text-ink px-5 py-3 border-l border-t border-gold">
                 <div className="eyebrow text-muted-foreground">Featured</div>
-                <div className="font-display text-lg leading-tight">Blakely Aviator · OEM-AV-101</div>
+                <div className="font-display text-lg leading-tight">India's Trusted OEM Partner</div>
               </div>
             </div>
           </div>
@@ -77,7 +79,6 @@ function Home() {
         </div>
       </section>
 
-      {/* WHY */}
       <Section eyebrow="Why OEMSunglasses.com" title="Built for brands who take manufacturing seriously.">
         <div className="grid md:grid-cols-3 gap-8 mt-10">
           {[
@@ -97,7 +98,6 @@ function Home() {
         </div>
       </Section>
 
-      {/* COLLECTIONS */}
       <Section eyebrow="Wholesale Collections" title="A silhouette for every private label." right={<Link to="/collection" className="text-sm hover:text-gold flex items-center gap-2">View all categories <ArrowRight size={14} /></Link>}>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
           {categories.slice(0, 8).map((c) => (
@@ -113,7 +113,6 @@ function Home() {
         </div>
       </Section>
 
-      {/* OEM PROCESS */}
       <section className="bg-ink text-bone mt-24">
         <div className="container-luxe grid lg:grid-cols-2 gap-16 py-24 items-center">
           <div className="order-2 lg:order-1">
@@ -148,7 +147,6 @@ function Home() {
         </div>
       </section>
 
-      {/* CUSTOMIZATION */}
       <Section eyebrow="Private Label & Customization" title="Every surface, brandable." right={<Link to="/customization" className="text-sm hover:text-gold flex items-center gap-2">All customization options <ArrowRight size={14} /></Link>}>
         <div className="grid lg:grid-cols-2 gap-10 mt-10">
           <div className="aspect-[4/3] overflow-hidden">
@@ -165,28 +163,32 @@ function Home() {
         </div>
       </Section>
 
-      {/* FEATURED PRODUCTS */}
-      <Section eyebrow="Featured Products" title="Wholesale-ready silhouettes.">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-          {featuredCodes.map((code) => {
-            const p = findProduct(code)!;
-            return (
-              <Link key={code} to="/product/$code" params={{ code }} className="group block">
-                <div className="aspect-square overflow-hidden bg-secondary">
-                  <img src={p.image} alt={p.name} loading="lazy" width={900} height={900} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="mt-4">
-                  <div className="eyebrow">{p.code}</div>
-                  <div className="font-display text-lg mt-1 group-hover:text-gold transition-colors">{p.name}</div>
-                  <div className="text-sm text-muted-foreground mt-1">₹{p.price} · MOQ {SITE.moq} pcs</div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </Section>
+      {featured.length > 0 && (
+        <Section eyebrow="Featured Products" title="Wholesale-ready silhouettes.">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+            {featured.map((p: Product) => {
+              const img = productPrimaryImage(p);
+              return (
+                <Link key={p.code} to="/product/$code" params={{ code: p.code }} className="group block">
+                  <div className="aspect-square overflow-hidden bg-secondary">
+                    {img ? (
+                      <img src={img} alt={p.name} loading="lazy" width={900} height={900} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs uppercase tracking-widest">No image</div>
+                    )}
+                  </div>
+                  <div className="mt-4">
+                    <div className="eyebrow">{p.code}</div>
+                    <div className="font-display text-lg mt-1 group-hover:text-gold transition-colors">{p.name}</div>
+                    <div className="text-sm text-muted-foreground mt-1">₹{p.price} · MOQ {SITE.moq} pcs</div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </Section>
+      )}
 
-      {/* INDUSTRIES */}
       <Section eyebrow="Industries We Serve" title="Trusted across the eyewear economy.">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
           {["D2C Fashion Brands","Amazon & E-commerce","Optical Chains","Corporate Gifting","Promotional Agencies","Distributors & Importers","Exporters","Retail Chains"].map((i) => (
@@ -198,7 +200,6 @@ function Home() {
         </div>
       </Section>
 
-      {/* TESTIMONIALS */}
       <Section eyebrow="Buyers say" title="A partner our clients scale with.">
         <div className="grid md:grid-cols-3 gap-6 mt-10">
           {[
@@ -215,7 +216,6 @@ function Home() {
         </div>
       </Section>
 
-      {/* CTA BAND */}
       <section className="mt-24">
         <div className="container-luxe">
           <div className="relative overflow-hidden">
@@ -234,7 +234,6 @@ function Home() {
         </div>
       </section>
 
-      {/* FAQ */}
       <Section eyebrow="Frequently Asked" title="Answers before you ask.">
         <div className="mt-10 grid md:grid-cols-2 gap-x-12 gap-y-2">
           {faqs.map((f) => (

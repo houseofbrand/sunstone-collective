@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { categories, products } from "@/lib/products";
+import { categories, type Product } from "@/lib/products";
+import { listPublicProducts } from "@/lib/products.functions";
 import { blogPosts } from "@/lib/blog";
 
 const BASE_URL = "";
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
+        const products = (await listPublicProducts()) as Product[];
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/collection", changefreq: "weekly", priority: "0.9" },

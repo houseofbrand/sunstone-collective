@@ -31,34 +31,41 @@ export const categories: Category[] = [
   { slug: "premium", name: "Premium Collection", short: "Signature private label", description: "Our most requested private label frames with premium packaging included.", image: aviator },
 ];
 
-export type Product = {
-  code: string;
-  name: string;
-  category: string; // slug
-  price: number; // wholesale INR
-  colours: string[];
-  frameMaterial: string;
-  lensMaterial: string;
-  weight: string;
-  image: string;
+export const findCategory = (slug: string) => categories.find((c) => c.slug === slug);
+
+export type ProductImage = {
+  id: string;
+  url: string;
+  is_primary: boolean;
+  sort_order: number;
+  alt_text: string | null;
 };
 
-export const products: Product[] = [
-  { code: "OEM-AV-101", name: "Blakely Aviator", category: "aviator", price: 249, colours: ["Matte Gold", "Gunmetal", "Rose Gold", "Black"], frameMaterial: "Alloy Metal", lensMaterial: "TAC Polarized UV400", weight: "28g", image: aviator },
-  { code: "OEM-AV-108", name: "Marconi Pilot", category: "aviator", price: 279, colours: ["Gold/Brown", "Silver/Grey"], frameMaterial: "Stainless Steel", lensMaterial: "CR-39 UV400", weight: "31g", image: aviator },
-  { code: "OEM-RD-204", name: "Atelier Round", category: "round", price: 229, colours: ["Gold", "Silver", "Black", "Tortoise"], frameMaterial: "Metal + Acetate Tip", lensMaterial: "AC Lens UV400", weight: "26g", image: round },
-  { code: "OEM-SQ-312", name: "Milano Square", category: "square", price: 289, colours: ["Tortoise", "Black", "Amber", "Crystal"], frameMaterial: "Italian Acetate", lensMaterial: "Nylon UV400", weight: "34g", image: square },
-  { code: "OEM-CE-408", name: "Fray Cat Eye", category: "cat-eye", price: 269, colours: ["Black/Gold", "Ivory", "Tortoise"], frameMaterial: "Acetate", lensMaterial: "TAC UV400", weight: "30g", image: cateye },
-  { code: "OEM-SP-511", name: "Vector Sport Wrap", category: "sports", price: 219, colours: ["Matte Black", "Navy", "White"], frameMaterial: "TR90", lensMaterial: "PC Polarized UV400", weight: "24g", image: sport },
-  { code: "OEM-PL-609", name: "Polaris Wayfarer", category: "polarized", price: 259, colours: ["Black/Gold", "Tortoise/Green"], frameMaterial: "TR90 + Metal Bridge", lensMaterial: "TAC Polarized UV400", weight: "27g", image: polarized },
-  { code: "OEM-DR-702", name: "Nightline Driver", category: "driving", price: 299, colours: ["Yellow HD", "Grey Polarized"], frameMaterial: "TR90", lensMaterial: "HD Polarized UV400", weight: "25g", image: polarized },
-];
+export type Product = {
+  id: string;
+  code: string;
+  name: string;
+  category_slug: string;
+  price: number;
+  colours: string[];
+  frame_material: string;
+  lens_material: string;
+  weight: string;
+  description: string | null;
+  sort_order: number;
+  images: ProductImage[];
+};
 
-export const featuredCodes = ["OEM-AV-101", "OEM-CE-408", "OEM-SQ-312", "OEM-SP-511"];
+export const productPrimaryImage = (p: Pick<Product, "images">) =>
+  p.images.find((i) => i.is_primary)?.url || p.images[0]?.url || null;
 
-export const findProduct = (code: string) => products.find((p) => p.code === code);
-export const findCategory = (slug: string) => categories.find((c) => c.slug === slug);
-export const productsByCategory = (slug: string) => {
-  const catNames = new Set([slug]);
-  return products.filter((p) => catNames.has(p.category) || (slug === "men" && ["aviator", "square", "sports", "polarized"].includes(p.category)) || (slug === "women" && ["cat-eye", "round"].includes(p.category)));
+/** Categories that group multiple silhouettes together. */
+const groupCategoryMap: Record<string, string[]> = {
+  men: ["aviator", "square", "sports", "polarized"],
+  women: ["cat-eye", "round"],
+};
+
+export const productsByCategory = (all: Product[], slug: string) => {
+  const group = groupCategoryMap[slug];
+  return all.filter((p) => (group ? group.includes(p.category_slug) : p.category_slug === slug));
 };
