@@ -31,7 +31,7 @@ export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () 
     setState("loading");
     const f = new FormData(e.currentTarget);
     try {
-      await submit({
+      const res = await submit({
         data: {
           name: String(f.get("name") || ""),
           company: String(f.get("company") || ""),
@@ -42,15 +42,7 @@ export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () 
           city: String(f.get("city") || ""),
         },
       });
-      // Best-effort: find the row we just inserted to reference it in download events
-      const { data } = await supabase
-        .from("catalogue_downloads")
-        .select("id")
-        .eq("email", String(f.get("email") || ""))
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-      setLeadId(data?.id);
+      setLeadId(res.id);
       setState("done");
     } catch (err) {
       setErrMsg(err instanceof Error ? err.message : "Something went wrong");
