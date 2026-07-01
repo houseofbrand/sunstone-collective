@@ -152,6 +152,8 @@ function Home() {
         </div>
       </section>
 
+      <FounderSection f={founder} compact />
+
       <Section eyebrow="Private Label & Customization" title="Every surface, brandable." right={<Link to="/customization" className="text-sm hover:text-gold flex items-center gap-2">All customization options <ArrowRight size={14} /></Link>}>
         <div className="grid lg:grid-cols-2 gap-10 mt-10">
           <div className="aspect-[4/3] overflow-hidden">
