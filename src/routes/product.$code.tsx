@@ -51,7 +51,7 @@ function ProductPage() {
   const { p, all } = Route.useLoaderData();
   const { openInquiry } = useDialogs();
   const cat = findCategory(p.category_slug);
-  const related = all.filter((x) => x.category_slug === p.category_slug && x.code !== p.code).slice(0, 4);
+  const related = all.filter((x: Product) => x.category_slug === p.category_slug && x.code !== p.code).slice(0, 4);
   const primary = productPrimaryImage(p);
   const [active, setActive] = useState<string | null>(primary);
 
@@ -69,7 +69,7 @@ function ProductPage() {
           </div>
           {p.images.length > 1 && (
             <div className="mt-3 grid grid-cols-5 gap-2">
-              {p.images.map((im) => (
+              {p.images.map((im: Product["images"][number]) => (
                 <button
                   key={im.id}
                   onClick={() => setActive(im.url)}
@@ -105,7 +105,7 @@ function ProductPage() {
             <div className="mt-6">
               <div className="eyebrow mb-2">Available Colours</div>
               <div className="flex flex-wrap gap-2">
-                {p.colours.map((c) => <span key={c} className="border border-border px-3 py-1 text-xs">{c}</span>)}
+                {p.colours.map((c: string) => <span key={c} className="border border-border px-3 py-1 text-xs">{c}</span>)}
               </div>
             </div>
           )}
@@ -123,7 +123,7 @@ function ProductPage() {
           <h2 className="font-display text-2xl mt-2">More from {cat?.name}</h2>
           <div className="rule-gold mt-4 w-16" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-            {related.map((r) => {
+            {related.map((r: Product) => {
               const rimg = productPrimaryImage(r);
               return (
                 <Link key={r.code} to="/product/$code" params={{ code: r.code }} className="group block">
