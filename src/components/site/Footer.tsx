@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { SITE, waLink } from "@/lib/site";
 import { Mail, MessageCircle, Download } from "lucide-react";
 import { useDialogs } from "./DialogsProvider";
+import logoAsset from "@/assets/oem-sunglasses-logo.png.asset.json";
 
 export function Footer() {
   const { openCatalogue } = useDialogs();
@@ -9,7 +10,7 @@ export function Footer() {
     <footer className="mt-24 border-t border-border bg-ink text-bone">
       <div className="container-luxe py-16 grid gap-12 md:grid-cols-4">
         <div>
-          <div className="font-display text-xl mb-4">OEM<span className="text-gold">Sunglasses</span></div>
+          <img src={logoAsset.url} alt="OEMSunglasses.com" className="h-14 w-auto mb-4 bg-bone rounded-sm p-2" />
           <p className="text-sm text-bone/70 leading-relaxed">
             India's trusted OEM sunglasses manufacturing partner. Private label, custom logo, low MOQ from 12 pieces, worldwide shipping.
           </p>
