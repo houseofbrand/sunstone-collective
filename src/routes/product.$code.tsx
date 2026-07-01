@@ -49,7 +49,7 @@ export const Route = createFileRoute("/product/$code")({
 
 function ProductPage() {
   const { p, all } = Route.useLoaderData();
-  const { openInquiry } = useDialogs();
+  const { openInquiry, openCatalogue } = useDialogs();
   const cat = findCategory(p.category_slug);
   const related = all.filter((x: Product) => x.category_slug === p.category_slug && x.code !== p.code).slice(0, 4);
   const primary = productPrimaryImage(p);
