@@ -112,6 +112,7 @@ function AdminPage() {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-8">
+        {tab === "products" && <ProductsPanel />}
         {tab === "catalogues" && (
           <CataloguesPanel cats={cats.data ?? []} refetch={() => qc.invalidateQueries({ queryKey: ["admin-catalogues"] })} />
         )}
