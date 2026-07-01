@@ -157,16 +157,16 @@ function Home() {
 
       <FounderSection f={founder} compact />
 
-      <Section eyebrow="Private Label & Customization" title="Every surface, brandable." right={<Link to="/customization" className="text-sm text-primary hover:text-blue-700 flex items-center gap-2">All customization options <ArrowRight size={14} /></Link>}>
-        <div className="grid lg:grid-cols-2 gap-10 mt-10">
-          <div className="aspect-[4/3] overflow-hidden">
+      <Section eyebrow="Private Label & Customization" title="Every surface, brandable." right={<Link to="/customization" className="text-sm font-medium flex items-center gap-2">All customization options <ArrowRight size={14} /></Link>}>
+        <div className="grid lg:grid-cols-2 gap-10 mt-10 items-center">
+          <div className="aspect-[4/3] overflow-hidden rounded-lg border border-border shadow-card">
             <img src={customImg} alt="Custom logo printing on sunglasses" loading="lazy" width={1400} height={1000} className="w-full h-full object-cover" />
           </div>
-          <div className="grid grid-cols-2 gap-3 self-center">
+          <div className="grid grid-cols-2 gap-3">
             {["Temple Logo Printing","Lens Branding","Laser Engraving","Metal Logo Badge","Hard Case Printing","Soft Pouch Printing","Cleaning Cloth","Gift Box Printing","Barcode Stickers","Custom Packaging","Custom Colours","Custom Lens Tints"].map((o) => (
-              <div key={o} className="border border-border p-4 flex items-center gap-3 hover:border-gold transition-colors">
+              <div key={o} className="card-luxe px-4 py-3 flex items-center gap-3">
                 <Sparkles className="text-gold shrink-0" size={16} />
-                <span className="text-sm">{o}</span>
+                <span className="text-sm text-foreground">{o}</span>
               </div>
             ))}
           </div>
@@ -175,24 +175,30 @@ function Home() {
 
       {featured.length > 0 && (
         <Section eyebrow="Featured Products" title="Wholesale-ready silhouettes.">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
             {featured.map((p: Product) => {
               const img = productPrimaryImage(p);
               return (
-                <Link key={p.code} to="/product/$code" params={{ code: p.code }} className="group block">
-                  <div className="aspect-square overflow-hidden bg-secondary">
+                <div key={p.code} className="card-luxe overflow-hidden flex flex-col hover:card-luxe-hover">
+                  <Link to="/product/$code" params={{ code: p.code }} className="block aspect-square overflow-hidden bg-secondary">
                     {img ? (
-                      <img src={img} alt={p.name} loading="lazy" width={900} height={900} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img src={img} alt={p.name} loading="lazy" width={900} height={900} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs uppercase tracking-widest">No image</div>
+                      <div className="w-full h-full flex items-center justify-center text-secondary-foreground text-xs uppercase tracking-widest">No image</div>
                     )}
+                  </Link>
+                  <div className="p-5 flex flex-col flex-1">
+                    <div className="text-xs font-medium uppercase tracking-wider text-secondary-foreground">{p.code}</div>
+                    <Link to="/product/$code" params={{ code: p.code }} className="font-display text-lg mt-1 text-foreground hover:text-royal">
+                      {p.name}
+                    </Link>
+                    <div className="mt-2 text-sm text-secondary-foreground">MOQ {SITE.moq} pcs · Wholesale ₹{p.price}</div>
+                    <div className="mt-4 flex gap-2 pt-4 border-t border-border">
+                      <Link to="/product/$code" params={{ code: p.code }} className="btn-outline-ink flex-1 text-xs">View Details</Link>
+                      <button onClick={() => openInquiry()} className="btn-ink flex-1 text-xs">Request Quote</button>
+                    </div>
                   </div>
-                  <div className="mt-4">
-                    <div className="eyebrow">{p.code}</div>
-                    <div className="font-display text-lg mt-1 group-hover:text-primary transition-colors">{p.name}</div>
-                    <div className="text-sm text-muted-foreground mt-1">₹{p.price} · MOQ {SITE.moq} pcs</div>
-                  </div>
-                </Link>
+                </div>
               );
             })}
           </div>
@@ -202,25 +208,27 @@ function Home() {
       <Section eyebrow="Industries We Serve" title="Trusted across the eyewear economy.">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
           {["D2C Fashion Brands","Amazon & E-commerce","Optical Chains","Corporate Gifting","Promotional Agencies","Distributors & Importers","Exporters","Retail Chains"].map((i) => (
-            <div key={i} className="border border-border p-6 text-center bg-card hover:border-primary transition-colors">
-              <Package size={20} className="mx-auto text-gold" />
-              <div className="font-display mt-3">{i}</div>
+            <div key={i} className="card-luxe p-6 text-center hover:card-luxe-hover">
+              <div className="w-10 h-10 rounded-md bg-secondary flex items-center justify-center text-royal mx-auto">
+                <Package size={18} />
+              </div>
+              <div className="font-medium text-sm mt-3 text-foreground">{i}</div>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="Buyers say" title="A partner our clients scale with.">
+      <Section eyebrow="Client Testimonials" title="A partner our clients scale with.">
         <div className="grid md:grid-cols-3 gap-6 mt-10">
           {[
             { q: "We launched our first private label collection in 6 weeks. Quality matched our reference frames from Milan.", a: "Founder, Northwind Eyewear (UK)" },
             { q: "Consistent quality across three repeat orders. Packaging and branding were exactly as approved.", a: "Category Head, Amazon Seller (US)" },
             { q: "Their sampling process is quick and their team is genuinely responsive. Ideal for corporate gifting programs.", a: "Procurement Lead, Fortune 500 (India)" },
           ].map((t) => (
-            <figure key={t.a} className="border border-border p-8 bg-card">
-              <div className="text-gold font-display text-3xl leading-none">"</div>
-              <blockquote className="mt-4 text-sm leading-relaxed">{t.q}</blockquote>
-              <figcaption className="eyebrow mt-6">{t.a}</figcaption>
+            <figure key={t.a} className="card-luxe p-7">
+              <div className="text-gold font-display text-4xl leading-none">"</div>
+              <blockquote className="mt-3 text-sm leading-relaxed text-foreground">{t.q}</blockquote>
+              <figcaption className="text-xs font-medium uppercase tracking-wider text-secondary-foreground mt-6">{t.a}</figcaption>
             </figure>
           ))}
         </div>
@@ -228,17 +236,13 @@ function Home() {
 
       <section className="mt-24">
         <div className="container-luxe">
-          <div className="relative overflow-hidden">
-            <img src={collectionImg} alt="Sunglasses collection" loading="lazy" width={1600} height={1000} className="w-full h-72 md:h-96 object-cover" />
-              <div className="absolute inset-0 bg-background grid place-items-center text-center p-8 border border-border">
-              <div>
-                <div className="eyebrow">Start your brand</div>
-                <h3 className="font-display text-3xl md:text-4xl text-foreground mt-3 max-w-2xl">Ready to launch your own sunglasses line?</h3>
-                <div className="mt-8 flex flex-wrap gap-3 justify-center">
-                  <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone"><Download size={14} /> Download Catalogue</button>
-                  <button onClick={() => openInquiry()} className="btn-outline-ink hover:bg-ink hover:text-bone">Get OEM Quote</button>
-                </div>
-              </div>
+          <div className="bg-ink rounded-lg px-8 py-14 md:px-16 md:py-20 text-center">
+            <div className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Start Your Brand</div>
+            <h3 className="font-display text-3xl md:text-4xl mt-3 max-w-2xl mx-auto">Ready to launch your own sunglasses line?</h3>
+            <p className="mt-4 text-white/85 max-w-xl mx-auto">Speak with our OEM team for pricing, samples, and lead times tailored to your brand.</p>
+            <div className="mt-8 flex flex-wrap gap-3 justify-center">
+              <button onClick={() => openInquiry()} className="btn-ink hover:btn-ink-hover">Get a Quote</button>
+              <button onClick={() => openCatalogue()} className="btn-outline-bone hover:bg-white hover:text-ink"><Download size={16} /> Download Catalogue</button>
             </div>
           </div>
         </div>
