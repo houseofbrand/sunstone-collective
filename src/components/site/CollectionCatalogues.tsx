@@ -81,8 +81,8 @@ export function CollectionCatalogues() {
                 <span className="absolute top-3 right-3 rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-medium text-white">
                   PDF · {c.size}
                 </span>
-                <span className="absolute inset-0 grid place-items-center bg-ink/45 opacity-0 transition-opacity group-hover/thumb:opacity-100">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-ink">
+                <span className="absolute inset-0 grid place-items-center bg-black/50 opacity-0 transition-opacity group-hover/thumb:opacity-100">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#ffffff] px-4 py-2 text-sm font-semibold text-[#0B1220]">
                     <Eye size={15} /> View catalogue
                   </span>
                 </span>
