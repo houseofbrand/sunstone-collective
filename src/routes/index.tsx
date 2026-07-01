@@ -38,7 +38,7 @@ function Home() {
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link to="/collection" className="btn-gold hover:brightness-95">Browse Collection <ArrowRight size={14} /></Link>
-              <button onClick={openCatalogue} className="btn-outline-bone hover:bg-bone hover:text-ink"><Download size={14} /> Download Catalogue</button>
+              <button onClick={() => openCatalogue()} className="btn-outline-bone hover:bg-bone hover:text-ink"><Download size={14} /> Download Catalogue</button>
               <button onClick={() => openInquiry()} className="btn-outline-bone hover:bg-bone hover:text-ink">Get OEM Quote</button>
               <a href={waLink("Hello, I'd like to discuss OEM sunglasses.")} target="_blank" rel="noreferrer" className="btn-outline-bone hover:bg-bone hover:text-ink"><MessageCircle size={14} /> WhatsApp</a>
             </div>
@@ -225,7 +225,7 @@ function Home() {
                 <div className="eyebrow text-gold">Start your brand</div>
                 <h3 className="font-display text-3xl md:text-4xl text-bone mt-3 max-w-2xl">Ready to launch your own sunglasses line?</h3>
                 <div className="mt-8 flex flex-wrap gap-3 justify-center">
-                  <button onClick={openCatalogue} className="btn-gold hover:brightness-95"><Download size={14} /> Download Catalogue</button>
+                  <button onClick={() => openCatalogue()} className="btn-gold hover:brightness-95"><Download size={14} /> Download Catalogue</button>
                   <button onClick={() => openInquiry()} className="btn-outline-bone hover:bg-bone hover:text-ink">Get OEM Quote</button>
                 </div>
               </div>
