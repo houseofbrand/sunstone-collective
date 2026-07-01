@@ -480,13 +480,13 @@ function SortableImage({
         <button
           {...attributes}
           {...listeners}
-          className="absolute top-1 left-1 bg-background/80 border border-border p-1 cursor-grab active:cursor-grabbing"
+          className="absolute top-1 left-1 bg-background border border-border p-1 cursor-grab active:cursor-grabbing"
           aria-label="Drag to reorder"
         >
           <GripVertical size={12} />
         </button>
         {img.is_primary && (
-          <div className="absolute top-1 right-1 bg-gold text-ink text-[10px] uppercase tracking-widest px-2 py-0.5 flex items-center gap-1">
+          <div className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] uppercase tracking-widest px-2 py-0.5 flex items-center gap-1">
             <Star size={10} /> Primary
           </div>
         )}

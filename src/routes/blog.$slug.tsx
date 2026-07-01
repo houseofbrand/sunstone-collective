@@ -44,7 +44,7 @@ function BlogPost() {
         <h1 className="font-display text-4xl md:text-5xl mt-3">{post.title}</h1>
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-6 text-xs text-muted-foreground">{post.readTime} min read</div>
-        <div className="prose prose-neutral mt-10 space-y-6 text-foreground/85 leading-relaxed">
+        <div className="prose prose-neutral mt-10 space-y-6 text-foreground leading-relaxed">
           {post.body.map((para: string, i: number) => (
             para.startsWith("## ") ? (
               <h2 key={i} className="font-display text-2xl mt-8">{para.replace("## ", "")}</h2>

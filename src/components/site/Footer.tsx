@@ -7,48 +7,48 @@ import logoAsset from "@/assets/oem-sunglasses-logo.png.asset.json";
 export function Footer() {
   const { openCatalogue } = useDialogs();
   return (
-    <footer className="mt-24 border-t border-border bg-ink text-bone">
+    <footer className="mt-24 border-t border-border bg-background text-foreground">
       <div className="container-luxe py-16 grid gap-12 md:grid-cols-4">
         <div>
-          <img src={logoAsset.url} alt="OEMSunglasses.com" className="h-14 w-auto mb-4 bg-bone rounded-sm p-2" />
-          <p className="text-sm text-bone/70 leading-relaxed">
+          <img src={logoAsset.url} alt="OEMSunglasses.com" className="h-14 w-auto mb-4" />
+          <p className="text-sm text-secondary-foreground leading-relaxed">
             India's trusted OEM sunglasses manufacturing partner. Private label, custom logo, low MOQ from 12 pieces, worldwide shipping.
           </p>
         </div>
         <div>
-          <div className="eyebrow text-bone/60 mb-4">Explore</div>
+          <div className="eyebrow mb-4">Explore</div>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/collection" className="hover:text-gold">Collection</Link></li>
-            <li><Link to="/oem" className="hover:text-gold">OEM Process</Link></li>
-            <li><Link to="/customization" className="hover:text-gold">Customization</Link></li>
-            <li><Link to="/wholesale" className="hover:text-gold">Wholesale</Link></li>
-            <li><Link to="/industries" className="hover:text-gold">Industries</Link></li>
+            <li><Link to="/collection" className="text-primary hover:text-blue-700 underline-offset-4">Collection</Link></li>
+            <li><Link to="/oem" className="text-primary hover:text-blue-700 underline-offset-4">OEM Process</Link></li>
+            <li><Link to="/customization" className="text-primary hover:text-blue-700 underline-offset-4">Customization</Link></li>
+            <li><Link to="/wholesale" className="text-primary hover:text-blue-700 underline-offset-4">Wholesale</Link></li>
+            <li><Link to="/industries" className="text-primary hover:text-blue-700 underline-offset-4">Industries</Link></li>
           </ul>
         </div>
         <div>
-          <div className="eyebrow text-bone/60 mb-4">Company</div>
+          <div className="eyebrow mb-4">Company</div>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/about" className="hover:text-gold">About</Link></li>
-            <li><Link to="/blog" className="hover:text-gold">Journal</Link></li>
-            <li><Link to="/contact" className="hover:text-gold">Contact</Link></li>
+            <li><Link to="/about" className="text-primary hover:text-blue-700 underline-offset-4">About</Link></li>
+            <li><Link to="/blog" className="text-primary hover:text-blue-700 underline-offset-4">Journal</Link></li>
+            <li><Link to="/contact" className="text-primary hover:text-blue-700 underline-offset-4">Contact</Link></li>
           </ul>
         </div>
         <div>
-          <div className="eyebrow text-bone/60 mb-4">Get in touch</div>
-          <a href={waLink("Hello, I'd like an OEM sunglasses quote.")} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm hover:text-gold">
+          <div className="eyebrow mb-4">Get in touch</div>
+          <a href={waLink("Hello, I'd like an OEM sunglasses quote.")} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-primary hover:text-blue-700 underline-offset-4">
             <MessageCircle size={16} /> {SITE.whatsapp}
           </a>
-          <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 text-sm hover:text-gold mt-2">
+          <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 text-sm text-primary hover:text-blue-700 underline-offset-4 mt-2">
             <Mail size={16} /> {SITE.email}
           </a>
-          <p className="text-xs text-bone/50 mt-6">MOQ 12 pieces · Worldwide export · Custom branding</p>
-          <button onClick={() => openCatalogue()} className="mt-4 inline-flex items-center gap-2 border border-gold text-gold px-4 py-2 text-xs uppercase tracking-widest hover:bg-gold hover:text-ink transition-colors">
+          <p className="text-xs text-muted-foreground mt-6">MOQ 12 pieces · Worldwide export · Custom branding</p>
+          <button onClick={() => openCatalogue()} className="btn-outline-ink mt-4 inline-flex hover:bg-ink hover:text-bone">
             <Download size={14} /> Download Catalogue
           </button>
         </div>
       </div>
-      <div className="border-t border-bone/10">
-        <div className="container-luxe py-5 text-xs text-bone/50 flex flex-col sm:flex-row justify-between gap-2">
+      <div className="border-t border-border">
+        <div className="container-luxe py-5 text-xs text-muted-foreground flex flex-col sm:flex-row justify-between gap-2">
           <span>© {new Date().getFullYear()} OEMSunglasses.com — All rights reserved.</span>
           <span>OEM · Private Label · White Label · Wholesale</span>
         </div>

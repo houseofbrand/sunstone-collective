@@ -46,7 +46,7 @@ function CategoryPage() {
         <p className="mt-4 max-w-2xl text-muted-foreground">{cat.description}</p>
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-8 flex flex-wrap gap-3">
-          <button onClick={() => openInquiry({ category: cat.name })} className="btn-gold hover:brightness-95">Get Wholesale Quote</button>
+          <button onClick={() => openInquiry({ category: cat.name })} className="btn-gold">Get Wholesale Quote</button>
           <button onClick={() => openCatalogue(cat.slug)} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
           <Link to="/customization" className="btn-outline-ink hover:bg-ink hover:text-bone">Customization Options</Link>
         </div>
@@ -68,7 +68,7 @@ function CategoryPage() {
               </div>
               <div className="mt-4">
                 <div className="eyebrow">{p.code}</div>
-                <div className="font-display text-lg mt-1 group-hover:text-gold">{p.name}</div>
+                <div className="font-display text-lg mt-1 group-hover:text-primary">{p.name}</div>
                 <div className="text-sm text-muted-foreground mt-1">₹{p.price} · MOQ {SITE.moq} pcs</div>
               </div>
             </Link>

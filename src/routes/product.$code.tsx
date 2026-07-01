@@ -110,7 +110,7 @@ function ProductPage() {
             </div>
           )}
           <div className="mt-10 grid grid-cols-2 gap-3">
-            <button onClick={() => openInquiry({ productCode: p.code, category: cat?.name })} className="btn-gold hover:brightness-95"><ShoppingBag size={14} /> Get OEM Quote</button>
+            <button onClick={() => openInquiry({ productCode: p.code, category: cat?.name })} className="btn-gold"><ShoppingBag size={14} /> Get OEM Quote</button>
             <button onClick={() => openInquiry({ productCode: p.code, category: cat?.name })} className="btn-outline-ink hover:bg-ink hover:text-bone"><Send size={14} /> Request Sample</button>
             <button onClick={() => openCatalogue(p.category_slug)} className="btn-outline-ink hover:bg-ink hover:text-bone col-span-2"><Download size={14} /> Download Catalogue</button>
             <a href={waLink(`Hi, I'm interested in ${p.name} (${p.code}). Please share wholesale pricing & customisation options.`)} target="_blank" rel="noreferrer" className="btn-ink hover:brightness-110 col-span-2"><MessageCircle size={14} /> WhatsApp Inquiry</a>
@@ -137,7 +137,7 @@ function ProductPage() {
                   </div>
                   <div className="mt-3">
                     <div className="eyebrow">{r.code}</div>
-                    <div className="font-display text-base mt-1 group-hover:text-gold">{r.name}</div>
+                    <div className="font-display text-base mt-1 group-hover:text-primary">{r.name}</div>
                   </div>
                 </Link>
               );

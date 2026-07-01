@@ -208,7 +208,7 @@ function CatalogueRow({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-display text-lg text-ink truncate">{cat.title}</span>
-            {cat.is_primary && <span className="text-[10px] uppercase tracking-widest bg-gold text-ink px-2 py-0.5 inline-flex items-center gap-1"><Star size={10} /> Primary</span>}
+            {cat.is_primary && <span className="text-[10px] uppercase tracking-widest bg-primary text-primary-foreground px-2 py-0.5 inline-flex items-center gap-1"><Star size={10} /> Primary</span>}
             {cat.category_slug && <span className="text-[10px] uppercase tracking-widest bg-muted px-2 py-0.5">{cat.category_slug}</span>}
             {!cat.is_active && <span className="text-[10px] uppercase tracking-widest bg-muted px-2 py-0.5">Hidden</span>}
           </div>
