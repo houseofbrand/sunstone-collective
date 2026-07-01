@@ -31,6 +31,8 @@ type Cat = {
   slug: string;
   title: string;
   description: string | null;
+  category_slug: string | null;
+  is_primary: boolean;
   file_path: string | null;
   file_size: number | null;
   sort_order: number;
