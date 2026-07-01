@@ -166,7 +166,7 @@ function Home() {
       {featured.length > 0 && (
         <Section eyebrow="Featured Products" title="Wholesale-ready silhouettes.">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-            {featured.map((p) => {
+            {featured.map((p: Product) => {
               const img = productPrimaryImage(p);
               return (
                 <Link key={p.code} to="/product/$code" params={{ code: p.code }} className="group block">
