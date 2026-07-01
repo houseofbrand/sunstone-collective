@@ -146,6 +146,54 @@ export type Database = {
         }
         Relationships: []
       }
+      founder_profile: {
+        Row: {
+          achievements: Json
+          bio: string
+          designation: string
+          facebook_url: string
+          id: string
+          image_url: string
+          instagram_url: string
+          linkedin_url: string
+          name: string
+          quote: string
+          updated_at: string
+          website_url: string
+          youtube_url: string
+        }
+        Insert: {
+          achievements?: Json
+          bio?: string
+          designation?: string
+          facebook_url?: string
+          id?: string
+          image_url?: string
+          instagram_url?: string
+          linkedin_url?: string
+          name?: string
+          quote?: string
+          updated_at?: string
+          website_url?: string
+          youtube_url?: string
+        }
+        Update: {
+          achievements?: Json
+          bio?: string
+          designation?: string
+          facebook_url?: string
+          id?: string
+          image_url?: string
+          instagram_url?: string
+          linkedin_url?: string
+          name?: string
+          quote?: string
+          updated_at?: string
+          website_url?: string
+          youtube_url?: string
+        }
+        Relationships: []
+      }
       inquiries: {
         Row: {
           business_type: string | null

@@ -14,6 +14,7 @@ import {
 } from "@/lib/catalogues.functions";
 import { Upload, Trash2, Plus, LogOut, RefreshCw, Download as DL, Save, Star } from "lucide-react";
 import { ProductsPanel } from "@/components/admin/ProductsPanel";
+import { FounderPanel } from "@/components/admin/FounderPanel";
 import { categories as productCategories } from "@/lib/products";
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -65,7 +66,7 @@ function AdminPage() {
     enabled: !!admin.data?.admin,
   });
 
-  const [tab, setTab] = useState<"products" | "catalogues" | "events" | "leads">("products");
+  const [tab, setTab] = useState<"products" | "catalogues" | "events" | "leads" | "founder">("products");
 
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -100,7 +101,7 @@ function AdminPage() {
           <button onClick={signOut} className="btn-outline-ink inline-flex"><LogOut size={14} /> Sign out</button>
         </div>
         <nav className="max-w-7xl mx-auto px-6 flex gap-6 -mb-px">
-          {(["products", "catalogues", "events", "leads"] as const).map((t) => (
+          {(["products", "catalogues", "events", "leads", "founder"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
@@ -121,6 +122,7 @@ function AdminPage() {
         )}
         {tab === "events" && <EventsPanel events={events.data ?? []} leads={leads.data ?? { downloads: [] }} />}
         {tab === "leads" && <LeadsPanel leads={leads.data ?? { downloads: [], inquiries: [] }} />}
+        {tab === "founder" && <FounderPanel />}
       </main>
     </div>
   );

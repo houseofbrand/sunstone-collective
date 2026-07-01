@@ -13,6 +13,7 @@ import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as OemRouteImport } from './routes/oem'
 import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as FounderRouteImport } from './routes/founder'
 import { Route as CustomizationRouteImport } from './routes/customization'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CollectionRouteImport } from './routes/collection'
@@ -44,6 +45,11 @@ const OemRoute = OemRouteImport.update({
 const IndustriesRoute = IndustriesRouteImport.update({
   id: '/industries',
   path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FounderRoute = FounderRouteImport.update({
+  id: '/founder',
+  path: '/founder',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CustomizationRoute = CustomizationRouteImport.update({
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/collection': typeof CollectionRoute
   '/contact': typeof ContactRoute
   '/customization': typeof CustomizationRoute
+  '/founder': typeof FounderRoute
   '/industries': typeof IndustriesRoute
   '/oem': typeof OemRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/collection': typeof CollectionRoute
   '/contact': typeof ContactRoute
   '/customization': typeof CustomizationRoute
+  '/founder': typeof FounderRoute
   '/industries': typeof IndustriesRoute
   '/oem': typeof OemRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/collection': typeof CollectionRoute
   '/contact': typeof ContactRoute
   '/customization': typeof CustomizationRoute
+  '/founder': typeof FounderRoute
   '/industries': typeof IndustriesRoute
   '/oem': typeof OemRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/collection'
     | '/contact'
     | '/customization'
+    | '/founder'
     | '/industries'
     | '/oem'
     | '/sitemap.xml'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/collection'
     | '/contact'
     | '/customization'
+    | '/founder'
     | '/industries'
     | '/oem'
     | '/sitemap.xml'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/collection'
     | '/contact'
     | '/customization'
+    | '/founder'
     | '/industries'
     | '/oem'
     | '/sitemap.xml'
@@ -223,6 +235,7 @@ export interface RootRouteChildren {
   CollectionRoute: typeof CollectionRoute
   ContactRoute: typeof ContactRoute
   CustomizationRoute: typeof CustomizationRoute
+  FounderRoute: typeof FounderRoute
   IndustriesRoute: typeof IndustriesRoute
   OemRoute: typeof OemRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       path: '/industries'
       fullPath: '/industries'
       preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/founder': {
+      id: '/founder'
+      path: '/founder'
+      fullPath: '/founder'
+      preLoaderRoute: typeof FounderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/customization': {
@@ -378,6 +398,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionRoute: CollectionRoute,
   ContactRoute: ContactRoute,
   CustomizationRoute: CustomizationRoute,
+  FounderRoute: FounderRoute,
   IndustriesRoute: IndustriesRoute,
   OemRoute: OemRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
