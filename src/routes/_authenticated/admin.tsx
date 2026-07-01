@@ -12,8 +12,9 @@ import {
   adminListLeads,
   isCurrentUserAdmin,
 } from "@/lib/catalogues.functions";
-import { Upload, Trash2, Plus, LogOut, RefreshCw, Download as DL, Save } from "lucide-react";
+import { Upload, Trash2, Plus, LogOut, RefreshCw, Download as DL, Save, Star } from "lucide-react";
 import { ProductsPanel } from "@/components/admin/ProductsPanel";
+import { categories as productCategories } from "@/lib/products";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
