@@ -120,7 +120,7 @@ function Home() {
       <section className="section-surface mt-24 border-y border-border">
         <div className="container-luxe grid lg:grid-cols-2 gap-16 py-24 items-center">
           <div className="order-2 lg:order-1">
-            <div className="eyebrow text-bone mb-4">OEM Manufacturing Process</div>
+            <div className="eyebrow mb-4">OEM Manufacturing Process</div>
             <h2 className="font-display text-3xl md:text-4xl">From sketch to shipment — in six deliberate steps.</h2>
             <ol className="mt-10 space-y-6">
               {[
@@ -226,7 +226,7 @@ function Home() {
         <div className="container-luxe">
           <div className="relative overflow-hidden">
             <img src={collectionImg} alt="Sunglasses collection" loading="lazy" width={1600} height={1000} className="w-full h-72 md:h-96 object-cover" />
-              <div className="absolute inset-0 bg-background/95 grid place-items-center text-center p-8 border border-border">
+              <div className="absolute inset-0 bg-background grid place-items-center text-center p-8 border border-border">
               <div>
                 <div className="eyebrow">Start your brand</div>
                 <h3 className="font-display text-3xl md:text-4xl text-foreground mt-3 max-w-2xl">Ready to launch your own sunglasses line?</h3>

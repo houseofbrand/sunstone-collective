@@ -16,7 +16,7 @@ export function FounderSection({ f, compact = false }: { f: FounderProfile; comp
               loading="lazy"
               className="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"
             />
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-background/95" />
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-background" />
             <div className="absolute bottom-0 left-0 right-0 p-6">
               <div className="eyebrow">{f.designation}</div>
               <div className="font-display text-3xl text-foreground mt-1">{f.name}</div>
