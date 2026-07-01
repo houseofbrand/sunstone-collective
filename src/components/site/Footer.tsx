@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { SITE, waLink } from "@/lib/site";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle, Download } from "lucide-react";
+import { useDialogs } from "./DialogsProvider";
 
 export function Footer() {
+  const { openCatalogue } = useDialogs();
   return (
     <footer className="mt-24 border-t border-border bg-ink text-bone">
       <div className="container-luxe py-16 grid gap-12 md:grid-cols-4">
