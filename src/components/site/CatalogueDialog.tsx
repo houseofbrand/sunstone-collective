@@ -4,7 +4,6 @@ import { submitDownload } from "@/lib/leads.functions";
 import { listPublicCatalogues, requestCatalogueDownload } from "@/lib/catalogues.functions";
 import { X, Download, CheckCircle2, FileText } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 
 type PublicCat = { id: string; slug: string; title: string; description: string | null; file_size: number | null; sort_order: number };
 
