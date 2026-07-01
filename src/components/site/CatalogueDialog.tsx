@@ -1,13 +1,39 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { submitDownload } from "@/lib/leads.functions";
 import { listPublicCatalogues, requestCatalogueDownload } from "@/lib/catalogues.functions";
-import { X, Download, CheckCircle2, FileText } from "lucide-react";
+import { X, Download, CheckCircle2, FileText, MessageCircle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
-type PublicCat = { id: string; slug: string; title: string; description: string | null; file_size: number | null; sort_order: number };
+type PublicCat = { id: string; slug: string; title: string; description: string | null; file_size: number | null; sort_order: number; category_slug: string | null; is_primary: boolean };
+type LeadForm = { name: string; company: string; mobile: string; email: string; gst: string; country: string; city: string };
 
-export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
+const BUSINESS_WA = "917303681194";
+
+function buildWaMessage(lead: LeadForm, catalogueTitle?: string) {
+  const now = new Date();
+  const lines = [
+    "📥 New Catalogue Download Lead",
+    "",
+    `Name: ${lead.name}`,
+    `Company: ${lead.company}`,
+    `Mobile: ${lead.mobile}`,
+    `Email: ${lead.email}`,
+    `GST: ${lead.gst || "—"}`,
+    `City: ${lead.city}`,
+    `Country: ${lead.country}`,
+    `Catalogue Downloaded: ${catalogueTitle || "(to be selected)"}`,
+    `Date & Time: ${now.toLocaleString()}`,
+  ];
+  return lines.join("\n");
+}
+
+function openWhatsApp(msg: string) {
+  const url = `https://wa.me/${BUSINESS_WA}?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+export function CatalogueDialog({ open, onClose, categorySlug }: { open: boolean; onClose: () => void; categorySlug?: string }) {
   const submit = useServerFn(submitDownload);
   const catsFn = useServerFn(listPublicCatalogues);
   const requestFn = useServerFn(requestCatalogueDownload);
@@ -18,9 +44,17 @@ export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () 
     enabled: open,
   });
 
+  const filteredCats = useMemo(() => {
+    const all = catalogues ?? [];
+    if (!categorySlug) return all;
+    const matching = all.filter((c) => c.category_slug === categorySlug);
+    return matching.length ? matching : all;
+  }, [catalogues, categorySlug]);
+
   const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [errMsg, setErrMsg] = useState("");
   const [leadId, setLeadId] = useState<string | undefined>(undefined);
+  const [lead, setLead] = useState<LeadForm | null>(null);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   if (!open) return null;
@@ -29,20 +63,24 @@ export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () 
     e.preventDefault();
     setState("loading");
     const f = new FormData(e.currentTarget);
+    const payload: LeadForm = {
+      name: String(f.get("name") || ""),
+      company: String(f.get("company") || ""),
+      mobile: String(f.get("mobile") || ""),
+      email: String(f.get("email") || ""),
+      gst: String(f.get("gst") || ""),
+      country: String(f.get("country") || ""),
+      city: String(f.get("city") || ""),
+    };
     try {
-      const res = await submit({
-        data: {
-          name: String(f.get("name") || ""),
-          company: String(f.get("company") || ""),
-          mobile: String(f.get("mobile") || ""),
-          email: String(f.get("email") || ""),
-          gst: String(f.get("gst") || ""),
-          country: String(f.get("country") || ""),
-          city: String(f.get("city") || ""),
-        },
-      });
+      const res = await submit({ data: payload });
       setLeadId(res.id);
+      setLead(payload);
       setState("done");
+      // Auto-open WhatsApp with the pre-filled lead notification.
+      // If a primary/only catalogue is available, include its title.
+      const primary = filteredCats.find((c) => c.is_primary) || filteredCats[0];
+      openWhatsApp(buildWaMessage(payload, primary?.title));
     } catch (err) {
       setErrMsg(err instanceof Error ? err.message : "Something went wrong");
       setState("error");
@@ -80,10 +118,18 @@ export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () 
               <div className="text-center">
                 <CheckCircle2 className="mx-auto text-gold" size={44} />
                 <h3 className="font-display text-2xl mt-4">Thank you</h3>
-                <p className="text-sm text-muted-foreground mt-2">Choose a catalogue below to download.</p>
+                <p className="text-sm text-muted-foreground mt-2">Choose a catalogue below to download. Our team has been notified on WhatsApp.</p>
+                {lead && (
+                  <button
+                    onClick={() => openWhatsApp(buildWaMessage(lead))}
+                    className="btn-outline-ink mt-4 inline-flex text-xs"
+                  >
+                    <MessageCircle size={14} /> Re-send WhatsApp notification
+                  </button>
+                )}
               </div>
               <div className="mt-6 space-y-2">
-                {(catalogues ?? []).map((c) => (
+                {filteredCats.map((c) => (
                   <button
                     key={c.id}
                     onClick={() => handleDownload(c)}
@@ -92,7 +138,10 @@ export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () 
                   >
                     <FileText size={20} className="text-gold flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <div className="font-display text-base text-ink">{c.title}</div>
+                      <div className="font-display text-base text-ink flex items-center gap-2">
+                        {c.title}
+                        {c.is_primary && <span className="text-[9px] uppercase tracking-widest bg-gold text-ink px-1.5 py-0.5">Primary</span>}
+                      </div>
                       {c.description && <div className="text-xs text-muted-foreground truncate">{c.description}</div>}
                     </div>
                     <div className="text-right flex-shrink-0">
@@ -103,7 +152,7 @@ export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () 
                     </div>
                   </button>
                 ))}
-                {(!catalogues || catalogues.length === 0) && (
+                {filteredCats.length === 0 && (
                   <p className="text-xs text-muted-foreground text-center py-4">Our team will email the catalogue shortly.</p>
                 )}
               </div>
@@ -127,7 +176,7 @@ export function CatalogueDialog({ open, onClose }: { open: boolean; onClose: () 
                 <button disabled={state === "loading"} className="btn-gold w-full mt-2 disabled:opacity-60">
                   <Download size={15} /> {state === "loading" ? "Preparing…" : "Access Catalogues"}
                 </button>
-                <p className="text-[11px] text-muted-foreground text-center pt-1">Your details are used only to send you our latest B2B pricing & catalogue.</p>
+                <p className="text-[11px] text-muted-foreground text-center pt-1">Submitting will open WhatsApp with your enquiry pre-filled for our sales team.</p>
               </form>
             </>
           )}
