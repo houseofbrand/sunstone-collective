@@ -42,7 +42,7 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden lg:flex items-center gap-3">
-          <button onClick={onOpenCatalogue} className="btn-outline-ink hover:bg-ink hover:text-bone">Catalogue</button>
+          <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Catalogue</button>
           <button onClick={onOpenInquiry} className="btn-gold hover:brightness-95">Get Quote</button>
         </div>
         <button className="lg:hidden p-2" onClick={() => setOpen((v) => !v)} aria-label="Menu">
@@ -56,7 +56,7 @@ export function Header() {
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="text-sm py-1">{n.label}</Link>
             ))}
             <div className="flex flex-col gap-3 pt-3 border-t border-border">
-              <button onClick={() => { setOpen(false); onOpenCatalogue(); }} className="btn-outline-ink">Download Catalogue</button>
+              <button onClick={() => { setOpen(false); openCatalogue(); }} className="btn-outline-ink">Download Catalogue</button>
               <button onClick={() => { setOpen(false); onOpenInquiry(); }} className="btn-gold">Get OEM Quote</button>
               <a href={waLink(`Hello ${SITE.name}, I'd like to inquire about OEM sunglasses.`)} target="_blank" rel="noreferrer" className="btn-ink">WhatsApp Now</a>
             </div>

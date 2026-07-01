@@ -20,6 +20,7 @@ export type Database = {
           catalogue_slug: string | null
           created_at: string
           id: string
+          ip_address: string | null
           lead_id: string | null
           referrer: string | null
           user_agent: string | null
@@ -29,6 +30,7 @@ export type Database = {
           catalogue_slug?: string | null
           created_at?: string
           id?: string
+          ip_address?: string | null
           lead_id?: string | null
           referrer?: string | null
           user_agent?: string | null
@@ -38,6 +40,7 @@ export type Database = {
           catalogue_slug?: string | null
           created_at?: string
           id?: string
+          ip_address?: string | null
           lead_id?: string | null
           referrer?: string | null
           user_agent?: string | null
@@ -97,6 +100,7 @@ export type Database = {
       }
       catalogues: {
         Row: {
+          category_slug: string | null
           created_at: string
           description: string | null
           file_path: string | null
@@ -104,12 +108,14 @@ export type Database = {
           file_url: string | null
           id: string
           is_active: boolean
+          is_primary: boolean
           slug: string
           sort_order: number
           title: string
           updated_at: string
         }
         Insert: {
+          category_slug?: string | null
           created_at?: string
           description?: string | null
           file_path?: string | null
@@ -117,12 +123,14 @@ export type Database = {
           file_url?: string | null
           id?: string
           is_active?: boolean
+          is_primary?: boolean
           slug: string
           sort_order?: number
           title: string
           updated_at?: string
         }
         Update: {
+          category_slug?: string | null
           created_at?: string
           description?: string | null
           file_path?: string | null
@@ -130,6 +138,7 @@ export type Database = {
           file_url?: string | null
           id?: string
           is_active?: boolean
+          is_primary?: boolean
           slug?: string
           sort_order?: number
           title?: string

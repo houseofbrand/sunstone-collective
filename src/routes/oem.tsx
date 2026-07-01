@@ -39,7 +39,7 @@ function OemPage() {
           <div className="rule-gold mt-6 w-16" />
           <div className="mt-8 flex flex-wrap gap-3">
             <button onClick={() => openInquiry()} className="btn-gold hover:brightness-95">Start OEM Project</button>
-            <button onClick={openCatalogue} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
+            <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
           </div>
         </div>
         <div className="aspect-[4/5] overflow-hidden">

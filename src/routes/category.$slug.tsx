@@ -34,7 +34,7 @@ export const Route = createFileRoute("/category/$slug")({
 
 function CategoryPage() {
   const { cat, all } = Route.useLoaderData();
-  const { openInquiry } = useDialogs();
+  const { openInquiry, openCatalogue } = useDialogs();
   const list = productsByCategory(all, cat.slug);
   const showcase: Product[] = list.length > 0 ? list : all.slice(0, 6);
   return (
@@ -47,6 +47,7 @@ function CategoryPage() {
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-8 flex flex-wrap gap-3">
           <button onClick={() => openInquiry({ category: cat.name })} className="btn-gold hover:brightness-95">Get Wholesale Quote</button>
+          <button onClick={() => openCatalogue(cat.slug)} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
           <Link to="/customization" className="btn-outline-ink hover:bg-ink hover:text-bone">Customization Options</Link>
         </div>
       </header>

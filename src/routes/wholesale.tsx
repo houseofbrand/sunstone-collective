@@ -29,7 +29,7 @@ function WholesalePage() {
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-8 flex flex-wrap gap-3">
           <button onClick={() => openInquiry()} className="btn-gold hover:brightness-95">Request Quotation</button>
-          <button onClick={openCatalogue} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Wholesale Catalogue</button>
+          <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Wholesale Catalogue</button>
         </div>
       </header>
 

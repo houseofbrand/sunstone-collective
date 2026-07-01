@@ -4,7 +4,7 @@ import { findCategory, productPrimaryImage, type Product } from "@/lib/products"
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import { SITE, waLink } from "@/lib/site";
-import { MessageCircle, Send, ShoppingBag } from "lucide-react";
+import { MessageCircle, Send, ShoppingBag, Download } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/product/$code")({
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/product/$code")({
 
 function ProductPage() {
   const { p, all } = Route.useLoaderData();
-  const { openInquiry } = useDialogs();
+  const { openInquiry, openCatalogue } = useDialogs();
   const cat = findCategory(p.category_slug);
   const related = all.filter((x: Product) => x.category_slug === p.category_slug && x.code !== p.code).slice(0, 4);
   const primary = productPrimaryImage(p);
@@ -112,6 +112,7 @@ function ProductPage() {
           <div className="mt-10 grid grid-cols-2 gap-3">
             <button onClick={() => openInquiry({ productCode: p.code, category: cat?.name })} className="btn-gold hover:brightness-95"><ShoppingBag size={14} /> Get OEM Quote</button>
             <button onClick={() => openInquiry({ productCode: p.code, category: cat?.name })} className="btn-outline-ink hover:bg-ink hover:text-bone"><Send size={14} /> Request Sample</button>
+            <button onClick={() => openCatalogue(p.category_slug)} className="btn-outline-ink hover:bg-ink hover:text-bone col-span-2"><Download size={14} /> Download Catalogue</button>
             <a href={waLink(`Hi, I'm interested in ${p.name} (${p.code}). Please share wholesale pricing & customisation options.`)} target="_blank" rel="noreferrer" className="btn-ink hover:brightness-110 col-span-2"><MessageCircle size={14} /> WhatsApp Inquiry</a>
           </div>
         </div>

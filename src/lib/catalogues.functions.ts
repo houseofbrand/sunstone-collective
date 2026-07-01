@@ -14,8 +14,9 @@ export const listPublicCatalogues = createServerFn({ method: "GET" }).handler(as
   const sb = publicClient();
   const { data, error } = await sb
     .from("catalogues")
-    .select("id, slug, title, description, file_size, sort_order")
+    .select("id, slug, title, description, file_size, sort_order, category_slug, is_primary")
     .eq("is_active", true)
+    .order("is_primary", { ascending: false })
     .order("sort_order", { ascending: true });
   if (error) throw new Error(error.message);
   return data ?? [];
@@ -90,6 +91,8 @@ export const adminUpsertCatalogue = createServerFn({ method: "POST" })
         slug: z.string().trim().min(2).max(80).regex(/^[a-z0-9-]+$/),
         title: z.string().trim().min(2).max(150),
         description: z.string().trim().max(500).optional().or(z.literal("")),
+        category_slug: z.string().trim().max(80).optional().or(z.literal("")),
+        is_primary: z.boolean().optional(),
         file_path: z.string().trim().max(300).optional().or(z.literal("")),
         file_size: z.number().int().nonnegative().optional(),
         sort_order: z.number().int().min(0).max(1000).optional(),
@@ -104,11 +107,18 @@ export const adminUpsertCatalogue = createServerFn({ method: "POST" })
       slug: data.slug,
       title: data.title,
       description: data.description || null,
+      category_slug: data.category_slug || null,
+      is_primary: !!data.is_primary,
       file_path: data.file_path || null,
       file_size: data.file_size ?? null,
       sort_order: data.sort_order ?? 0,
       is_active: data.is_active ?? true,
     };
+    // Enforce single-primary: if setting this row primary, clear others first
+    if (row.is_primary) {
+      const q = supabaseAdmin.from("catalogues").update({ is_primary: false }).eq("is_primary", true);
+      if (data.id) await q.neq("id", data.id); else await q;
+    }
     if (data.id) {
       const { error } = await supabaseAdmin.from("catalogues").update(row).eq("id", data.id);
       if (error) throw new Error(error.message);
