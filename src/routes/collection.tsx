@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { categories } from "@/lib/products";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
+import { CollectionCatalogues } from "@/components/site/CollectionCatalogues";
 
 export const Route = createFileRoute("/collection")({
   component: CollectionPage,
@@ -26,7 +27,7 @@ function CollectionPage() {
         <p className="mt-4 max-w-2xl text-muted-foreground">Explore our full OEM & private label sunglasses range — from timeless aviators and editorial cat eyes to performance wraps and driving lenses.</p>
         <div className="rule-gold mt-6 w-16" />
       </header>
-      <section className="container-luxe pb-24 grid grid-cols-2 md:grid-cols-3 gap-5">
+      <section className="container-luxe pb-16 grid grid-cols-2 md:grid-cols-3 gap-5">
         {categories.map((c) => (
           <Link key={c.slug} to="/category/$slug" params={{ slug: c.slug }} className="group block relative overflow-hidden bg-secondary aspect-[4/5]">
             <img src={c.image} alt={c.name} loading="lazy" width={900} height={1125} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -37,6 +38,7 @@ function CollectionPage() {
           </Link>
         ))}
       </section>
+      <CollectionCatalogues />
     </>
   );
 }
