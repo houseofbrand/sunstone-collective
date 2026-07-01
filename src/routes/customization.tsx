@@ -38,7 +38,7 @@ const groups = [
 ];
 
 function CustomPage() {
-  const { openInquiry } = useDialogs();
+  const { openInquiry, openCatalogue } = useDialogs();
   return (
     <>
       <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Customization" }]} />
@@ -48,7 +48,10 @@ function CustomPage() {
           <h1 className="font-display text-4xl md:text-5xl mt-3">Every surface, <span className="text-gold italic font-normal">brandable.</span></h1>
           <p className="mt-5 text-muted-foreground max-w-xl">From your logo on the temple to a fully custom gift box on arrival — we execute private label at every scale.</p>
           <div className="rule-gold mt-6 w-16" />
-          <button onClick={() => openInquiry()} className="btn-gold mt-8 hover:brightness-95">Discuss Customization</button>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button onClick={() => openInquiry()} className="btn-gold hover:brightness-95">Discuss Customization</button>
+            <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
+          </div>
         </div>
         <div className="aspect-[4/3] overflow-hidden">
           <img src={customImg} alt="Custom logo sunglasses" loading="lazy" width={1400} height={1000} className="w-full h-full object-cover" />
