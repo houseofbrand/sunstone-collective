@@ -249,13 +249,18 @@
 }
 
 .bg-ink .eyebrow,
+.bg-primary .eyebrow,
 .bg-ink .text-gold,
+.bg-primary .text-gold,
 .bg-ink .text-bone\/50,
 .bg-ink .text-bone\/60,
 .bg-ink .text-bone\/70,
 .bg-ink .text-bone\/75,
 .bg-ink .text-bone\/80,
-.bg-ink .text-bone\/90 {
+.bg-ink .text-bone\/90,
+.bg-primary .text-bone,
+.bg-primary .text-primary,
+.bg-primary .text-ink {
   color: #FFFFFF;
 }
 
