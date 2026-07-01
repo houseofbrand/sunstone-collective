@@ -41,6 +41,9 @@ export function Footer() {
             <Mail size={16} /> {SITE.email}
           </a>
           <p className="text-xs text-bone/50 mt-6">MOQ 12 pieces · Worldwide export · Custom branding</p>
+          <button onClick={() => openCatalogue()} className="mt-4 inline-flex items-center gap-2 border border-gold text-gold px-4 py-2 text-xs uppercase tracking-widest hover:bg-gold hover:text-ink transition-colors">
+            <Download size={14} /> Download Catalogue
+          </button>
         </div>
       </div>
       <div className="border-t border-bone/10">
