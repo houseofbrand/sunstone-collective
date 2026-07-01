@@ -73,7 +73,7 @@ function ProductPage() {
           <div className="mt-6">
             <div className="eyebrow mb-2">Available Colours</div>
             <div className="flex flex-wrap gap-2">
-              {p.colours.map((c) => <span key={c} className="border border-border px-3 py-1 text-xs">{c}</span>)}
+              {p.colours.map((c: string) => <span key={c} className="border border-border px-3 py-1 text-xs">{c}</span>)}
             </div>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-3">
