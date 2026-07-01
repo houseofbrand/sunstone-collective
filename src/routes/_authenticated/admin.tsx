@@ -286,8 +286,21 @@ function CatalogueForm({
       <div className="md:col-span-2">
         <Field label="Description" value={description ?? ""} onChange={setDescription} />
       </div>
+      <label className="block">
+        <span className="block text-[11px] uppercase tracking-widest text-muted-foreground mb-1">Product Category</span>
+        <select value={category_slug} onChange={(e) => setCategorySlug(e.target.value)} className="w-full border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:border-gold">
+          <option value="">— None (general) —</option>
+          {productCategories.map((c) => (
+            <option key={c.slug} value={c.slug}>{c.name}</option>
+          ))}
+        </select>
+      </label>
       <Field label="Sort order" value={String(sort_order)} onChange={(v) => setSort(Number(v) || 0)} type="number" />
-      <label className="flex items-center gap-2 mt-6">
+      <label className="flex items-center gap-2">
+        <input type="checkbox" checked={is_primary} onChange={(e) => setIsPrimary(e.target.checked)} />
+        <span className="text-sm">Primary catalogue (default download)</span>
+      </label>
+      <label className="flex items-center gap-2">
         <input type="checkbox" checked={is_active} onChange={(e) => setActive(e.target.checked)} />
         <span className="text-sm">Active (visible on the site)</span>
       </label>
@@ -313,7 +326,7 @@ function CatalogueForm({
       <div className="md:col-span-2 flex gap-2 justify-end pt-2">
         <button onClick={onCancel} className="btn-outline-ink">Cancel</button>
         <button
-          onClick={() => onSubmit({ slug, title, description, sort_order, is_active, file_path, file_size: file_size ?? undefined })}
+          onClick={() => onSubmit({ slug, title, description, category_slug, is_primary, sort_order, is_active, file_path, file_size: file_size ?? undefined })}
           className="btn-gold"
           disabled={!slug || !title}
         >
