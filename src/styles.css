@@ -123,9 +123,10 @@
     text-transform: uppercase;
     letter-spacing: 0.22em;
     font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--color-accent);
+    font-weight: 700;
+    color: var(--color-ink);
   }
+
   .rule-gold {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--color-gold) 40%, var(--color-gold) 60%, transparent);
