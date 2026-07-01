@@ -119,7 +119,7 @@ function AdminPage() {
         {tab === "catalogues" && (
           <CataloguesPanel cats={cats.data ?? []} refetch={() => qc.invalidateQueries({ queryKey: ["admin-catalogues"] })} />
         )}
-        {tab === "events" && <EventsPanel events={events.data ?? []} />}
+        {tab === "events" && <EventsPanel events={events.data ?? []} leads={leads.data ?? { downloads: [] }} />}
         {tab === "leads" && <LeadsPanel leads={leads.data ?? { downloads: [], inquiries: [] }} />}
       </main>
     </div>
