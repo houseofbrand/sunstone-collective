@@ -107,14 +107,17 @@ function Home() {
       <Section eyebrow="Wholesale Collections" title="A silhouette for every private label." right={<Link to="/collection" className="text-sm text-primary hover:text-blue-700 flex items-center gap-2">View all categories <ArrowRight size={14} /></Link>}>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
           {categories.slice(0, 8).map((c) => (
-            <Link key={c.slug} to="/category/$slug" params={{ slug: c.slug }} className="group block relative overflow-hidden bg-secondary aspect-[3/4]">
-              <img src={c.image} alt={c.name} loading="lazy" width={900} height={1200} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-x-0 bottom-0 bg-primary text-primary-foreground p-5">
-                <div className="eyebrow text-bone">{c.short}</div>
-                <div className="font-display text-lg mt-1">{c.name}</div>
+            <Link key={c.slug} to="/category/$slug" params={{ slug: c.slug }} className="group card-luxe overflow-hidden hover:card-luxe-hover">
+              <div className="aspect-[4/3] overflow-hidden bg-secondary">
+                <img src={c.image} alt={c.name} loading="lazy" width={900} height={700} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <div className="p-4">
+                <div className="text-xs font-medium uppercase tracking-wider text-secondary-foreground">{c.short}</div>
+                <div className="font-display text-base mt-1 text-foreground group-hover:text-royal transition-colors">{c.name}</div>
               </div>
             </Link>
           ))}
+
         </div>
       </Section>
 
