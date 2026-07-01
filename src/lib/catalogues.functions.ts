@@ -14,8 +14,9 @@ export const listPublicCatalogues = createServerFn({ method: "GET" }).handler(as
   const sb = publicClient();
   const { data, error } = await sb
     .from("catalogues")
-    .select("id, slug, title, description, file_size, sort_order")
+    .select("id, slug, title, description, file_size, sort_order, category_slug, is_primary")
     .eq("is_active", true)
+    .order("is_primary", { ascending: false })
     .order("sort_order", { ascending: true });
   if (error) throw new Error(error.message);
   return data ?? [];
