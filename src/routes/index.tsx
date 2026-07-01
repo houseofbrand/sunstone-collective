@@ -30,47 +30,45 @@ function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="relative bg-background text-foreground overflow-hidden border-b border-border">
-        <div className="container-luxe grid lg:grid-cols-12 gap-10 py-20 lg:py-28 items-center">
+      <section className="relative bg-background border-b border-border">
+        <div className="container-luxe grid lg:grid-cols-12 gap-12 py-16 lg:py-24 items-center">
           <div className="lg:col-span-6">
-            <div className="eyebrow mb-5">India · Est. Manufacturing · Worldwide Export</div>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
-              OEM Sunglasses Manufacturer.<br />
-              <span className="text-primary italic font-normal">Private Label</span> & Wholesale Supplier.
+            <div className="eyebrow mb-4">India · ISO-grade Manufacturing · Worldwide Export</div>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.1] text-foreground">
+              OEM Sunglasses Manufacturer for Global Brands
             </h1>
-            <p className="mt-6 text-secondary-foreground max-w-xl leading-relaxed">
-              Launch your own sunglasses brand with India's trusted OEM partner. Low MOQ from {SITE.moq} pieces, custom logo, private label, fast production and worldwide shipping.
+            <p className="mt-5 text-secondary-foreground text-lg max-w-xl leading-relaxed">
+              Launch and scale your eyewear brand with India's trusted OEM partner. Private label, custom logo, low MOQ from {SITE.moq} pieces, 15–30 day production and export to 40+ countries.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link to="/collection" className="btn-outline-ink hover:bg-ink hover:text-bone">Browse Collection <ArrowRight size={14} /></Link>
-              <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone"><Download size={14} /> Download Catalogue</button>
-              <button onClick={() => openInquiry()} className="btn-outline-ink hover:bg-ink hover:text-bone">Get OEM Quote</button>
-              <a href={waLink("Hello, I'd like to discuss OEM sunglasses.")} target="_blank" rel="noreferrer" className="btn-outline-ink hover:bg-ink hover:text-bone"><MessageCircle size={14} /> WhatsApp</a>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button onClick={() => openInquiry()} className="btn-ink hover:btn-ink-hover">
+                Get a Quote <ArrowRight size={16} />
+              </button>
+              <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-royal hover:text-white">
+                <Download size={16} /> Download Catalogue
+              </button>
             </div>
-            <dl className="mt-14 grid grid-cols-3 gap-6 max-w-lg">
+            <dl className="mt-12 grid grid-cols-3 gap-6 max-w-lg border-t border-border pt-8">
               {[
-                { k: "MOQ", v: "12 pcs" },
+                { k: "Minimum Order", v: "12 pcs" },
                 { k: "Production", v: "15–30 days" },
-                { k: "Export", v: "40+ countries" },
+                { k: "Export Reach", v: "40+ countries" },
               ].map((s) => (
                 <div key={s.k}>
-                  <dt className="eyebrow">{s.k}</dt>
+                  <dt className="text-xs font-medium uppercase tracking-wider text-secondary-foreground">{s.k}</dt>
                   <dd className="font-display text-2xl mt-1 text-foreground">{s.v}</dd>
                 </div>
               ))}
             </dl>
           </div>
           <div className="lg:col-span-6">
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <img src={heroImg} alt="Premium OEM aviator sunglasses" width={1600} height={1200} className="w-full h-full object-cover" />
-              <div className="absolute -bottom-1 -right-1 bg-bone text-ink px-5 py-3 border-l border-t border-gold">
-                <div className="eyebrow text-muted-foreground">Featured</div>
-                <div className="font-display text-lg leading-tight">India's Trusted OEM Partner</div>
-              </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border shadow-card">
+              <img src={heroImg} alt="Premium OEM sunglasses manufacturing" width={1600} height={1200} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
       </section>
+
 
       {/* TRUSTED */}
       <section className="border-b border-border">
