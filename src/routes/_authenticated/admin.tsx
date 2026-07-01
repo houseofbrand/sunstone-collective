@@ -245,6 +245,8 @@ function CatalogueForm({
   const [slug, setSlug] = useState(initial?.slug ?? "");
   const [title, setTitle] = useState(initial?.title ?? "");
   const [description, setDescription] = useState(initial?.description ?? "");
+  const [category_slug, setCategorySlug] = useState<string>(initial?.category_slug ?? "");
+  const [is_primary, setIsPrimary] = useState<boolean>(initial?.is_primary ?? false);
   const [sort_order, setSort] = useState(initial?.sort_order ?? 0);
   const [is_active, setActive] = useState(initial?.is_active ?? true);
   const [file_path, setFilePath] = useState(initial?.file_path ?? "");
