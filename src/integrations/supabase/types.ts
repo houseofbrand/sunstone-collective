@@ -191,6 +191,107 @@ export type Database = {
         }
         Relationships: []
       }
+      product_images: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          height: number | null
+          id: string
+          is_primary: boolean
+          product_id: string
+          public_url: string
+          size_bytes: number | null
+          sort_order: number
+          storage_path: string
+          width: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          height?: number | null
+          id?: string
+          is_primary?: boolean
+          product_id: string
+          public_url: string
+          size_bytes?: number | null
+          sort_order?: number
+          storage_path: string
+          width?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          height?: number | null
+          id?: string
+          is_primary?: boolean
+          product_id?: string
+          public_url?: string
+          size_bytes?: number | null
+          sort_order?: number
+          storage_path?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_images_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          category_slug: string
+          code: string
+          colours: string[]
+          created_at: string
+          description: string | null
+          frame_material: string
+          id: string
+          is_active: boolean
+          lens_material: string
+          name: string
+          price: number
+          sort_order: number
+          updated_at: string
+          weight: string
+        }
+        Insert: {
+          category_slug: string
+          code: string
+          colours?: string[]
+          created_at?: string
+          description?: string | null
+          frame_material?: string
+          id?: string
+          is_active?: boolean
+          lens_material?: string
+          name: string
+          price?: number
+          sort_order?: number
+          updated_at?: string
+          weight?: string
+        }
+        Update: {
+          category_slug?: string
+          code?: string
+          colours?: string[]
+          created_at?: string
+          description?: string | null
+          frame_material?: string
+          id?: string
+          is_active?: boolean
+          lens_material?: string
+          name?: string
+          price?: number
+          sort_order?: number
+          updated_at?: string
+          weight?: string
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           catalogue_url: string
