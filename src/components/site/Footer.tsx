@@ -1,0 +1,52 @@
+import { Link } from "@tanstack/react-router";
+import { SITE, waLink } from "@/lib/site";
+import { Mail, MessageCircle } from "lucide-react";
+
+export function Footer() {
+  return (
+    <footer className="mt-24 border-t border-border bg-ink text-bone">
+      <div className="container-luxe py-16 grid gap-12 md:grid-cols-4">
+        <div>
+          <div className="font-display text-xl mb-4">OEM<span className="text-gold">Sunglasses</span></div>
+          <p className="text-sm text-bone/70 leading-relaxed">
+            India's trusted OEM sunglasses manufacturing partner. Private label, custom logo, low MOQ from 12 pieces, worldwide shipping.
+          </p>
+        </div>
+        <div>
+          <div className="eyebrow text-bone/60 mb-4">Explore</div>
+          <ul className="space-y-2 text-sm">
+            <li><Link to="/collection" className="hover:text-gold">Collection</Link></li>
+            <li><Link to="/oem" className="hover:text-gold">OEM Process</Link></li>
+            <li><Link to="/customization" className="hover:text-gold">Customization</Link></li>
+            <li><Link to="/wholesale" className="hover:text-gold">Wholesale</Link></li>
+            <li><Link to="/industries" className="hover:text-gold">Industries</Link></li>
+          </ul>
+        </div>
+        <div>
+          <div className="eyebrow text-bone/60 mb-4">Company</div>
+          <ul className="space-y-2 text-sm">
+            <li><Link to="/about" className="hover:text-gold">About</Link></li>
+            <li><Link to="/blog" className="hover:text-gold">Journal</Link></li>
+            <li><Link to="/contact" className="hover:text-gold">Contact</Link></li>
+          </ul>
+        </div>
+        <div>
+          <div className="eyebrow text-bone/60 mb-4">Get in touch</div>
+          <a href={waLink("Hello, I'd like an OEM sunglasses quote.")} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm hover:text-gold">
+            <MessageCircle size={16} /> {SITE.whatsapp}
+          </a>
+          <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 text-sm hover:text-gold mt-2">
+            <Mail size={16} /> {SITE.email}
+          </a>
+          <p className="text-xs text-bone/50 mt-6">MOQ 12 pieces · Worldwide export · Custom branding</p>
+        </div>
+      </div>
+      <div className="border-t border-bone/10">
+        <div className="container-luxe py-5 text-xs text-bone/50 flex flex-col sm:flex-row justify-between gap-2">
+          <span>© {new Date().getFullYear()} OEMSunglasses.com — All rights reserved.</span>
+          <span>OEM · Private Label · White Label · Wholesale</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
