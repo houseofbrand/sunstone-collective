@@ -62,7 +62,7 @@ function AdminPage() {
     enabled: !!admin.data?.admin,
   });
 
-  const [tab, setTab] = useState<"catalogues" | "events" | "leads">("catalogues");
+  const [tab, setTab] = useState<"products" | "catalogues" | "events" | "leads">("products");
 
   const signOut = async () => {
     await supabase.auth.signOut();
