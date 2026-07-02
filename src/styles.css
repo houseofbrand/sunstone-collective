@@ -54,34 +54,34 @@
   --shadow-lifted: 0 20px 40px -12px rgb(0 0 0 / 0.6), 0 8px 16px -8px rgb(0 0 0 / 0.4);
 }
 
-/* Premium dark corporate theme */
+/* Premium dark green corporate theme */
 :root {
-  --background: #0B1220;
+  --background: #0F3D2E;
   --foreground: #FFFFFF;
-  --surface: #111827;
-  --card: #1F2937;
+  --surface: #154734;
+  --card: #1B4D3E;
   --card-foreground: #FFFFFF;
-  --popover: #1F2937;
+  --popover: #1B4D3E;
   --popover-foreground: #FFFFFF;
-  --primary: #2563EB;
+  --primary: #2E8B57;
   --primary-foreground: #FFFFFF;
-  --secondary: #111827;
-  --secondary-foreground: #D1D5DB;
-  --muted: #1F2937;
-  --muted-foreground: #9CA3AF;
-  --accent: #2563EB;
-  --accent-foreground: #FFFFFF;
+  --secondary: #154734;
+  --secondary-foreground: #E8F5EE;
+  --muted: #1B4D3E;
+  --muted-foreground: #B8D8C6;
+  --accent: #4CAF74;
+  --accent-foreground: #0F3D2E;
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
-  --border: #374151;
-  --input: #374151;
-  --ring: #2563EB;
-  --gold: #D4AF37;
-  --gold-soft: #F6ECC6;
-  --ink: #0B1220;
-  --navy-deep: #050A14;
-  --royal: #2563EB;
-  --bone: #1F2937;
+  --border: #245C46;
+  --input: #245C46;
+  --ring: #4CAF74;
+  --gold: #4CAF74;
+  --gold-soft: #B8D8C6;
+  --ink: #0C3327;
+  --navy-deep: #0C3327;
+  --royal: #2E8B57;
+  --bone: #154734;
   --radius: 0.5rem;
 }
 
