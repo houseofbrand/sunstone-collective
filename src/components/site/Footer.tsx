@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { SITE, waLink } from "@/lib/site";
 import { Mail, MessageCircle, Download, MapPin, Phone, Linkedin, Instagram, Facebook } from "lucide-react";
 import { useDialogs } from "./DialogsProvider";
-import logoAsset from "@/assets/oem-sunglasses-logo.png.asset.json";
+import logoAsset from "@/assets/oem-sunglasses-logo-transparent.png.asset.json";
 
 export function Footer() {
   const { openCatalogue, openInquiry } = useDialogs();
