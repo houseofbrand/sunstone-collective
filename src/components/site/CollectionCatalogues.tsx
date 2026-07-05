@@ -3,9 +3,13 @@ import { SITE, waLink } from "@/lib/site";
 import classicPdf from "@/assets/catalogues/classic-collection-2026.pdf";
 import edgePdf from "@/assets/catalogues/edge-collection-2026.pdf";
 import elitePdf from "@/assets/catalogues/elite-collection-2026.pdf";
+import primePdf from "@/assets/catalogues/prime-collection-2026.pdf";
+import kidsPdf from "@/assets/catalogues/kids-collection-2026.pdf";
 import classicCover from "@/assets/catalogues/classic-collection-2026-cover.jpg";
 import edgeCover from "@/assets/catalogues/edge-collection-2026-cover.jpg";
 import eliteCover from "@/assets/catalogues/elite-collection-2026-cover.jpg";
+import primeCover from "@/assets/catalogues/prime-collection-2026-cover.jpg";
+import kidsCover from "@/assets/catalogues/kids-collection-2026-cover.jpg";
 
 /**
  * 2026 collection catalogue cards. PDFs + cover thumbnails live in
@@ -39,6 +43,22 @@ const CATALOGUES: Catalogue[] = [
     file: elitePdf,
     cover: eliteCover,
     size: "8 MB",
+  },
+  {
+    name: "Prime Collection",
+    tag: "2026 · Signature",
+    description: "Our signature hero range — refined rounds and lifestyle-led silhouettes that define the season.",
+    file: primePdf,
+    cover: primeCover,
+    size: "39 MB",
+  },
+  {
+    name: "Kids Collection",
+    tag: "2026 · Little Faces",
+    description: "Durable, playful frames sized for little faces — lightweight fits, safe materials and full UV protection.",
+    file: kidsPdf,
+    cover: kidsCover,
+    size: "27 MB",
   },
 ];
 
