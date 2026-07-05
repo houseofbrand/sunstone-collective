@@ -10,7 +10,7 @@ export function Footer() {
     <footer className="mt-24 bg-ink text-white">
       <div className="container-luxe pt-16 pb-10 grid gap-12 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <img src={logoAsset.url} alt="OEMSunglasses.com" className="h-11 w-auto mb-5 brightness-0 invert" />
+          <img src={logoAsset.url} alt="OEMSunglasses.com" className="h-11 w-auto mb-5" />
           <p className="text-sm leading-relaxed text-white/85 max-w-sm">
             India's trusted OEM sunglasses manufacturing partner. Private label, custom logo, low MOQ from 12 pieces, worldwide shipping to 40+ countries.
           </p>
