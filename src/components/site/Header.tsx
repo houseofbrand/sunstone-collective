@@ -41,8 +41,8 @@ export function Header() {
           <img
             src={logoAsset.url}
             alt="OEMSunglasses.com"
-            className="w-auto brightness-0 invert"
-            style={{ height: "44px" }}
+            className="w-auto h-auto"
+            style={{ height: "44px", width: "auto" }}
           />
         </Link>
 
