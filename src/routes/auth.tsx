@@ -17,7 +17,6 @@ function AuthPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -32,17 +31,8 @@ function AuthPage() {
     setErr("");
     setLoading(true);
     try {
-      if (mode === "signin") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
-        });
-        if (error) throw error;
-      }
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
       navigate({ to: "/admin" });
     } catch (e) {
       setErr(e instanceof Error ? e.message : "Sign in failed");
@@ -70,12 +60,12 @@ function AuthPage() {
           </label>
           {err && <p className="text-xs text-destructive">{err}</p>}
           <button disabled={loading} className="btn-gold w-full mt-2 disabled:opacity-60">
-            {loading ? "Please wait…" : mode === "signin" ? "Sign In" : "Create Account"}
+            {loading ? "Please wait…" : "Sign In"}
           </button>
         </form>
-        <button onClick={() => setMode(mode === "signin" ? "signup" : "signin")} className="text-xs text-muted-foreground hover:text-ink mt-4 block mx-auto">
-          {mode === "signin" ? "Need an account? Sign up" : "Already registered? Sign in"}
-        </button>
+        <p className="text-xs text-muted-foreground mt-4 text-center">
+          Admin accounts are invitation-only. Contact your administrator for access.
+        </p>
         <Link to="/" className="text-xs text-muted-foreground hover:text-ink mt-6 block text-center">← Back to site</Link>
       </div>
     </div>
