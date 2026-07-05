@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDialogs } from "./DialogsProvider";
-import logoAsset from "@/assets/oem-sunglasses-logo.png.asset.json";
+import logoAsset from "@/assets/oem-sunglasses-logo-transparent.png.asset.json";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -41,8 +41,8 @@ export function Header() {
           <img
             src={logoAsset.url}
             alt="OEMSunglasses.com"
-            className="w-auto brightness-0 invert"
-            style={{ height: "44px" }}
+            className="w-auto h-auto"
+            style={{ height: "44px", width: "auto" }}
           />
         </Link>
 
