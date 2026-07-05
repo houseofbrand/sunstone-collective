@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDialogs } from "./DialogsProvider";
-import logoAsset from "@/assets/oem-sunglasses-logo-new.png.asset.json";
+import logoAsset from "@/assets/oem-sunglasses-logo-transparent.png.asset.json";
 
 const nav = [
   { to: "/", label: "Home" },
