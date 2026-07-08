@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
-import customImg from "@/assets/customization.jpg";
+import customImg from "@/assets/brand-every-detail.png.asset.json";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import { Sparkles } from "lucide-react";
 
@@ -54,7 +54,7 @@ function CustomPage() {
           </div>
         </div>
         <div className="aspect-[4/3] overflow-hidden">
-          <img src={customImg} alt="Custom logo sunglasses" loading="lazy" width={1400} height={1000} className="w-full h-full object-cover" />
+          <img src={customImg.url} alt="Custom logo sunglasses" loading="lazy" width={1400} height={1000} className="w-full h-full object-cover" />
         </div>
       </header>
 
