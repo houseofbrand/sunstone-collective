@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
-import customImg from "@/assets/customization.jpg";
+import customImg from "@/assets/brand-every-detail.png.asset.json";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import { Sparkles } from "lucide-react";
 
