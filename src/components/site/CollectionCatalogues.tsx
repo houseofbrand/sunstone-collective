@@ -5,11 +5,13 @@ import edgePdf from "@/assets/catalogues/edge-collection-2026.pdf";
 import elitePdf from "@/assets/catalogues/elite-collection-2026.pdf";
 import primePdf from "@/assets/catalogues/prime-collection-2026.pdf";
 import kidsPdf from "@/assets/catalogues/kids-collection-2026.pdf";
+import celebrityPdf from "@/assets/catalogues/celebrity-collection-2026.pdf";
 import classicCover from "@/assets/catalogues/classic-collection-2026-cover.jpg";
 import edgeCover from "@/assets/catalogues/edge-collection-2026-cover.jpg";
 import eliteCover from "@/assets/catalogues/elite-collection-2026-cover.jpg";
 import primeCover from "@/assets/catalogues/prime-collection-2026-cover.jpg";
 import kidsCover from "@/assets/catalogues/kids-collection-2026-cover.jpg";
+import celebrityCover from "@/assets/catalogues/celebrity-collection-2026-cover.jpg";
 
 /**
  * 2026 collection catalogue cards. PDFs + cover thumbnails live in
@@ -42,7 +44,15 @@ const CATALOGUES: Catalogue[] = [
     description: "Our finest acetate and metal craftsmanship — elevated materials, finishes and detailing.",
     file: elitePdf,
     cover: eliteCover,
-    size: "8 MB",
+    size: "60 MB",
+  },
+  {
+    name: "Celebrity Collection",
+    tag: "2026 · Red Carpet",
+    description: "Show-stopping, crystal-embellished statement frames — bold silhouettes and couture detailing made for the spotlight and celebrity-led drops.",
+    file: celebrityPdf,
+    cover: celebrityCover,
+    size: "44 MB",
   },
   {
     name: "Prime Collection",
