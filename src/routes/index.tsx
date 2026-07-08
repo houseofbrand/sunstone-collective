@@ -3,7 +3,7 @@ import { ArrowRight, Award, Boxes, Clock, Download, Factory, Globe2, MessageCirc
 import heroImg from "@/assets/hero-sunglasses.jpg";
 import collectionImg from "@/assets/collection-grid.jpg";
 import oemImg from "@/assets/oem-process.jpg";
-import customImg from "@/assets/customization.jpg";
+import customImg from "@/assets/brand-every-detail.png.asset.json";
 import { categories, productPrimaryImage, type Product } from "@/lib/products";
 import { listPublicProducts } from "@/lib/products.functions";
 import { getFounder } from "@/lib/founder.functions";
