@@ -54,7 +54,7 @@ function CustomPage() {
           </div>
         </div>
         <div className="aspect-[4/3] overflow-hidden">
-          <img src={customImg} alt="Custom logo sunglasses" loading="lazy" width={1400} height={1000} className="w-full h-full object-cover" />
+          <img src={customImg.url} alt="Custom logo sunglasses" loading="lazy" width={1400} height={1000} className="w-full h-full object-cover" />
         </div>
       </header>
 
