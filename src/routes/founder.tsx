@@ -6,9 +6,9 @@ export const Route = createFileRoute("/founder")({
   loader: async () => ({ founder: await getFounder() }),
   head: ({ loaderData }) => ({
     meta: [
-      { title: `${loaderData?.founder.name ?? "Rajan Mehta"} — ${loaderData?.founder.designation ?? "Founder & CEO"} | OEMSunglasses.com` },
-      { name: "description", content: `Meet ${loaderData?.founder.name ?? "Rajan Mehta"}, ${loaderData?.founder.designation ?? "Founder & CEO"} of OEMSunglasses.com — 25+ years of OEM and private label manufacturing expertise across the global fashion accessories industry.` },
-      { property: "og:title", content: `${loaderData?.founder.name ?? "Rajan Mehta"} — Founder, OEMSunglasses.com` },
+      { title: `${loaderData?.founder.name ?? "Rajan Mehta"} — ${loaderData?.founder.designation ?? "Founder & CEO"} | SunglassManufacturer.com` },
+      { name: "description", content: `Meet ${loaderData?.founder.name ?? "Rajan Mehta"}, ${loaderData?.founder.designation ?? "Founder & CEO"} of SunglassManufacturer.com — 25+ years of OEM and private label manufacturing expertise across the global fashion accessories industry.` },
+      { property: "og:title", content: `${loaderData?.founder.name ?? "Rajan Mehta"} — Founder, SunglassManufacturer.com` },
       { property: "og:description", content: "25+ years pioneering OEM & private label manufacturing across sunglasses, watches, wallets, belts and lifestyle accessories." },
       { property: "og:type", content: "profile" },
       { property: "og:image", content: loaderData?.founder.image_url },
