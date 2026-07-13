@@ -13,6 +13,49 @@ const PRODUCT_CATEGORIES = [
 
 type DialogState = "idle" | "loading" | "done" | "error";
 
+const WHATSAPP_RECIPIENT = "917303681194";
+
+function createWhatsAppMessage(
+  data: {
+    name: string;
+    company: string;
+    email: string;
+    mobile: string;
+    country: string;
+    product_category: string;
+    quantity?: number;
+    message: string;
+    page_url: string;
+    lead_source: string;
+  },
+  submittedAt: string,
+) {
+  return [
+    "*New OEM Catalog Request*",
+    "",
+    "*Contact Details*",
+    `Full Name: ${data.name}`,
+    `Company Name: ${data.company}`,
+    `Email Address: ${data.email}`,
+    `WhatsApp Number: ${data.mobile}`,
+    `Country: ${data.country}`,
+    "",
+    "*Requirement Details*",
+    `Product Category: ${data.product_category}`,
+    `Estimated Order Quantity: ${data.quantity ?? "Not provided"}`,
+    `Message: ${data.message || "Not provided"}`,
+    "",
+    "*Inquiry Details*",
+    `Date & Time: ${new Date(submittedAt).toLocaleString("en-IN", {
+      dateStyle: "medium",
+      timeStyle: "short",
+      timeZone: "Asia/Kolkata",
+    })} IST`,
+    `Page URL: ${data.page_url}`,
+    `Lead Source: ${data.lead_source}`,
+  ].join("\n");
+}
+
 export function InquiryDialog({
   open,
   onClose,
@@ -59,23 +102,36 @@ export function InquiryDialog({
       : leadSource ||
         (document.referrer ? `referral:${new URL(document.referrer).hostname}` : "direct");
 
+    const inquiry = {
+      name: String(form.get("full_name") || ""),
+      company: String(form.get("company_name") || ""),
+      email: String(form.get("email") || ""),
+      mobile: String(form.get("whatsapp_number") || ""),
+      country: String(form.get("country") || ""),
+      product_category: String(form.get("product_category") || ""),
+      quantity: quantityValue ? Number(quantityValue) : undefined,
+      message: String(form.get("message") || ""),
+      page_url: window.location.href,
+      lead_source: trackedSource,
+    };
+
+    // Open during the submit gesture so browsers do not block the WhatsApp tab after the request.
+    const whatsappWindow = window.open("about:blank", "oem-catalog-whatsapp");
+
     try {
-      await submit({
-        data: {
-          name: String(form.get("full_name") || ""),
-          company: String(form.get("company_name") || ""),
-          email: String(form.get("email") || ""),
-          mobile: String(form.get("whatsapp_number") || ""),
-          country: String(form.get("country") || ""),
-          product_category: String(form.get("product_category") || ""),
-          quantity: quantityValue ? Number(quantityValue) : undefined,
-          message: String(form.get("message") || ""),
-          page_url: window.location.href,
-          lead_source: trackedSource,
-        },
-      });
+      const result = await submit({ data: inquiry });
+      const whatsappMessage = createWhatsAppMessage(inquiry, result.submittedAt);
+      const whatsappUrl = `https://wa.me/${WHATSAPP_RECIPIENT}?text=${encodeURIComponent(whatsappMessage)}`;
+
       setState("done");
+      if (whatsappWindow && !whatsappWindow.closed) {
+        whatsappWindow.opener = null;
+        whatsappWindow.location.replace(whatsappUrl);
+      } else {
+        window.location.assign(whatsappUrl);
+      }
     } catch (error) {
+      whatsappWindow?.close();
       setErrMsg(error instanceof Error ? error.message : "Something went wrong. Please try again.");
       setState("error");
     }
