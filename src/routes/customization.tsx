@@ -38,7 +38,7 @@ const groups = [
 ];
 
 function CustomPage() {
-  const { openInquiry, openCatalogue } = useDialogs();
+  const { openCatalogRequest } = useDialogs();
   return (
     <>
       <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Customization" }]} />
@@ -49,8 +49,7 @@ function CustomPage() {
           <p className="mt-5 text-muted-foreground max-w-xl">From your logo on the temple to a fully custom gift box on arrival — we execute private label at every scale.</p>
           <div className="rule-gold mt-6 w-16" />
           <div className="mt-8 flex flex-wrap gap-3">
-            <button onClick={() => openInquiry()} className="btn-gold hover:brightness-95">Discuss Customization</button>
-            <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
+            <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: "private_label_page" })} className="btn-gold rounded-lg hover:brightness-95">Request OEM Catalog</button>
           </div>
         </div>
         <div className="aspect-[1402/1122] overflow-hidden">

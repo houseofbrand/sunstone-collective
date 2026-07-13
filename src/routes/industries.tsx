@@ -22,7 +22,7 @@ const rows = [
   { icon: Store, t: "Optical Chains", d: "Bulk manufacturing for private-label optical programs — polarized, driving, prescription-ready fronts." },
   { icon: Gift, t: "Corporate Gifting", d: "Branded temples, printed cases and custom gift boxes for enterprise gifting programs." },
   { icon: Megaphone, t: "Promotional Agencies", d: "Ultra-low-cost custom sunglasses for events, campaigns and giveaways from 100 pieces." },
-  { icon: Briefcase, t: "Distributors & Importers", d: "Deep catalogue, consistent stock, tiered pricing and container-load export solutions." },
+  { icon: Briefcase, t: "Distributors & Importers", d: "Deep product range, consistent stock, tiered pricing and container-load export solutions." },
   { icon: Globe, t: "Exporters", d: "Full export documentation, HS codes, freight partners and country-specific compliance." },
   { icon: Building2, t: "Retail Chains", d: "Store-ready packaging with per-SKU barcoding and end-cap display kits available." },
 ];

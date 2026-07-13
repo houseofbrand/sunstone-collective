@@ -155,7 +155,7 @@ export function ProductsPanel() {
         <div>
           <h2 className="font-display text-xl text-ink">Products</h2>
           <p className="text-xs text-muted-foreground mt-1">
-            Full catalogue management. Click a product to edit details and manage images.
+            Full product management. Click a product to edit details and manage images.
           </p>
         </div>
         <div className="flex gap-2">

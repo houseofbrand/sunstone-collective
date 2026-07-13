@@ -14,7 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { DialogsProvider } from "@/components/site/DialogsProvider";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
+import { ContactWidget } from "@/components/site/WhatsAppFloat";
+import { StickyMobileCTA } from "@/components/site/StickyMobileCTA";
 
 function NotFoundComponent() {
   return (
@@ -114,12 +115,13 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <DialogsProvider>
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col pb-20 md:pb-0">
           <Header />
           <main className="flex-1"><Outlet /></main>
           <Footer />
         </div>
-        <WhatsAppFloat />
+        <ContactWidget />
+        <StickyMobileCTA />
       </DialogsProvider>
     </QueryClientProvider>
   );

@@ -18,7 +18,7 @@ export const Route = createFileRoute("/wholesale")({
 });
 
 function WholesalePage() {
-  const { openInquiry, openCatalogue } = useDialogs();
+  const { openCatalogRequest } = useDialogs();
   return (
     <>
       <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Wholesale" }]} />
@@ -28,8 +28,7 @@ function WholesalePage() {
         <p className="mt-5 max-w-2xl text-muted-foreground">Order in multiples of {SITE.moq}. Request quotation. Add multiple products. Submit wholesale order — no retail checkout, no consumer noise.</p>
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-8 flex flex-wrap gap-3">
-          <button onClick={() => openInquiry()} className="btn-gold hover:brightness-95">Request Quotation</button>
-          <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Wholesale Catalogue</button>
+          <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: "wholesale_page" })} className="btn-gold rounded-lg hover:brightness-95">Request OEM Catalog</button>
         </div>
       </header>
 

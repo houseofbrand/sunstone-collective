@@ -8,77 +8,129 @@ const publicClient = () =>
     auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
   });
 
-const downloadSchema = z.object({
+const inquirySchema = z.object({
   name: z.string().trim().min(2).max(100),
   company: z.string().trim().min(2).max(150),
   mobile: z.string().trim().min(6).max(30),
   email: z.string().trim().email().max(200),
-  gst: z.string().trim().max(30).optional().or(z.literal("")),
   country: z.string().trim().min(2).max(80),
-  city: z.string().trim().min(2).max(80),
-});
-
-export const submitDownload = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => downloadSchema.parse(d))
-  .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: row, error } = await supabaseAdmin.from("catalogue_downloads").insert({
-      name: data.name,
-      company: data.company,
-      mobile: data.mobile,
-      email: data.email,
-      gst: data.gst || null,
-      country: data.country,
-      city: data.city,
-    }).select("id").single();
-    if (error) throw new Error(error.message);
-    return { ok: true, id: row.id as string };
-  });
-
-const inquirySchema = z.object({
-  name: z.string().trim().min(2).max(100),
-  company: z.string().trim().max(150).optional().or(z.literal("")),
-  mobile: z.string().trim().min(6).max(30),
-  email: z.string().trim().email().max(200),
-  gst: z.string().trim().max(30).optional().or(z.literal("")),
-  country: z.string().trim().max(80).optional().or(z.literal("")),
-  city: z.string().trim().max(80).optional().or(z.literal("")),
-  business_type: z.string().trim().max(80).optional().or(z.literal("")),
-  product_category: z.string().trim().max(80).optional().or(z.literal("")),
-  product_code: z.string().trim().max(50).optional().or(z.literal("")),
-  quantity: z.number().int().min(12).max(1_000_000).optional(),
+  product_category: z.enum([
+    "Watches",
+    "Sunglasses",
+    "Leather Accessories",
+    "Corporate Gifts",
+    "Multiple Categories",
+  ]),
+  quantity: z.number().int().min(1).max(10_000_000).optional(),
   message: z.string().trim().max(2000).optional().or(z.literal("")),
-  source: z.string().trim().max(50).optional(),
+  page_url: z.string().url().max(2000),
+  lead_source: z.string().trim().min(1).max(200),
 });
+
+type Inquiry = z.infer<typeof inquirySchema>;
+
+const NOTIFICATION_EMAIL = "rajan@houseofbrands.in";
+const NOTIFICATION_WHATSAPP = "917303681194";
+
+function notificationText(data: Inquiry, submittedAt: string) {
+  return [
+    "New OEM Catalog Request",
+    "",
+    `Full Name: ${data.name}`,
+    `Company Name: ${data.company}`,
+    `Email Address: ${data.email}`,
+    `WhatsApp Number: ${data.mobile}`,
+    `Country: ${data.country}`,
+    `Product Category: ${data.product_category}`,
+    `Estimated Order Quantity: ${data.quantity ?? "Not provided"}`,
+    `Message: ${data.message || "Not provided"}`,
+    "",
+    `Date & Time: ${submittedAt}`,
+    `Page URL: ${data.page_url}`,
+    `Lead Source: ${data.lead_source}`,
+  ].join("\n");
+}
+
+async function sendEmailNotification(data: Inquiry, submittedAt: string) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return "not_configured" as const;
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: process.env.RESEND_FROM_EMAIL || "OEMSunglasses.com <noreply@houseofbrands.in>",
+      to: [NOTIFICATION_EMAIL],
+      reply_to: data.email,
+      subject: `OEM Catalog Request — ${data.company}`,
+      text: notificationText(data, submittedAt),
+    }),
+  });
+  if (!response.ok) throw new Error(`Email notification failed (${response.status})`);
+  return "sent" as const;
+}
+
+async function sendWhatsAppNotification(data: Inquiry, submittedAt: string) {
+  const accessToken = process.env.WHATSAPP_CLOUD_ACCESS_TOKEN;
+  const phoneNumberId = process.env.WHATSAPP_CLOUD_PHONE_NUMBER_ID;
+  if (!accessToken || !phoneNumberId) return "not_configured" as const;
+
+  const graphVersion = process.env.WHATSAPP_GRAPH_API_VERSION || "v23.0";
+  const endpoint =
+    process.env.WHATSAPP_CLOUD_API_URL ||
+    `https://graph.facebook.com/${graphVersion}/${phoneNumberId}/messages`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      messaging_product: "whatsapp",
+      recipient_type: "individual",
+      to: process.env.WHATSAPP_NOTIFICATION_TO || NOTIFICATION_WHATSAPP,
+      type: "text",
+      text: { preview_url: false, body: notificationText(data, submittedAt) },
+    }),
+  });
+  if (!response.ok) throw new Error(`WhatsApp notification failed (${response.status})`);
+  return "sent" as const;
+}
 
 export const submitInquiry = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => inquirySchema.parse(d))
   .handler(async ({ data }) => {
     const sb = publicClient();
+    const submittedAt = new Date().toISOString();
     const { error } = await sb.from("inquiries").insert({
       name: data.name,
-      company: data.company || null,
+      company: data.company,
       mobile: data.mobile,
       email: data.email,
-      gst: data.gst || null,
-      country: data.country || null,
-      city: data.city || null,
-      business_type: data.business_type || null,
-      product_category: data.product_category || null,
-      product_code: data.product_code || null,
+      country: data.country,
+      product_category: data.product_category,
       quantity: data.quantity ?? null,
       message: data.message || null,
-      source: data.source || "inquiry_form",
+      source: data.lead_source,
     });
     if (error) throw new Error(error.message);
-    return { ok: true };
-  });
 
-export const getSiteSettings = createServerFn({ method: "GET" }).handler(async () => {
-  const sb = publicClient();
-  const { data } = await sb.from("site_settings").select("whatsapp_number, catalogue_url").eq("id", "default").maybeSingle();
-  return {
-    whatsapp: data?.whatsapp_number ?? "+917303681194",
-    catalogue_url: data?.catalogue_url ?? "",
-  };
-});
+    const [emailResult, whatsappResult] = await Promise.allSettled([
+      sendEmailNotification(data, submittedAt),
+      sendWhatsAppNotification(data, submittedAt),
+    ]);
+    if (emailResult.status === "rejected") console.error("[OEM Catalog]", emailResult.reason);
+    if (whatsappResult.status === "rejected") console.error("[OEM Catalog]", whatsappResult.reason);
+
+    return {
+      ok: true,
+      submittedAt,
+      notifications: {
+        email: emailResult.status === "fulfilled" ? emailResult.value : "failed",
+        whatsapp: whatsappResult.status === "fulfilled" ? whatsappResult.value : "failed",
+      },
+    };
+  });

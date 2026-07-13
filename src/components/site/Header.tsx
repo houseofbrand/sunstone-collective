@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { BookOpen, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDialogs } from "./DialogsProvider";
 import logoAsset from "@/assets/oem-sunglasses-logo-transparent.png.asset.json";
@@ -15,7 +15,7 @@ const nav = [
 ] as const;
 
 export function Header() {
-  const { openCatalogue, openInquiry } = useDialogs();
+  const { openCatalogRequest } = useDialogs();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -66,20 +66,21 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden xl:flex items-center shrink-0" style={{ gap: "16px" }}>
+        <div className="hidden xl:flex items-center shrink-0">
           <button
-            onClick={() => openCatalogue()}
-            className="bg-transparent text-white hover:bg-white hover:text-[#081A32] transition-all duration-300 ease-out"
-            style={{ height: "46px", padding: "0 28px", fontSize: "15px", fontWeight: 600, border: "1.5px solid #FFFFFF", borderRadius: "8px" }}
+            onClick={() =>
+              openCatalogRequest({ category: "Sunglasses", source: "header_navigation" })
+            }
+            className="inline-flex items-center gap-2 bg-[#D5A34A] text-[#081A32] shadow-[0_8px_24px_rgba(213,163,74,0.2)] transition-all duration-300 ease-out hover:bg-[#E0B45F] hover:shadow-[0_10px_30px_rgba(213,163,74,0.3)]"
+            style={{
+              height: "46px",
+              padding: "0 26px",
+              fontSize: "15px",
+              fontWeight: 700,
+              borderRadius: "8px",
+            }}
           >
-            Download Catalogue
-          </button>
-          <button
-            onClick={() => openInquiry()}
-            className="bg-white text-[#081A32] hover:bg-[#EAF0FB] transition-all duration-300 ease-out"
-            style={{ height: "46px", padding: "0 30px", fontSize: "15px", fontWeight: 700, borderRadius: "8px" }}
-          >
-            Get Quote
+            <BookOpen size={16} /> Request OEM Catalog
           </button>
         </div>
 
@@ -106,20 +107,16 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
-            <div className="flex flex-col gap-3 pt-4 mt-2 border-t border-white/10">
+            <div className="pt-4 mt-2 border-t border-white/10">
               <button
-                onClick={() => { setOpen(false); openCatalogue(); }}
-                className="border-[1.5px] border-white text-white bg-transparent"
-                style={{ height: "46px", fontSize: "15px", fontWeight: 600, borderRadius: "8px" }}
-              >
-                Download Catalogue
-              </button>
-              <button
-                onClick={() => { setOpen(false); openInquiry(); }}
-                className="bg-white text-[#081A32]"
+                onClick={() => {
+                  setOpen(false);
+                  openCatalogRequest({ category: "Sunglasses", source: "mobile_navigation" });
+                }}
+                className="inline-flex w-full items-center justify-center gap-2 bg-[#D5A34A] text-[#081A32]"
                 style={{ height: "46px", fontSize: "15px", fontWeight: 700, borderRadius: "8px" }}
               >
-                Get Quote
+                <BookOpen size={16} /> Request OEM Catalog
               </button>
             </div>
           </div>

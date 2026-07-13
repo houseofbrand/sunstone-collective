@@ -46,7 +46,7 @@ function AuthPage() {
       <div className="w-full max-w-md border border-border bg-card p-8">
         <div className="eyebrow mb-2">OEMSunglasses.com</div>
         <h1 className="font-display text-3xl text-ink">Admin Access</h1>
-        <p className="text-sm text-muted-foreground mt-1">Sign in to manage catalogues and leads.</p>
+        <p className="text-sm text-muted-foreground mt-1">Sign in to manage products and leads.</p>
         <form onSubmit={onSubmit} className="mt-6 space-y-3">
           <label className="block">
             <span className="block text-[11px] uppercase tracking-widest text-muted-foreground mb-1">Email</span>

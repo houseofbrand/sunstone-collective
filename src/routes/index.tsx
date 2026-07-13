@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Award, Boxes, Clock, Download, Factory, Globe2, MessageCircle, Package, Palette, Sparkles } from "lucide-react";
+import { ArrowRight, Award, BookOpen, Boxes, Clock, Factory, Globe2, Package, Palette, Sparkles } from "lucide-react";
 import heroImg from "@/assets/hero-sunglasses.jpg";
 import collectionImg from "@/assets/collection-grid.jpg";
 import oemImg from "@/assets/oem-process.jpg";
@@ -9,7 +9,7 @@ import { listPublicProducts } from "@/lib/products.functions";
 import { getFounder } from "@/lib/founder.functions";
 import { FounderSection } from "@/components/site/FounderSection";
 import { useDialogs } from "@/components/site/DialogsProvider";
-import { SITE, waLink } from "@/lib/site";
+import { SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   loader: async () => ({
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const { openCatalogue, openInquiry } = useDialogs();
+  const { openCatalogRequest } = useDialogs();
   const { products, founder } = Route.useLoaderData();
   const featured = products.slice(0, 4);
   return (
@@ -41,11 +41,8 @@ function Home() {
               Launch and scale your eyewear brand with India's trusted OEM partner. Private label, custom logo, low MOQ from {SITE.moq} pieces, 15–30 day production and export to 40+ countries.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <button onClick={() => openInquiry()} className="btn-ink hover:btn-ink-hover">
-                Get a Quote <ArrowRight size={16} />
-              </button>
-              <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-royal hover:text-white">
-                <Download size={16} /> Download Catalogue
+              <button data-testid="hero-catalog-request" onClick={() => openCatalogRequest({ category: "Sunglasses", source: "hero" })} className="btn-gold rounded-lg px-6 py-3.5 shadow-[0_10px_30px_rgba(213,163,74,0.22)]">
+                <BookOpen size={17} /> Request OEM Catalog
               </button>
             </div>
             <dl className="mt-12 grid grid-cols-3 gap-6 max-w-lg border-t border-border pt-8">
@@ -146,7 +143,7 @@ function Home() {
             </ol>
             <div className="mt-10 flex gap-3">
               <Link to="/oem" className="btn-outline-ink hover:bg-ink hover:text-bone">Full OEM Process</Link>
-              <button onClick={() => openInquiry()} className="btn-outline-ink hover:bg-ink hover:text-bone">Start OEM Project</button>
+              <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: "home_oem_process" })} className="btn-gold rounded-lg"><BookOpen size={15} /> Request OEM Catalog</button>
             </div>
           </div>
           <div className="order-1 lg:order-2 relative aspect-[4/5] overflow-hidden">
@@ -195,7 +192,7 @@ function Home() {
                     <div className="mt-2 text-sm text-secondary-foreground">MOQ {SITE.moq} pcs · Wholesale ₹{p.price}</div>
                     <div className="mt-4 flex gap-2 pt-4 border-t border-border">
                       <Link to="/product/$code" params={{ code: p.code }} className="btn-outline-ink flex-1 text-xs">View Details</Link>
-                      <button onClick={() => openInquiry()} className="btn-ink flex-1 text-xs">Request Quote</button>
+                      <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: `featured_product:${p.code}` })} className="btn-ink flex-1 text-xs">Request OEM Catalog</button>
                     </div>
                   </div>
                 </div>
@@ -240,10 +237,7 @@ function Home() {
             <div className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Start Your Brand</div>
             <h3 className="font-display text-3xl md:text-4xl mt-3 max-w-2xl mx-auto">Ready to launch your own sunglasses line?</h3>
             <p className="mt-4 text-white/85 max-w-xl mx-auto">Speak with our OEM team for pricing, samples, and lead times tailored to your brand.</p>
-            <div className="mt-8 flex flex-wrap gap-3 justify-center">
-              <button onClick={() => openInquiry()} className="btn-ink hover:btn-ink-hover">Get a Quote</button>
-              <button onClick={() => openCatalogue()} className="btn-outline-bone hover:bg-white hover:text-ink"><Download size={16} /> Download Catalogue</button>
-            </div>
+            <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: "home_final_cta" })} className="btn-gold mt-8 rounded-lg"><BookOpen size={16} /> Request OEM Catalog</button>
           </div>
         </div>
       </section>

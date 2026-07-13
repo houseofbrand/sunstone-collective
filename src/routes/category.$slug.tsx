@@ -34,7 +34,7 @@ export const Route = createFileRoute("/category/$slug")({
 
 function CategoryPage() {
   const { cat, all } = Route.useLoaderData();
-  const { openInquiry, openCatalogue } = useDialogs();
+  const { openCatalogRequest } = useDialogs();
   const list = productsByCategory(all, cat.slug);
   const showcase: Product[] = list.length > 0 ? list : all.slice(0, 6);
   return (
@@ -46,8 +46,7 @@ function CategoryPage() {
         <p className="mt-4 max-w-2xl text-muted-foreground">{cat.description}</p>
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-8 flex flex-wrap gap-3">
-          <button onClick={() => openInquiry({ category: cat.name })} className="btn-gold">Get Wholesale Quote</button>
-          <button onClick={() => openCatalogue(cat.slug)} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
+          <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: `category_page:${cat.slug}` })} className="btn-gold rounded-lg">Request OEM Catalog</button>
           <Link to="/customization" className="btn-outline-ink hover:bg-ink hover:text-bone">Customization Options</Link>
         </div>
       </header>

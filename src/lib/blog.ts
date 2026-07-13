@@ -37,7 +37,7 @@ export const blogPosts: BlogPost[] = [
       "## OEM (Original Equipment Manufacturer)",
       "You bring the design, materials and specification. The manufacturer produces to your brief. Highest degree of ownership — and highest MOQ, typically 300+ pieces per SKU.",
       "## Private Label",
-      "You choose from an existing catalogue of frames and add your branding — logo on temples, custom lens tints, branded packaging. MOQs are dramatically lower (from 12 pieces) and time-to-market is fast.",
+      "You choose from an existing range of frames and add your branding — logo on temples, custom lens tints, branded packaging. MOQs are dramatically lower (from 12 pieces) and time-to-market is fast.",
       "## White Label",
       "Similar to private label but the frame itself is unbranded and generic — you're essentially reselling a neutral product with your logo. Common in promotional and gifting programs.",
     ],

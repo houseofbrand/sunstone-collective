@@ -27,7 +27,7 @@ const steps = [
 ];
 
 function OemPage() {
-  const { openInquiry, openCatalogue } = useDialogs();
+  const { openCatalogRequest } = useDialogs();
   return (
     <>
       <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "OEM Process" }]} />
@@ -38,8 +38,7 @@ function OemPage() {
           <p className="mt-5 text-muted-foreground max-w-xl">Our OEM programme is built for founders, D2C brands, exporters and corporate buyers who want a manufacturing partner — not just a supplier.</p>
           <div className="rule-gold mt-6 w-16" />
           <div className="mt-8 flex flex-wrap gap-3">
-            <button onClick={() => openInquiry()} className="btn-gold">Start OEM Project</button>
-            <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
+            <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: "oem_page" })} className="btn-gold rounded-lg">Request OEM Catalog</button>
           </div>
         </div>
         <div className="aspect-[4/5] overflow-hidden">

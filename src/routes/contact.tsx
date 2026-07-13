@@ -19,7 +19,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const { openInquiry } = useDialogs();
+  const { openCatalogRequest } = useDialogs();
   return (
     <>
       <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Contact" }]} />
@@ -40,7 +40,7 @@ function ContactPage() {
           <Mail className="text-gold" />
           <div className="eyebrow mt-4">Email</div>
           <div className="font-display text-xl mt-1">{SITE.email}</div>
-          <p className="text-sm text-muted-foreground mt-2">For catalogues, quotes and export queries</p>
+          <p className="text-sm text-muted-foreground mt-2">For OEM, private label and export queries</p>
         </a>
         <div className="border border-border p-8 bg-card">
           <MapPin className="text-gold" />
@@ -50,7 +50,7 @@ function ContactPage() {
         </div>
       </section>
       <section className="container-luxe pb-24 text-center">
-        <button onClick={() => openInquiry()} className="btn-gold hover:brightness-95">Submit Detailed Inquiry</button>
+        <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: "contact_page" })} className="btn-gold rounded-lg hover:brightness-95">Request OEM Catalog</button>
       </section>
     </>
   );

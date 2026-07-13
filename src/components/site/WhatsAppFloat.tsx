@@ -1,16 +1,30 @@
-import { MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import { SITE, waLink } from "@/lib/site";
 
-export function WhatsAppFloat() {
+export function ContactWidget() {
   return (
-    <a
-      href={waLink(`Hello ${SITE.name}, I'm interested in OEM sunglasses. Please share catalogue & pricing.`)}
-      target="_blank"
-      rel="noreferrer"
-      className="fixed bottom-6 right-6 z-30 grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground shadow-xl hover:scale-105 transition"
-      aria-label="Chat on WhatsApp"
+    <div
+      className="fixed bottom-24 right-4 z-40 flex flex-col gap-2.5 md:bottom-6 md:right-6"
+      aria-label="Contact options"
     >
-      <MessageCircle size={26} />
-    </a>
+      <a
+        href={`mailto:${SITE.email}`}
+        className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-[#081A32] text-white shadow-xl transition hover:-translate-y-0.5 hover:bg-[#102D52]"
+        aria-label={`Email ${SITE.email}`}
+        title={SITE.email}
+      >
+        <Mail size={20} />
+      </a>
+      <a
+        href={waLink(`Hello ${SITE.name}, I'd like to discuss OEM or private label manufacturing.`)}
+        target="_blank"
+        rel="noreferrer"
+        className="group flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-[#071D12] shadow-xl transition hover:-translate-y-0.5 hover:brightness-95"
+        aria-label={`Chat on WhatsApp at ${SITE.whatsapp}`}
+        title={SITE.whatsapp}
+      >
+        <MessageCircle size={22} />
+      </a>
+    </div>
   );
 }
