@@ -3,7 +3,7 @@ import { ArrowRight, Award, Boxes, Clock, Download, Factory, Globe2, MessageCirc
 import heroImg from "@/assets/hero-sunglasses.jpg";
 import collectionImg from "@/assets/collection-grid.jpg";
 import oemImg from "@/assets/oem-process.jpg";
-import customImg from "@/assets/brand-every-detail.png.asset.json";
+import customImg from "@/assets/brand-every-detail.png";
 import { categories, productPrimaryImage, type Product } from "@/lib/products";
 import { listPublicProducts } from "@/lib/products.functions";
 import { getFounder } from "@/lib/founder.functions";
@@ -159,8 +159,8 @@ function Home() {
 
       <Section eyebrow="Private Label & Customization" title="Every surface, brandable." right={<Link to="/customization" className="text-sm font-medium flex items-center gap-2">All customization options <ArrowRight size={14} /></Link>}>
         <div className="grid lg:grid-cols-2 gap-10 mt-10 items-center">
-          <div className="aspect-[4/3] overflow-hidden rounded-lg border border-border shadow-card">
-            <img src={customImg.url} alt="Custom logo printing on sunglasses" loading="lazy" width={1400} height={1000} className="w-full h-full object-cover" />
+          <div className="aspect-[1402/1122] overflow-hidden rounded-lg border border-border shadow-card">
+            <img src={customImg} alt="Sunglasses branding and logo printing options" loading="lazy" width={1402} height={1122} className="w-full h-full object-cover" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             {["Temple Logo Printing","Lens Branding","Laser Engraving","Metal Logo Badge","Hard Case Printing","Soft Pouch Printing","Cleaning Cloth","Gift Box Printing","Barcode Stickers","Custom Packaging","Custom Colours","Custom Lens Tints"].map((o) => (

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
-import customImg from "@/assets/brand-every-detail.png.asset.json";
+import customImg from "@/assets/brand-every-detail.png";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import { Sparkles } from "lucide-react";
 
@@ -53,8 +53,8 @@ function CustomPage() {
             <button onClick={() => openCatalogue()} className="btn-outline-ink hover:bg-ink hover:text-bone">Download Catalogue</button>
           </div>
         </div>
-        <div className="aspect-[4/3] overflow-hidden">
-          <img src={customImg.url} alt="Custom logo sunglasses" loading="lazy" width={1400} height={1000} className="w-full h-full object-cover" />
+        <div className="aspect-[1402/1122] overflow-hidden">
+          <img src={customImg} alt="Sunglasses branding and logo printing options" loading="lazy" width={1402} height={1122} className="w-full h-full object-cover" />
         </div>
       </header>
 
