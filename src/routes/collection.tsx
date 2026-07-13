@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { categories } from "@/lib/products";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
-import { CollectionCatalogues } from "@/components/site/CollectionCatalogues";
 
 export const Route = createFileRoute("/collection")({
   component: CollectionPage,
@@ -38,7 +37,6 @@ function CollectionPage() {
           </Link>
         ))}
       </section>
-      <CollectionCatalogues />
     </>
   );
 }
