@@ -36,7 +36,6 @@ INSERT INTO public.founder_profile (id, name, designation, bio, quote, achieveme
     {"value":"25+","label":"Years of Industry Experience"},
     {"value":"10M+","label":"Products Delivered Globally"},
     {"value":"800+","label":"Product Lines Developed"},
-    {"value":"03","label":"International Offices"},
     {"value":"40+","label":"Countries Served"},
     {"value":"100%","label":"OEM & Private Label Focus"}
   ]'::jsonb,

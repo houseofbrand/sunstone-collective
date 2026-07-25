@@ -24,6 +24,9 @@ const publicClient = () =>
     auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
   });
 
+const sanitizeAchievements = (items: Achievement[]) =>
+  items.filter((item) => !/international\s+offices/i.test(item.label));
+
 const DEFAULT: FounderProfile = {
   name: "Rajan Mehta",
   designation: "Founder & CEO",
@@ -38,24 +41,26 @@ const DEFAULT: FounderProfile = {
   achievements: [],
 };
 
-export const getFounder = createServerFn({ method: "GET" }).handler(async (): Promise<FounderProfile> => {
-  const sb = publicClient();
-  const { data } = await sb.from("founder_profile").select("*").eq("id", "default").maybeSingle();
-  if (!data) return DEFAULT;
-  return {
-    name: data.name,
-    designation: data.designation,
-    bio: data.bio,
-    quote: data.quote,
-    image_url: data.image_url,
-    website_url: data.website_url,
-    linkedin_url: data.linkedin_url,
-    instagram_url: data.instagram_url,
-    facebook_url: data.facebook_url,
-    youtube_url: data.youtube_url,
-    achievements: (data.achievements as Achievement[]) ?? [],
-  };
-});
+export const getFounder = createServerFn({ method: "GET" }).handler(
+  async (): Promise<FounderProfile> => {
+    const sb = publicClient();
+    const { data } = await sb.from("founder_profile").select("*").eq("id", "default").maybeSingle();
+    if (!data) return DEFAULT;
+    return {
+      name: data.name,
+      designation: data.designation,
+      bio: data.bio,
+      quote: data.quote,
+      image_url: data.image_url,
+      website_url: data.website_url,
+      linkedin_url: data.linkedin_url,
+      instagram_url: data.instagram_url,
+      facebook_url: data.facebook_url,
+      youtube_url: data.youtube_url,
+      achievements: sanitizeAchievements((data.achievements as Achievement[]) ?? []),
+    };
+  },
+);
 
 const updateSchema = z.object({
   name: z.string().trim().min(1).max(120),
@@ -68,7 +73,9 @@ const updateSchema = z.object({
   instagram_url: z.string().trim().max(300),
   facebook_url: z.string().trim().max(300),
   youtube_url: z.string().trim().max(300),
-  achievements: z.array(z.object({ value: z.string().max(20), label: z.string().max(120) })).max(12),
+  achievements: z
+    .array(z.object({ value: z.string().max(20), label: z.string().max(120) }))
+    .max(12),
 });
 
 export const adminUpdateFounder = createServerFn({ method: "POST" })
@@ -76,10 +83,16 @@ export const adminUpdateFounder = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => updateSchema.parse(d))
   .handler(async ({ data, context }) => {
     const { data: isAdmin } = await context.supabase
-      .from("user_roles").select("role").eq("user_id", context.userId).eq("role", "admin").maybeSingle();
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId)
+      .eq("role", "admin")
+      .maybeSingle();
     if (!isAdmin) throw new Error("Forbidden");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { error } = await supabaseAdmin.from("founder_profile").upsert({ id: "default", ...data });
+    const { error } = await supabaseAdmin
+      .from("founder_profile")
+      .upsert({ id: "default", ...data });
     if (error) throw new Error(error.message);
     return { ok: true };
   });
@@ -95,7 +108,11 @@ export const adminUploadFounderImage = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => uploadSchema.parse(d))
   .handler(async ({ data, context }) => {
     const { data: isAdmin } = await context.supabase
-      .from("user_roles").select("role").eq("user_id", context.userId).eq("role", "admin").maybeSingle();
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId)
+      .eq("role", "admin")
+      .maybeSingle();
     if (!isAdmin) throw new Error("Forbidden");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const bytes = Uint8Array.from(atob(data.base64), (c) => c.charCodeAt(0));
@@ -105,7 +122,9 @@ export const adminUploadFounderImage = createServerFn({ method: "POST" })
       upsert: true,
     });
     if (up.error) throw new Error(up.error.message);
-    const { data: signed, error: sErr } = await supabaseAdmin.storage.from("product-images").createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
+    const { data: signed, error: sErr } = await supabaseAdmin.storage
+      .from("product-images")
+      .createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
     if (sErr) throw new Error(sErr.message);
     return { url: signed.signedUrl };
   });

@@ -60,9 +60,9 @@ function Home() {
               Build Your Eyewear Brand With an Experienced Manufacturing Partner
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-secondary-foreground">
-              From private-label collections to customised OEM sunglasses, we help brands,
-              retailers, distributors and e-commerce businesses develop and scale eyewear programmes
-              for India and international markets.
+              From private-label sunglasses to customised OEM programmes, we help brands, retailers,
+              distributors and e-commerce businesses develop and scale eyewear collections for India
+              and global markets.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <button
@@ -248,33 +248,38 @@ function Home() {
             {[
               {
                 icon: BriefcaseBusiness,
-                title: "25+ Years of Industry Experience",
-                text: "Deep experience across watches, eyewear, fashion accessories and private-label manufacturing.",
+                title: "25+ Years Industry Experience",
+                text: "Extensive experience across eyewear, watches, fashion accessories and private-label product development.",
               },
               {
                 icon: Layers3,
-                title: "OEM & Private Label",
+                title: "OEM & Private Label Expertise",
                 text: "Solutions for brands, retailers, distributors and e-commerce businesses.",
               },
               {
                 icon: Boxes,
                 title: "Flexible Collection Building",
-                text: "Create collections across multiple models and colours within the applicable MOQ structure.",
+                text: "Build broader eyewear collections by mixing multiple models within the applicable MOQ structure.",
+              },
+              {
+                icon: CheckCircle2,
+                title: "Flexible MOQ",
+                text: "Start with a total order of 120 pieces and mix up to 10 models, with a minimum of 12 pieces per selected model/colour.",
               },
               {
                 icon: Palette,
                 title: "Custom Branding",
-                text: "Branding options across frames, temples, lenses and packaging depending on the product.",
+                text: "Branding options across frames, temples, lenses and packaging, depending on product specifications.",
               },
               {
                 icon: Package,
                 title: "Custom Packaging",
-                text: "Develop branded cases, pouches, cleaning cloths and retail packaging.",
+                text: "Branded cases, pouches, cleaning cloths and retail packaging options.",
               },
               {
                 icon: Globe2,
                 title: "Scalable Sourcing",
-                text: "Built to support growing brands as their order volumes increase.",
+                text: "Designed to support growing brands as their requirements increase.",
               },
             ].map((item) => (
               <article key={item.title} className="card-luxe p-6">
@@ -290,7 +295,7 @@ function Home() {
       <Section
         eyebrow="From Development to Production"
         title="A closer look at the product journey."
-        description="A closer look at the processes, product development, customisation and quality control behind our eyewear programmes."
+        description="A closer look at the product development, customisation, production and quality-control processes behind our eyewear programmes."
       >
         <div className="mt-10 grid gap-4 lg:grid-cols-12">
           <figure className="group relative overflow-hidden rounded-2xl border border-border lg:col-span-7">
@@ -355,13 +360,13 @@ function Home() {
           <div className="grid grid-cols-2 gap-3">
             {[
               ["Frame", "Custom colours and finishes"],
-              ["Temple", "Printed, engraved or applied logo options"],
+              ["Temple", "Logo printing, engraving and branding options"],
               ["Lens", "Branding where technically suitable"],
-              ["Metal Details", "Logo badges and decorative components"],
-              ["Case", "Custom branded protective cases"],
+              ["Metal Details", "Custom branding elements where applicable"],
+              ["Case", "Custom branded cases"],
               ["Pouch", "Private-label pouches"],
               ["Cleaning Cloth", "Custom logo printing"],
-              ["Retail Box", "Complete branded packaging"],
+              ["Retail Box", "Complete branded retail packaging"],
             ].map(([title, text]) => (
               <div key={title} className="card-luxe p-5">
                 <Sparkles className="text-primary" size={17} />
@@ -463,9 +468,9 @@ function Home() {
               build and scale their eyewear business.
             </p>
             <p className="mt-4 max-w-3xl text-sm text-white/65">
-              An experienced global eyewear manufacturing partner that can work with your brand from
-              initial 120-piece collections to requirements running into tens of thousands of
-              pieces.
+              Start with a flexible 120-piece collection and scale with an experienced eyewear
+              manufacturing partner as your business grows — from initial collection development to
+              requirements running into tens of thousands of pieces.
             </p>
           </div>
           <div className="grid gap-3">
@@ -611,7 +616,7 @@ const faqs = [
   {
     question: "What is the minimum order quantity?",
     answer:
-      "Our MOQ is 120 pieces. You can mix up to 10 models in one order, with a minimum of 12 pieces per selected model/colour. This gives brands and retailers the flexibility to create a broader collection without committing to large quantities of a single design.",
+      "Our MOQ is 120 pieces per order. You can mix up to 10 models, with a minimum of 12 pieces per selected model/colour. This allows brands, retailers and distributors to build a broader eyewear collection without committing to 120 pieces of a single design.",
   },
   {
     question: "Can I mix different sunglasses models in one order?",
