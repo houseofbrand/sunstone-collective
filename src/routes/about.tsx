@@ -204,8 +204,8 @@ function AboutPage() {
             Share your product, quantity, branding and packaging requirements.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl">
-            The displayed starting MOQ is from {SITE.moq} pieces for suitable private-label
-            programmes. Custom development quantities depend on the selected product and scope.
+            {SITE.moqDetailed}. Build a flexible collection across selected models and colours, then
+            scale future requirements as your business grows.
           </p>
           <button
             onClick={() =>

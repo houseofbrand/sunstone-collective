@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "OEM and private-label sunglasses manufacturing partner for brands, retailers, distributors and sourcing teams. MOQ from 120 pieces, custom branding and packaging.",
+          "OEM and private-label sunglasses manufacturing partner for brands, retailers, distributors and sourcing teams. MOQ: 120 pcs, mix up to 10 models, custom branding and packaging.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -80,12 +80,14 @@ function Home() {
               </button>
             </div>
             <div className="mt-10 flex max-w-4xl flex-wrap gap-x-6 gap-y-3 border-t border-border pt-7 text-xs font-semibold uppercase tracking-[0.12em] text-white/75">
-              <span>25+ Years Industry Experience</span>
-              <span>MOQ from {SITE.moq} pcs</span>
+              <span>MOQ: {SITE.moq} pcs</span>
+              <span>Mix up to 10 Models</span>
               <span>Custom Branding</span>
               <span>Custom Packaging</span>
-              <span>Scalable Production</span>
             </div>
+            <p className="mt-4 text-sm text-white/60">
+              25+ Years Industry Experience · Scalable Production
+            </p>
           </div>
           <div className="lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border shadow-lifted">
@@ -118,7 +120,7 @@ function Home() {
           <p className="max-w-3xl text-sm leading-relaxed text-white/75">
             We work with fashion brands, retailers, distributors, e-commerce businesses and
             corporate buyers to develop scalable eyewear collections — from private-label programmes
-            to large-volume OEM production.
+            to large-volume OEM requirements.
           </p>
         </div>
       </section>
@@ -242,7 +244,7 @@ function Home() {
             </h2>
             <div className="rule-gold mt-5 w-16" />
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 icon: BriefcaseBusiness,
@@ -251,23 +253,28 @@ function Home() {
               },
               {
                 icon: Layers3,
-                title: "OEM & Private Label Expertise",
-                text: "Solutions for established brands, retailers, distributors, start-ups and e-commerce businesses.",
+                title: "OEM & Private Label",
+                text: "Solutions for brands, retailers, distributors and e-commerce businesses.",
               },
               {
                 icon: Boxes,
-                title: "Flexible Production Capability",
-                text: "Support for smaller brand launches as well as large-volume production programmes.",
+                title: "Flexible Collection Building",
+                text: "Create collections across multiple models and colours within the applicable MOQ structure.",
+              },
+              {
+                icon: Palette,
+                title: "Custom Branding",
+                text: "Branding options across frames, temples, lenses and packaging depending on the product.",
               },
               {
                 icon: Package,
-                title: "Custom Branding & Packaging",
-                text: "Products, logos, cases, pouches, cleaning cloths and retail packaging developed as one programme.",
+                title: "Custom Packaging",
+                text: "Develop branded cases, pouches, cleaning cloths and retail packaging.",
               },
               {
                 icon: Globe2,
-                title: "India & Global Business Focus",
-                text: "A B2B approach designed for domestic buyers and international sourcing requirements.",
+                title: "Scalable Sourcing",
+                text: "Built to support growing brands as their order volumes increase.",
               },
             ].map((item) => (
               <article key={item.title} className="card-luxe p-6">
@@ -283,7 +290,7 @@ function Home() {
       <Section
         eyebrow="From Development to Production"
         title="A closer look at the product journey."
-        description="Product selection, development details, branding and finishing are reviewed as connected parts of the final eyewear programme."
+        description="A closer look at the processes, product development, customisation and quality control behind our eyewear programmes."
       >
         <div className="mt-10 grid gap-4 lg:grid-cols-12">
           <figure className="group relative overflow-hidden rounded-2xl border border-border lg:col-span-7">
@@ -327,7 +334,7 @@ function Home() {
       <Section
         eyebrow="Private Label & Customisation"
         title="Your Brand. Every Detail."
-        description="From the frame to the packaging, build a complete eyewear collection around your brand identity."
+        description="Build a complete eyewear collection around your brand identity — from the sunglasses to the final retail packaging."
         right={
           <Link to="/customization" className="flex items-center gap-2 text-sm font-semibold">
             Explore all options <ArrowRight size={15} />
@@ -449,27 +456,27 @@ function Home() {
           <div>
             <div className="eyebrow">From First Collection to Large-Scale Production</div>
             <h2 className="mt-3 max-w-4xl font-display text-3xl md:text-5xl">
-              An experienced global eyewear manufacturing partner for changing sourcing needs.
+              Experienced Global Eyewear Manufacturing Partner
             </h2>
             <p className="mt-6 max-w-3xl">
-              Whether you are launching your first eyewear collection or sourcing at scale, our
-              approach is built around your product, quantity, branding and commercial requirements.
+              From flexible 120-piece collection orders to large-volume programmes, we help brands
+              build and scale their eyewear business.
             </p>
             <p className="mt-4 max-w-3xl text-sm text-white/65">
-              From 100-piece opportunities to 100,000-piece programmes, different businesses require
-              different sourcing solutions. Our focus is to build long-term manufacturing
-              relationships that can grow with the brand.
+              An experienced global eyewear manufacturing partner that can work with your brand from
+              initial 120-piece collections to requirements running into tens of thousands of
+              pieces.
             </p>
           </div>
           <div className="grid gap-3">
             <div className="rounded-2xl border border-white/15 bg-white/5 p-7">
-              <div className="eyebrow">Displayed Starting MOQ</div>
-              <div className="mt-2 font-display text-4xl">From {SITE.moq} pcs</div>
-              <p className="mt-3 text-sm">For suitable products and private-label programmes.</p>
+              <div className="eyebrow">Collection MOQ</div>
+              <div className="mt-2 font-display text-3xl">{SITE.moqMedium}</div>
+              <p className="mt-3 text-sm">Minimum 12 pcs per selected model/colour.</p>
             </div>
             <div className="rounded-2xl border border-white/15 bg-white/5 p-7 text-sm text-white/70">
-              MOQ varies by product, design, material and customisation. Fully customised OEM
-              developments may require a higher starting quantity.
+              A 120-piece collection can include up to 10 models, giving buyers flexibility without
+              presenting 12 pieces as the total minimum order.
             </div>
           </div>
         </div>
@@ -517,7 +524,8 @@ function Home() {
                       {[product.frame_material, product.lens_material].filter(Boolean).join(" · ")}
                     </p>
                     <div className="mt-4 space-y-2 border-t border-border pt-4 text-xs font-semibold uppercase tracking-[0.1em] text-white/70">
-                      <div>MOQ from {SITE.moq} pcs</div>
+                      <div>{SITE.moqCompact}</div>
+                      <div>Mix up to 10 models</div>
                       <div>Private label available</div>
                       <div>Custom branding available</div>
                     </div>
@@ -603,7 +611,12 @@ const faqs = [
   {
     question: "What is the minimum order quantity?",
     answer:
-      "The displayed starting MOQ is 120 pieces for suitable products and private-label programmes. The applicable MOQ depends on the product, design, material, branding and customisation requirements; fully customised OEM development may require a higher quantity.",
+      "Our MOQ is 120 pieces. You can mix up to 10 models in one order, with a minimum of 12 pieces per selected model/colour. This gives brands and retailers the flexibility to create a broader collection without committing to large quantities of a single design.",
+  },
+  {
+    question: "Can I mix different sunglasses models in one order?",
+    answer:
+      "Yes. A 120-piece order can include a mix of up to 10 models, subject to a minimum of 12 pieces per selected model/colour.",
   },
   {
     question: "What is the difference between private label and custom OEM?",

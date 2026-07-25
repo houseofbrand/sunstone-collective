@@ -212,6 +212,9 @@ export function InquiryDialog({
             Share your product, quantity, branding and packaging requirements. Our team will review
             the brief and respond with the most relevant development route, MOQ and quotation.
           </p>
+          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-white/55">
+            MOQ: 120 pcs · Mix up to 10 models · Minimum 12 pcs per model/colour
+          </p>
         </div>
 
         <div className="px-6 py-7 sm:px-9 sm:py-8">
@@ -265,9 +268,9 @@ export function InquiryDialog({
                   name="estimated_quantity"
                   label="Estimated Quantity"
                   type="number"
-                  min="1"
+                  min="120"
                   inputMode="numeric"
-                  placeholder="e.g. 500"
+                  placeholder="Minimum total: 120"
                   required
                 />
                 <Field

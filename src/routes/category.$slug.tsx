@@ -23,7 +23,7 @@ export const Route = createFileRoute("/category/$slug")({
           { title: `${loaderData.cat.name} — Private Label & OEM | SunglassManufacturer.com` },
           {
             name: "description",
-            content: `${loaderData.cat.description} MOQ from ${SITE.moq} pieces for suitable private-label programmes. Custom branding and packaging available.`,
+            content: `${loaderData.cat.description} ${SITE.moqDetailed}. Custom branding and packaging available.`,
           },
           { property: "og:title", content: `${loaderData.cat.name} — Private Label & OEM` },
           { property: "og:description", content: loaderData.cat.description },
@@ -117,7 +117,8 @@ function CategoryPage() {
                 </div>
               </Link>
               <div className="mt-3 space-y-1 text-xs font-semibold uppercase tracking-[0.1em] text-white/65">
-                <div>MOQ from {SITE.moq} pcs</div>
+                <div>{SITE.moqCompact}</div>
+                <div>Mix up to 10 models</div>
                 <div>Private label &amp; custom branding available</div>
               </div>
               <button

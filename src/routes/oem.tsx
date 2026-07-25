@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import oemImg from "@/assets/oem-process.jpg";
+import { SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/oem")({
   component: OemPage,
@@ -108,8 +109,8 @@ function OemPage() {
       <section className="container-luxe py-20 grid md:grid-cols-3 gap-6">
         {[
           {
-            t: "Starting MOQ",
-            v: "From 120 pieces for suitable products and private-label programmes. Custom OEM quantities depend on the development scope.",
+            t: "Commercial MOQ",
+            v: SITE.moqDetailed,
           },
           {
             t: "Product Brief",

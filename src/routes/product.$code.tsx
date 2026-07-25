@@ -24,12 +24,12 @@ export const Route = createFileRoute("/product/$code")({
         },
         {
           name: "description",
-          content: `${loaderData.p.name} — ${loaderData.p.frame_material}, ${loaderData.p.lens_material}. MOQ from ${SITE.moq} pieces for suitable private-label programmes. Custom branding and packaging available.`,
+          content: `${loaderData.p.name} — ${loaderData.p.frame_material}, ${loaderData.p.lens_material}. ${SITE.moqDetailed}. Custom branding and packaging available.`,
         },
         { property: "og:title", content: `${loaderData.p.name} — Wholesale OEM Sunglasses` },
         {
           property: "og:description",
-          content: `${loaderData.p.frame_material} · ${loaderData.p.lens_material} · MOQ from ${SITE.moq} pieces for suitable programmes.`,
+          content: `${loaderData.p.frame_material} · ${loaderData.p.lens_material} · ${SITE.moqMedium}.`,
         },
         { property: "og:type", content: "product" },
         { property: "og:url", content: `/product/${loaderData.p.code}` },
@@ -134,7 +134,7 @@ function ProductPage() {
           <div className="rule-gold my-5 w-16" />
           <div className="flex flex-wrap items-center gap-3">
             <div className="rounded-full border border-primary/40 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.12em]">
-              MOQ from {SITE.moq} pcs
+              {SITE.moqMedium}
             </div>
             <div className="text-sm text-muted-foreground">Pricing quoted to your requirements</div>
           </div>
@@ -145,7 +145,7 @@ function ProductPage() {
             <Row k="Frame Material" v={p.frame_material} />
             <Row k="Lens Material" v={p.lens_material} />
             <Row k="Weight" v={p.weight} />
-            <Row k="MOQ" v={`From ${SITE.moq} pieces*`} />
+            <Row k="MOQ" v={SITE.moqDetailed.replace("MOQ: ", "")} />
             <Row k="Programme" v="Private label or custom OEM" />
             <Row k="Packaging" v="Cases, pouches, cloths and boxes available" />
             <Row k="Customization" v="Logo, colour, lens tint, packaging" />
@@ -171,7 +171,8 @@ function ProductPage() {
             <BookOpen size={16} /> Get OEM Price
           </button>
           <p className="mt-3 text-xs text-muted-foreground">
-            *MOQ depends on product, design, material and customisation requirements.
+            Total order: 120 pieces. Mix up to 10 models, with at least 12 pieces per selected
+            model/colour.
           </p>
         </div>
       </section>

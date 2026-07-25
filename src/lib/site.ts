@@ -5,6 +5,9 @@ export const SITE = {
   whatsappRaw: "917303681194",
   email: "rajan@houseofbrands.in",
   moq: 120,
+  moqCompact: "MOQ: 120 pcs",
+  moqMedium: "MOQ: 120 pcs | Mix up to 10 models",
+  moqDetailed: "MOQ: 120 pcs (Mix up to 10 models, minimum 12 pcs per model/colour)",
   city: "India",
 };
 

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/wholesale")({
       { title: "B2B Sunglasses Supply | Private Label & OEM | SunglassManufacturer.com" },
       {
         name: "description",
-        content: `B2B sunglasses sourcing for retailers, importers and distributors. MOQ from ${SITE.moq} pieces for suitable products, with private-label and OEM options.`,
+        content: `B2B sunglasses sourcing for retailers, importers and distributors. ${SITE.moqDetailed}, with private-label and OEM options.`,
       },
       { property: "og:title", content: "Professional B2B Sunglasses Sourcing" },
       {
@@ -34,8 +34,8 @@ function WholesalePage() {
           Professional eyewear sourcing, built for B2B buyers.
         </h1>
         <p className="mt-5 max-w-2xl text-muted-foreground">
-          MOQ starts from {SITE.moq} pieces for suitable products. Quotations are prepared around
-          product type, quantity, branding, packaging and customisation requirements.
+          {SITE.moqDetailed}. Quotations are prepared around product type, quantity, branding,
+          packaging and customisation requirements.
         </p>
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-8 flex flex-wrap gap-3">
@@ -55,8 +55,8 @@ function WholesalePage() {
             d: "Pricing is quoted after reviewing product, quantity, material, branding, packaging and customisation requirements.",
           },
           {
-            t: "Starting MOQ",
-            d: `Flexible MOQ from ${SITE.moq} pieces for suitable products and private-label programmes. Custom developments may require more.`,
+            t: "Commercial MOQ",
+            d: SITE.moqDetailed,
           },
           {
             t: "Private Label vs OEM",

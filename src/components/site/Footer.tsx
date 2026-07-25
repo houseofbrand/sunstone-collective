@@ -18,6 +18,9 @@ export function Footer() {
             distributors, e-commerce businesses and sourcing teams in India and international
             markets.
           </p>
+          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-white/65">
+            {SITE.moqMedium}
+          </p>
           <div className="mt-6 space-y-2 text-sm text-white/85">
             <a
               href={waLink("Hello, I'd like an OEM sunglasses quote.")}
