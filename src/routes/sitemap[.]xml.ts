@@ -4,7 +4,7 @@ import { categories, type Product } from "@/lib/products";
 import { listPublicProducts } from "@/lib/products.functions";
 import { blogPosts } from "@/lib/blog";
 
-const BASE_URL = "";
+const BASE_URL = "https://sunglassmanufacturer.com";
 
 interface SitemapEntry {
   path: string;
@@ -27,9 +27,21 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/about", changefreq: "monthly", priority: "0.6" },
           { path: "/contact", changefreq: "monthly", priority: "0.6" },
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
-          ...categories.map((c) => ({ path: `/category/${c.slug}`, changefreq: "weekly" as const, priority: "0.8" })),
-          ...products.map((p) => ({ path: `/product/${p.code}`, changefreq: "monthly" as const, priority: "0.7" })),
-          ...blogPosts.map((b) => ({ path: `/blog/${b.slug}`, changefreq: "monthly" as const, priority: "0.6" })),
+          ...categories.map((c) => ({
+            path: `/category/${c.slug}`,
+            changefreq: "weekly" as const,
+            priority: "0.8",
+          })),
+          ...products.map((p) => ({
+            path: `/product/${p.code}`,
+            changefreq: "monthly" as const,
+            priority: "0.7",
+          })),
+          ...blogPosts.map((b) => ({
+            path: `/blog/${b.slug}`,
+            changefreq: "monthly" as const,
+            priority: "0.6",
+          })),
         ];
 
         const urls = entries.map((e) =>
@@ -39,7 +51,9 @@ export const Route = createFileRoute("/sitemap.xml")({
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,
-          ].filter(Boolean).join("\n"),
+          ]
+            .filter(Boolean)
+            .join("\n"),
         );
 
         const xml = [

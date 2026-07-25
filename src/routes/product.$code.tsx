@@ -19,52 +19,94 @@ export const Route = createFileRoute("/product/$code")({
     const img = productPrimaryImage(loaderData.p);
     return {
       meta: [
-        { title: `${loaderData.p.name} (${loaderData.p.code}) — Wholesale OEM | OEMSunglasses.com` },
-        { name: "description", content: `${loaderData.p.name} — ${loaderData.p.frame_material}, ${loaderData.p.lens_material}. Wholesale price ₹${loaderData.p.price}, MOQ ${SITE.moq} pieces. OEM, private label & custom logo available.` },
+        {
+          title: `${loaderData.p.name} (${loaderData.p.code}) — Private Label OEM | SunglassManufacturer.com`,
+        },
+        {
+          name: "description",
+          content: `${loaderData.p.name} — ${loaderData.p.frame_material}, ${loaderData.p.lens_material}. MOQ from ${SITE.moq} pieces for suitable private-label programmes. Custom branding and packaging available.`,
+        },
         { property: "og:title", content: `${loaderData.p.name} — Wholesale OEM Sunglasses` },
-        { property: "og:description", content: `${loaderData.p.frame_material} · ${loaderData.p.lens_material} · MOQ ${SITE.moq} pieces.` },
+        {
+          property: "og:description",
+          content: `${loaderData.p.frame_material} · ${loaderData.p.lens_material} · MOQ from ${SITE.moq} pieces for suitable programmes.`,
+        },
         { property: "og:type", content: "product" },
         { property: "og:url", content: `/product/${loaderData.p.code}` },
-        ...(img ? [{ property: "og:image", content: img }, { name: "twitter:image", content: img }] : []),
+        ...(img
+          ? [
+              { property: "og:image", content: img },
+              { name: "twitter:image", content: img },
+            ]
+          : []),
       ],
       links: [{ rel: "canonical", href: `/product/${loaderData.p.code}` }],
-      scripts: [{
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Product",
-          name: loaderData.p.name,
-          sku: loaderData.p.code,
-          image: img ? [img] : undefined,
-          description: `${loaderData.p.frame_material}, ${loaderData.p.lens_material}, UV400 protected. Wholesale OEM sunglasses.`,
-          offers: { "@type": "Offer", priceCurrency: "INR", price: loaderData.p.price, availability: "https://schema.org/InStock" },
-        }),
-      }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: loaderData.p.name,
+            sku: loaderData.p.code,
+            image: img ? [img] : undefined,
+            description: `${loaderData.p.frame_material}, ${loaderData.p.lens_material}. Private-label and custom branding options available.`,
+          }),
+        },
+      ],
     };
   },
   component: ProductPage,
-  notFoundComponent: () => <div className="container-luxe py-24 text-center"><h1 className="font-display text-3xl">Product not found</h1><Link to="/collection" className="btn-ink mt-6 inline-flex">Back to collection</Link></div>,
-  errorComponent: ({ error }) => <div className="container-luxe py-24 text-center"><p>{error.message}</p></div>,
+  notFoundComponent: () => (
+    <div className="container-luxe py-24 text-center">
+      <h1 className="font-display text-3xl">Product not found</h1>
+      <Link to="/collection" className="btn-ink mt-6 inline-flex">
+        Back to collection
+      </Link>
+    </div>
+  ),
+  errorComponent: ({ error }) => (
+    <div className="container-luxe py-24 text-center">
+      <p>{error.message}</p>
+    </div>
+  ),
 });
 
 function ProductPage() {
   const { p, all } = Route.useLoaderData();
   const { openCatalogRequest } = useDialogs();
   const cat = findCategory(p.category_slug);
-  const related = all.filter((x: Product) => x.category_slug === p.category_slug && x.code !== p.code).slice(0, 4);
+  const related = all
+    .filter((x: Product) => x.category_slug === p.category_slug && x.code !== p.code)
+    .slice(0, 4);
   const primary = productPrimaryImage(p);
   const [active, setActive] = useState<string | null>(primary);
 
   return (
     <>
-      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Collection", to: "/collection" }, { label: cat?.name || "Category", to: cat ? `/category/${cat.slug}` : undefined }, { label: p.name }]} />
+      <Breadcrumbs
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Collection", to: "/collection" },
+          { label: cat?.name || "Category", to: cat ? `/category/${cat.slug}` : undefined },
+          { label: p.name },
+        ]}
+      />
       <section className="container-luxe pt-8 pb-20 grid lg:grid-cols-2 gap-12">
         <div>
           <div className="aspect-square overflow-hidden bg-secondary">
             {active ? (
-              <img src={active} alt={p.name} width={900} height={900} className="w-full h-full object-cover" />
+              <img
+                src={active}
+                alt={p.name}
+                width={900}
+                height={900}
+                className="w-full h-full object-cover"
+              />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs uppercase tracking-widest">No image available</div>
+              <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs uppercase tracking-widest">
+                No image available
+              </div>
             )}
           </div>
           {p.images.length > 1 && (
@@ -76,7 +118,11 @@ function ProductPage() {
                   className={`aspect-square overflow-hidden border ${active === im.url ? "border-gold" : "border-border"}`}
                   aria-label="View image"
                 >
-                  <img src={im.url} alt={im.alt_text || p.name} className="w-full h-full object-cover" />
+                  <img
+                    src={im.url}
+                    alt={im.alt_text || p.name}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -86,35 +132,47 @@ function ProductPage() {
           <div className="eyebrow">{p.code}</div>
           <h1 className="font-display text-4xl mt-2">{p.name}</h1>
           <div className="rule-gold my-5 w-16" />
-          <div className="flex items-baseline gap-4">
-            <div className="font-display text-3xl text-ink">₹{p.price}</div>
-            <div className="text-sm text-muted-foreground">Wholesale · MOQ {SITE.moq} pcs</div>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="rounded-full border border-primary/40 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.12em]">
+              MOQ from {SITE.moq} pcs
+            </div>
+            <div className="text-sm text-muted-foreground">Pricing quoted to your requirements</div>
           </div>
-          {p.description && <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{p.description}</p>}
+          {p.description && (
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{p.description}</p>
+          )}
           <dl className="mt-8 grid grid-cols-2 gap-y-4 gap-x-6 text-sm">
             <Row k="Frame Material" v={p.frame_material} />
             <Row k="Lens Material" v={p.lens_material} />
-            <Row k="Protection" v="UV400" />
             <Row k="Weight" v={p.weight} />
-            <Row k="MOQ" v={`${SITE.moq} pieces`} />
-            <Row k="Delivery" v="15–30 days" />
-            <Row k="Packaging" v="Soft pouch + cloth (customisable)" />
+            <Row k="MOQ" v={`From ${SITE.moq} pieces*`} />
+            <Row k="Programme" v="Private label or custom OEM" />
+            <Row k="Packaging" v="Cases, pouches, cloths and boxes available" />
             <Row k="Customization" v="Logo, colour, lens tint, packaging" />
           </dl>
           {p.colours.length > 0 && (
             <div className="mt-6">
               <div className="eyebrow mb-2">Available Colours</div>
               <div className="flex flex-wrap gap-2">
-                {p.colours.map((c: string) => <span key={c} className="border border-border px-3 py-1 text-xs">{c}</span>)}
+                {p.colours.map((c: string) => (
+                  <span key={c} className="border border-border px-3 py-1 text-xs">
+                    {c}
+                  </span>
+                ))}
               </div>
             </div>
           )}
           <button
-            onClick={() => openCatalogRequest({ category: "Sunglasses", source: `product_page:${p.code}` })}
+            onClick={() =>
+              openCatalogRequest({ category: "Sunglasses", source: `product_page:${p.code}` })
+            }
             className="btn-gold mt-10 w-full justify-center rounded-lg py-3.5"
           >
-            <BookOpen size={16} /> Request OEM Catalog
+            <BookOpen size={16} /> Get OEM Price
           </button>
+          <p className="mt-3 text-xs text-muted-foreground">
+            *MOQ depends on product, design, material and customisation requirements.
+          </p>
         </div>
       </section>
 
@@ -127,17 +185,33 @@ function ProductPage() {
             {related.map((r: Product) => {
               const rimg = productPrimaryImage(r);
               return (
-                <Link key={r.code} to="/product/$code" params={{ code: r.code }} className="group block">
+                <Link
+                  key={r.code}
+                  to="/product/$code"
+                  params={{ code: r.code }}
+                  className="group block"
+                >
                   <div className="aspect-square overflow-hidden bg-secondary">
                     {rimg ? (
-                      <img src={rimg} alt={r.name} loading="lazy" width={900} height={900} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img
+                        src={rimg}
+                        alt={r.name}
+                        loading="lazy"
+                        width={900}
+                        height={900}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs uppercase tracking-widest">No image</div>
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs uppercase tracking-widest">
+                        No image
+                      </div>
                     )}
                   </div>
                   <div className="mt-3">
                     <div className="eyebrow">{r.code}</div>
-                    <div className="font-display text-base mt-1 group-hover:text-primary">{r.name}</div>
+                    <div className="font-display text-base mt-1 group-hover:text-primary">
+                      {r.name}
+                    </div>
                   </div>
                 </Link>
               );

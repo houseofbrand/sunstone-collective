@@ -7,10 +7,16 @@ export const Route = createFileRoute("/wholesale")({
   component: WholesalePage,
   head: () => ({
     meta: [
-      { title: "Wholesale Sunglasses India | Bulk Supplier | OEMSunglasses.com" },
-      { name: "description", content: `Wholesale sunglasses supplier in India. Order in multiples of ${SITE.moq}. Aviator, polarized, sports, fashion, luxury frames for retailers, importers and exporters.` },
-      { property: "og:title", content: "Wholesale Sunglasses India — Bulk Supplier" },
-      { property: "og:description", content: "Wholesale ordering, quotation and repeat orders. No retail checkout." },
+      { title: "B2B Sunglasses Supply | Private Label & OEM | SunglassManufacturer.com" },
+      {
+        name: "description",
+        content: `B2B sunglasses sourcing for retailers, importers and distributors. MOQ from ${SITE.moq} pieces for suitable products, with private-label and OEM options.`,
+      },
+      { property: "og:title", content: "Professional B2B Sunglasses Sourcing" },
+      {
+        property: "og:description",
+        content: "Private-label, OEM and repeat-order sourcing for professional B2B buyers.",
+      },
       { property: "og:url", content: "/wholesale" },
     ],
     links: [{ rel: "canonical", href: "/wholesale" }],
@@ -24,20 +30,42 @@ function WholesalePage() {
       <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Wholesale" }]} />
       <header className="container-luxe pt-8 pb-16">
         <div className="eyebrow">Wholesale Program</div>
-        <h1 className="font-display text-4xl md:text-5xl mt-3 max-w-3xl">Bulk sunglasses ordering, built for buyers.</h1>
-        <p className="mt-5 max-w-2xl text-muted-foreground">Order in multiples of {SITE.moq}. Request quotation. Add multiple products. Submit wholesale order — no retail checkout, no consumer noise.</p>
+        <h1 className="font-display text-4xl md:text-5xl mt-3 max-w-3xl">
+          Professional eyewear sourcing, built for B2B buyers.
+        </h1>
+        <p className="mt-5 max-w-2xl text-muted-foreground">
+          MOQ starts from {SITE.moq} pieces for suitable products. Quotations are prepared around
+          product type, quantity, branding, packaging and customisation requirements.
+        </p>
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-8 flex flex-wrap gap-3">
-          <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: "wholesale_page" })} className="btn-gold rounded-lg hover:brightness-95">Request OEM Catalog</button>
+          <button
+            onClick={() => openCatalogRequest({ category: "Sunglasses", source: "wholesale_page" })}
+            className="btn-gold rounded-lg hover:brightness-95"
+          >
+            Request Wholesale Pricing
+          </button>
         </div>
       </header>
 
       <section className="container-luxe pb-24 grid md:grid-cols-2 gap-6">
         {[
-          { t: "Wholesale Pricing", d: "Slab pricing published on request. Tiered breaks at 12, 60, 300, 1000, 5000 pieces per style." },
-          { t: "Payment Terms", d: "50% advance for OEM, balance on dispatch. Repeat orders on flexible LC/TT terms." },
-          { t: "Stock vs OEM", d: "Ready stock ships in 3–7 days. Custom OEM production runs 15–30 days depending on scope." },
-          { t: "Export Documentation", d: "GST invoice, packing list, commercial invoice, HS code and country-specific compliance." },
+          {
+            t: "B2B Pricing",
+            d: "Pricing is quoted after reviewing product, quantity, material, branding, packaging and customisation requirements.",
+          },
+          {
+            t: "Starting MOQ",
+            d: `Flexible MOQ from ${SITE.moq} pieces for suitable products and private-label programmes. Custom developments may require more.`,
+          },
+          {
+            t: "Private Label vs OEM",
+            d: "Select existing designs for a faster private-label route, or discuss a customised OEM development programme.",
+          },
+          {
+            t: "Commercial Planning",
+            d: "Payment, production and dispatch terms are confirmed against the approved quotation and programme scope.",
+          },
         ].map((b) => (
           <div key={b.t} className="border border-border p-8 bg-card">
             <div className="eyebrow text-gold">{b.t}</div>

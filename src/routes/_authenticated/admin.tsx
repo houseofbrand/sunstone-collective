@@ -11,7 +11,7 @@ import { FounderPanel } from "@/components/admin/FounderPanel";
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Dashboard | OEMSunglasses.com" },
+      { title: "Admin Dashboard | SunglassManufacturer.com" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -74,7 +74,7 @@ function AdminPage() {
       <header className="border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div>
-            <div className="eyebrow">OEMSunglasses.com</div>
+            <div className="eyebrow">SunglassManufacturer.com</div>
             <h1 className="font-display text-2xl text-ink">Admin Dashboard</h1>
           </div>
           <button onClick={signOut} className="btn-outline-ink inline-flex">
@@ -112,13 +112,13 @@ function LeadsPanel({ leads }: { leads: InquiryLead[] }) {
     <div>
       <div className="flex items-center justify-between mb-3">
         <div>
-          <h2 className="font-display text-xl text-ink">OEM catalog requests ({leads.length})</h2>
+          <h2 className="font-display text-xl text-ink">OEM project enquiries ({leads.length})</h2>
           <p className="mt-1 text-xs text-muted-foreground">
             Form inquiries submitted across the website.
           </p>
         </div>
         <button
-          onClick={() => toCsv(leads, `oem-catalog-requests-${Date.now()}.csv`)}
+          onClick={() => toCsv(leads, `oem-project-enquiries-${Date.now()}.csv`)}
           className="btn-outline-ink"
         >
           <Download size={14} /> Export CSV

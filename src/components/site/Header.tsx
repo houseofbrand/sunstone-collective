@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { BookOpen, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDialogs } from "./DialogsProvider";
-import logoAsset from "@/assets/oem-sunglasses-logo-transparent.png.asset.json";
+import { SITE } from "@/lib/site";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -37,13 +37,11 @@ export function Header() {
         className="mx-auto flex items-center justify-between"
         style={{ maxWidth: "1400px", height: "80px", paddingLeft: "36px", paddingRight: "36px" }}
       >
-        <Link to="/" className="flex items-center shrink-0" aria-label="OEMSunglasses.com home">
-          <img
-            src={logoAsset.url}
-            alt="OEMSunglasses.com"
-            className="w-auto h-auto"
-            style={{ height: "44px", width: "auto" }}
-          />
+        <Link to="/" className="flex items-center shrink-0" aria-label={`${SITE.name} home`}>
+          <span className="text-white font-extrabold tracking-[-0.03em] text-[17px] sm:text-xl">
+            SUNGLASS<span className="text-[#4C84F5]">MANUFACTURER</span>
+            <span className="text-[10px] tracking-[0.14em] text-white/55">.COM</span>
+          </span>
         </Link>
 
         <nav className="hidden xl:flex items-center" style={{ gap: "28px" }}>
@@ -80,7 +78,7 @@ export function Header() {
               borderRadius: "8px",
             }}
           >
-            <BookOpen size={16} /> Request OEM Catalog
+            <BookOpen size={16} /> Get OEM Catalogue
           </button>
         </div>
 
@@ -116,7 +114,7 @@ export function Header() {
                 className="inline-flex w-full items-center justify-center gap-2 bg-[#D5A34A] text-[#081A32]"
                 style={{ height: "46px", fontSize: "15px", fontWeight: 700, borderRadius: "8px" }}
               >
-                <BookOpen size={16} /> Request OEM Catalog
+                <BookOpen size={16} /> Get OEM Catalogue
               </button>
             </div>
           </div>

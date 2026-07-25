@@ -1,10 +1,10 @@
 export const SITE = {
-  name: "OEMSunglasses.com",
-  tagline: "OEM Sunglasses Manufacturer | Private Label & Wholesale",
+  name: "SunglassManufacturer.com",
+  tagline: "OEM & Private Label Eyewear Manufacturing Partner",
   whatsapp: "+917303681194",
   whatsappRaw: "917303681194",
   email: "rajan@houseofbrands.in",
-  moq: 12,
+  moq: 120,
   city: "India",
 };
 

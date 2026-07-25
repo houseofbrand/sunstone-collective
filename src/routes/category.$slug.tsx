@@ -1,5 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { findCategory, productsByCategory, productPrimaryImage, type Product } from "@/lib/products";
+import {
+  findCategory,
+  productsByCategory,
+  productPrimaryImage,
+  type Product,
+} from "@/lib/products";
 import { listPublicProducts } from "@/lib/products.functions";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { useDialogs } from "@/components/site/DialogsProvider";
@@ -13,23 +18,34 @@ export const Route = createFileRoute("/category/$slug")({
     return { cat, all };
   },
   head: ({ loaderData }) => ({
-    meta: loaderData ? [
-      { title: `${loaderData.cat.name} — Wholesale & OEM | OEMSunglasses.com` },
-      { name: "description", content: `${loaderData.cat.description} Low MOQ from ${SITE.moq} pieces. Custom logo, private label & worldwide export.` },
-      { property: "og:title", content: `${loaderData.cat.name} — Wholesale & OEM` },
-      { property: "og:description", content: loaderData.cat.description },
-      { property: "og:url", content: `/category/${loaderData.cat.slug}` },
-    ] : [],
+    meta: loaderData
+      ? [
+          { title: `${loaderData.cat.name} — Private Label & OEM | SunglassManufacturer.com` },
+          {
+            name: "description",
+            content: `${loaderData.cat.description} MOQ from ${SITE.moq} pieces for suitable private-label programmes. Custom branding and packaging available.`,
+          },
+          { property: "og:title", content: `${loaderData.cat.name} — Private Label & OEM` },
+          { property: "og:description", content: loaderData.cat.description },
+          { property: "og:url", content: `/category/${loaderData.cat.slug}` },
+        ]
+      : [],
     links: loaderData ? [{ rel: "canonical", href: `/category/${loaderData.cat.slug}` }] : [],
   }),
   component: CategoryPage,
   notFoundComponent: () => (
     <div className="container-luxe py-24 text-center">
       <h1 className="font-display text-3xl">Category not found</h1>
-      <Link to="/collection" className="btn-ink mt-6 inline-flex">Back to collection</Link>
+      <Link to="/collection" className="btn-ink mt-6 inline-flex">
+        Back to collection
+      </Link>
     </div>
   ),
-  errorComponent: ({ error }) => <div className="container-luxe py-24 text-center"><p>{error.message}</p></div>,
+  errorComponent: ({ error }) => (
+    <div className="container-luxe py-24 text-center">
+      <p>{error.message}</p>
+    </div>
+  ),
 });
 
 function CategoryPage() {
@@ -39,38 +55,83 @@ function CategoryPage() {
   const showcase: Product[] = list.length > 0 ? list : all.slice(0, 6);
   return (
     <>
-      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Collection", to: "/collection" }, { label: cat.name }]} />
+      <Breadcrumbs
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Collection", to: "/collection" },
+          { label: cat.name },
+        ]}
+      />
       <header className="container-luxe pt-8 pb-14">
         <div className="eyebrow">Category</div>
         <h1 className="font-display text-4xl md:text-5xl mt-3">{cat.name}</h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">{cat.description}</p>
         <div className="rule-gold mt-6 w-16" />
         <div className="mt-8 flex flex-wrap gap-3">
-          <button onClick={() => openCatalogRequest({ category: "Sunglasses", source: `category_page:${cat.slug}` })} className="btn-gold rounded-lg">Request OEM Catalog</button>
-          <Link to="/customization" className="btn-outline-ink hover:bg-ink hover:text-bone">Customization Options</Link>
+          <button
+            onClick={() =>
+              openCatalogRequest({ category: "Sunglasses", source: `category_page:${cat.slug}` })
+            }
+            className="btn-gold rounded-lg"
+          >
+            Get OEM Price
+          </button>
+          <Link to="/customization" className="btn-outline-ink hover:bg-ink hover:text-bone">
+            Customization Options
+          </Link>
         </div>
       </header>
       <section className="container-luxe pb-24 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {showcase.length === 0 && (
-          <p className="col-span-full text-center text-sm text-muted-foreground py-12">No products yet in this category.</p>
+          <p className="col-span-full text-center text-sm text-muted-foreground py-12">
+            No products yet in this category.
+          </p>
         )}
         {showcase.map((p) => {
           const img = productPrimaryImage(p);
           return (
-            <Link key={p.code} to="/product/$code" params={{ code: p.code }} className="group block">
-              <div className="aspect-square overflow-hidden bg-secondary">
-                {img ? (
-                  <img src={img} alt={p.name} loading="lazy" width={900} height={900} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs uppercase tracking-widest">No image</div>
-                )}
+            <article key={p.code} className="group block">
+              <Link to="/product/$code" params={{ code: p.code }} className="block">
+                <div className="aspect-square overflow-hidden bg-secondary">
+                  {img ? (
+                    <img
+                      src={img}
+                      alt={p.name}
+                      loading="lazy"
+                      width={900}
+                      height={900}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs uppercase tracking-widest">
+                      No image
+                    </div>
+                  )}
+                </div>
+                <div className="mt-4">
+                  <div className="eyebrow">{p.code}</div>
+                  <div className="font-display text-lg mt-1 group-hover:text-primary">{p.name}</div>
+                  <div className="text-sm text-muted-foreground mt-1">
+                    {[p.frame_material, p.lens_material].filter(Boolean).join(" · ")}
+                  </div>
+                </div>
+              </Link>
+              <div className="mt-3 space-y-1 text-xs font-semibold uppercase tracking-[0.1em] text-white/65">
+                <div>MOQ from {SITE.moq} pcs</div>
+                <div>Private label &amp; custom branding available</div>
               </div>
-              <div className="mt-4">
-                <div className="eyebrow">{p.code}</div>
-                <div className="font-display text-lg mt-1 group-hover:text-primary">{p.name}</div>
-                <div className="text-sm text-muted-foreground mt-1">₹{p.price} · MOQ {SITE.moq} pcs</div>
-              </div>
-            </Link>
+              <button
+                onClick={() =>
+                  openCatalogRequest({
+                    category: "Sunglasses",
+                    source: `category_product:${p.code}`,
+                  })
+                }
+                className="btn-outline-ink mt-4 w-full text-xs"
+              >
+                Enquire Now
+              </button>
+            </article>
           );
         })}
       </section>

@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { SITE, waLink } from "@/lib/site";
-import { BookOpen, Mail, MapPin, Phone, Linkedin, Instagram, Facebook } from "lucide-react";
+import { BookOpen, Mail, MapPin, Phone } from "lucide-react";
 import { useDialogs } from "./DialogsProvider";
-import logoAsset from "@/assets/oem-sunglasses-logo-transparent.png.asset.json";
 
 export function Footer() {
   const { openCatalogRequest } = useDialogs();
@@ -10,10 +9,14 @@ export function Footer() {
     <footer className="mt-24 bg-ink text-white">
       <div className="container-luxe pt-16 pb-10 grid gap-12 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <img src={logoAsset.url} alt="OEMSunglasses.com" className="h-11 w-auto mb-5" />
+          <div className="mb-5 text-xl font-extrabold tracking-[-0.03em] text-white">
+            SUNGLASS<span className="text-[#4C84F5]">MANUFACTURER</span>
+            <span className="text-[10px] tracking-[0.14em] text-white/55">.COM</span>
+          </div>
           <p className="text-sm leading-relaxed text-white/85 max-w-sm">
-            India's trusted OEM sunglasses manufacturing partner. Private label, custom logo, low
-            MOQ from 12 pieces, worldwide shipping to 40+ countries.
+            An experienced OEM and private-label eyewear partner for brands, retailers,
+            distributors, e-commerce businesses and sourcing teams in India and international
+            markets.
           </p>
           <div className="mt-6 space-y-2 text-sm text-white/85">
             <a
@@ -29,7 +32,7 @@ export function Footer() {
             </a>
             <div className="flex items-start gap-2.5">
               <MapPin size={15} className="text-gold mt-0.5 shrink-0" />{" "}
-              <span>Manufacturing facility · India</span>
+              <span>India · Domestic and international B2B enquiries</span>
             </div>
           </div>
         </div>
@@ -86,7 +89,7 @@ export function Footer() {
               onClick={() => openCatalogRequest({ category: "Sunglasses", source: "footer" })}
               className="btn-gold w-full justify-center rounded-lg"
             >
-              <BookOpen size={15} /> Request OEM Catalog
+              <BookOpen size={15} /> Discuss Your Project
             </button>
           </div>
         </div>
@@ -94,19 +97,10 @@ export function Footer() {
 
       <div className="border-t border-white/15">
         <div className="container-luxe py-5 text-xs text-white/75 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <span>© {new Date().getFullYear()} OEMSunglasses.com — All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} {SITE.name} — All rights reserved.
+          </span>
           <span className="text-center">OEM · Private Label · White Label · Wholesale</span>
-          <div className="flex items-center gap-3">
-            <a href="#" aria-label="LinkedIn" className="hover:text-gold">
-              <Linkedin size={16} />
-            </a>
-            <a href="#" aria-label="Instagram" className="hover:text-gold">
-              <Instagram size={16} />
-            </a>
-            <a href="#" aria-label="Facebook" className="hover:text-gold">
-              <Facebook size={16} />
-            </a>
-          </div>
         </div>
       </div>
     </footer>

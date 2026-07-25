@@ -27,28 +27,40 @@ export function FounderSection({ f, compact = false }: { f: FounderProfile; comp
         <div className="lg:col-span-7">
           <div className="eyebrow mb-4">Meet the Founder</div>
           <h2 className="font-display text-3xl md:text-5xl leading-tight">
-            25 years of <span className="italic text-primary">craftsmanship,</span><br />
+            25 years of <span className="italic text-primary">craftsmanship,</span>
+            <br />
             one relentless vision.
           </h2>
           <div className="rule-gold mt-6 w-16" />
 
           <div className="mt-8 space-y-4 text-secondary-foreground leading-relaxed max-w-2xl">
-            {(compact ? f.bio.split(/\n+/).slice(0, 1) : f.bio.split(/\n+/)).filter(Boolean).map((p, i) => (
-              <p key={i} className="text-[15px]">{p}</p>
-            ))}
+            {(compact ? f.bio.split(/\n+/).slice(0, 1) : f.bio.split(/\n+/))
+              .filter(Boolean)
+              .map((p, i) => (
+                <p key={i} className="text-[15px]">
+                  {p}
+                </p>
+              ))}
           </div>
 
           {f.quote && (
             <figure className="mt-10 border-l-2 border-gold pl-6 max-w-xl">
               <span className="text-gold font-display text-4xl leading-none">"</span>
-              <blockquote className="italic font-display text-lg text-foreground mt-2">{f.quote}</blockquote>
+              <blockquote className="italic font-display text-lg text-foreground mt-2">
+                {f.quote}
+              </blockquote>
               <figcaption className="eyebrow mt-3">— {f.name}</figcaption>
             </figure>
           )}
 
           <div className="mt-10 flex flex-wrap gap-3 items-center">
             {f.website_url && (
-              <a href={f.website_url} target="_blank" rel="noreferrer" className="btn-gold hover:brightness-95">
+              <a
+                href={f.website_url}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-gold hover:brightness-95"
+              >
                 Visit RajanMehta.in <ExternalLink size={14} />
               </a>
             )}
@@ -61,19 +73,6 @@ export function FounderSection({ f, compact = false }: { f: FounderProfile; comp
           </div>
         </div>
       </div>
-
-      {f.achievements.length > 0 && (
-        <div className="border-t border-border">
-          <div className="container-luxe py-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {f.achievements.map((a) => (
-              <div key={a.label} className="text-center md:text-left group">
-                <div className="font-display text-4xl md:text-5xl text-primary group-hover:scale-105 transition-transform origin-left">{a.value}</div>
-                <div className="eyebrow mt-2 text-[10px] leading-snug">{a.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </section>
   );
 }

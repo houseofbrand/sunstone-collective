@@ -6,7 +6,7 @@ export const Route = createFileRoute("/auth")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Admin Sign In | OEMSunglasses.com" },
+      { title: "Admin Sign In | SunglassManufacturer.com" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -44,19 +44,34 @@ function AuthPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md border border-border bg-card p-8">
-        <div className="eyebrow mb-2">OEMSunglasses.com</div>
+        <div className="eyebrow mb-2">SunglassManufacturer.com</div>
         <h1 className="font-display text-3xl text-ink">Admin Access</h1>
         <p className="text-sm text-muted-foreground mt-1">Sign in to manage products and leads.</p>
         <form onSubmit={onSubmit} className="mt-6 space-y-3">
           <label className="block">
-            <span className="block text-[11px] uppercase tracking-widest text-muted-foreground mb-1">Email</span>
-            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:border-gold" />
+            <span className="block text-[11px] uppercase tracking-widest text-muted-foreground mb-1">
+              Email
+            </span>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:border-gold"
+            />
           </label>
           <label className="block">
-            <span className="block text-[11px] uppercase tracking-widest text-muted-foreground mb-1">Password</span>
-            <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:border-gold" />
+            <span className="block text-[11px] uppercase tracking-widest text-muted-foreground mb-1">
+              Password
+            </span>
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:border-gold"
+            />
           </label>
           {err && <p className="text-xs text-destructive">{err}</p>}
           <button disabled={loading} className="btn-gold w-full mt-2 disabled:opacity-60">
@@ -66,7 +81,12 @@ function AuthPage() {
         <p className="text-xs text-muted-foreground mt-4 text-center">
           Admin accounts are invitation-only. Contact your administrator for access.
         </p>
-        <Link to="/" className="text-xs text-muted-foreground hover:text-ink mt-6 block text-center">← Back to site</Link>
+        <Link
+          to="/"
+          className="text-xs text-muted-foreground hover:text-ink mt-6 block text-center"
+        >
+          ← Back to site
+        </Link>
       </div>
     </div>
   );
