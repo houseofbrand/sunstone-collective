@@ -69,11 +69,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Sunglass Manufacturer | OEM & Private Label Sunglasses" },
+      { title: "Sunglasses Manufacturer India | OEM & Private Label Sunglasses" },
       {
         name: "description",
         content:
-          "Experienced OEM and private-label sunglasses manufacturing partner for brands, retailers, distributors and sourcing teams in India and international markets.",
+          "OEM & private label sunglasses manufacturer in India for global brands, retailers and distributors. Custom logo, packaging, low MOQ from 12 pcs and worldwide supply.",
       },
       { name: "author", content: "SunglassManufacturer.com" },
       {
@@ -82,19 +82,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "OEM sunglasses, private label sunglasses, wholesale sunglasses, custom logo sunglasses, sunglasses manufacturer India, bulk sunglasses supplier, promotional sunglasses",
       },
       { property: "og:site_name", content: "SunglassManufacturer.com" },
-      { property: "og:title", content: "Sunglass Manufacturer | OEM & Private Label Sunglasses" },
+      {
+        property: "og:title",
+        content: "Sunglasses Manufacturer India | OEM & Private Label Sunglasses",
+      },
       {
         property: "og:description",
         content:
-          "Experienced OEM and private-label sunglasses manufacturing partner for brands, retailers, distributors and sourcing teams.",
+          "Custom sunglasses manufacturing for global brands with low MOQ, private label, custom logo and packaging.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Sunglass Manufacturer | OEM & Private Label Sunglasses" },
+      {
+        name: "twitter:title",
+        content: "Sunglasses Manufacturer India | OEM & Private Label Sunglasses",
+      },
       {
         name: "twitter:description",
         content:
-          "Experienced OEM and private-label sunglasses manufacturing partner for scalable B2B eyewear programmes.",
+          "Custom sunglasses manufacturing for global brands with low MOQ and scalable B2B supply.",
       },
     ],
     links: [
@@ -108,8 +114,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "SunglassManufacturer.com",
-          url: "/",
-          description: "OEM and private-label sunglasses manufacturing partner in India.",
+          url: "https://sunglassmanufacturer.com/",
+          email: "rajan@houseofbrands.in",
+          telephone: "+91 7303681194",
+          description:
+            "OEM, private-label, custom and wholesale sunglasses manufacturer in India serving global B2B buyers.",
           sameAs: [],
         }),
       },

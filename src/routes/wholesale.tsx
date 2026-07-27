@@ -19,7 +19,7 @@ export const Route = createFileRoute("/wholesale")({
       },
       { property: "og:url", content: "/wholesale" },
     ],
-    links: [{ rel: "canonical", href: "/wholesale" }],
+    links: [{ rel: "canonical", href: "/wholesale-sunglasses" }],
   }),
 });
 

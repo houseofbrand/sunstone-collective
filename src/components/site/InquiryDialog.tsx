@@ -213,7 +213,7 @@ export function InquiryDialog({
             the brief and respond with the most relevant development route, MOQ and quotation.
           </p>
           <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-white/55">
-            MOQ: 120 pcs · Mix up to 10 models · Minimum 12 pcs per model/colour
+            Low MOQ from 12 pcs · Custom logo · Private label · Worldwide B2B supply
           </p>
         </div>
 
@@ -253,30 +253,17 @@ export function InquiryDialog({
                 />
                 <Select
                   name="business_type"
-                  label="Private Label / Custom OEM"
+                  label="Programme (Optional)"
                   options={["Private Label", "Custom OEM / ODM", "Not Sure"]}
-                  required
-                />
-                <Field
-                  name="product_requirement"
-                  label="Product Requirement"
-                  defaultValue={defaultCategory}
-                  placeholder="e.g. acetate sunglasses, sports frames"
-                  required
                 />
                 <Field
                   name="estimated_quantity"
-                  label="Estimated Quantity"
+                  label="Approximate Quantity"
                   type="number"
-                  min="120"
+                  min="12"
                   inputMode="numeric"
-                  placeholder="Minimum total: 120"
+                  placeholder="e.g. 12, 120 or 1000"
                   required
-                />
-                <Field
-                  name="target_price"
-                  label="Target Price (Optional)"
-                  placeholder="Include currency and basis"
                 />
                 <label className="block" htmlFor="oem-reference-image">
                   <span className="field-label">Upload Design / Reference Image (Optional)</span>
@@ -296,26 +283,13 @@ export function InquiryDialog({
                 </label>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <TextArea
-                  name="branding_requirements"
-                  label="Branding Requirements"
-                  placeholder="Logo position, colours, lens or temple branding..."
-                  required
-                />
-                <TextArea
-                  name="packaging_requirements"
-                  label="Packaging Requirements"
-                  placeholder="Case, pouch, cleaning cloth, retail box, inserts..."
-                  required
-                />
-              </div>
-
               <TextArea
-                name="additional_requirements"
-                label="Additional Requirements (Optional)"
-                placeholder="Target market, timeline, references or any other project details."
-                rows={3}
+                name="product_requirement"
+                label="Requirement"
+                placeholder="Tell us the styles, branding, packaging or market you are sourcing for."
+                defaultValue={defaultCategory === "Sunglasses" ? "" : defaultCategory}
+                rows={4}
+                required
               />
 
               {state === "error" && (
@@ -433,12 +407,14 @@ function TextArea({
   name,
   placeholder,
   required,
+  defaultValue,
   rows = 4,
 }: {
   label: string;
   name: string;
   placeholder?: string;
   required?: boolean;
+  defaultValue?: string;
   rows?: number;
 }) {
   const id = `oem-${name}`;
@@ -453,6 +429,7 @@ function TextArea({
         name={name}
         rows={rows}
         required={required}
+        defaultValue={defaultValue}
         placeholder={placeholder}
         className="w-full rounded-lg border border-input bg-secondary px-3.5 py-3 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
       />

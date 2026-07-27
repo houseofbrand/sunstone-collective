@@ -12,6 +12,7 @@ import {
   ScanSearch,
   ShieldCheck,
   Sparkles,
+  Tag,
 } from "lucide-react";
 import heroImg from "@/assets/hero-sunglasses.jpg";
 import collectionImg from "@/assets/collection-grid.jpg";
@@ -22,7 +23,7 @@ import { listPublicProducts } from "@/lib/products.functions";
 import { getFounder } from "@/lib/founder.functions";
 import { FounderSection } from "@/components/site/FounderSection";
 import { useDialogs } from "@/components/site/DialogsProvider";
-import { SITE } from "@/lib/site";
+import { SITE, waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   loader: async () => ({
@@ -32,14 +33,38 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
+      { title: "Sunglasses Manufacturer India | OEM & Private Label Sunglasses" },
       {
         name: "description",
         content:
-          "OEM and private-label sunglasses manufacturing partner for brands, retailers, distributors and sourcing teams. MOQ: 120 pcs, mix up to 10 models, custom branding and packaging.",
+          "OEM & private label sunglasses manufacturer in India for global brands, retailers and distributors. Custom logo, packaging, low MOQ from 12 pcs and worldwide supply.",
+      },
+      {
+        property: "og:title",
+        content: "Sunglasses Manufacturer India | OEM & Private Label Sunglasses",
+      },
+      {
+        property: "og:description",
+        content:
+          "Custom sunglasses manufacturing for global brands with private label, custom logo, packaging and low MOQ from 12 pcs.",
       },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          })),
+        }),
+      },
+    ],
   }),
 });
 
@@ -57,12 +82,12 @@ function Home() {
           <div className="lg:col-span-7">
             <div className="eyebrow mb-4">OEM &amp; Private Label Sunglasses Manufacturer</div>
             <h1 className="max-w-4xl font-display text-4xl leading-[1.08] md:text-5xl lg:text-[3.65rem]">
-              Build Your Eyewear Brand With an Experienced Manufacturing Partner
+              Custom Sunglasses Manufacturer for Global Brands
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-secondary-foreground">
-              From private-label sunglasses to customised OEM programmes, we help brands, retailers,
-              distributors and e-commerce businesses develop and scale eyewear collections for India
-              and global markets.
+              Launch or scale your eyewear brand with an experienced OEM and private-label
+              sunglasses manufacturer. Choose from ready designs, add your logo and packaging, and
+              start with a low MOQ from just 12 pcs.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <button
@@ -70,20 +95,23 @@ function Home() {
                 onClick={() => discuss("hero_catalogue")}
                 className="btn-gold rounded-lg px-6 py-3.5"
               >
-                Get OEM Catalogue <ArrowRight size={17} />
+                Get Catalogue &amp; Pricing <ArrowRight size={17} />
               </button>
-              <button
-                onClick={() => discuss("hero_project")}
+              <a
+                href={waLink("Hello, I would like the sunglasses catalogue and pricing.")}
+                target="_blank"
+                rel="noreferrer"
                 className="btn-outline-ink rounded-lg px-6 py-3.5 hover:bg-white hover:text-ink"
               >
-                Discuss Your Project
-              </button>
+                WhatsApp Us
+              </a>
             </div>
             <div className="mt-10 flex max-w-4xl flex-wrap gap-x-6 gap-y-3 border-t border-border pt-7 text-xs font-semibold uppercase tracking-[0.12em] text-white/75">
-              <span>MOQ: {SITE.moq} pcs</span>
-              <span>Mix up to 10 Models</span>
-              <span>Custom Branding</span>
+              <span>MOQ from {SITE.moq} pcs</span>
+              <span>Custom Logo</span>
+              <span>Private Label</span>
               <span>Custom Packaging</span>
+              <span>Worldwide Supply</span>
             </div>
             <p className="mt-4 text-sm text-white/60">
               25+ Years Industry Experience · Scalable Production
@@ -105,6 +133,49 @@ function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-[#081A32]">
+        <div className="container-luxe py-14 md:py-16">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="eyebrow">Flexible MOQ · Scalable Supply</div>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl">
+              Start Small. Build Your Brand. Scale With Us.
+            </h2>
+            <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-white/75">
+              You don&apos;t need to commit to thousands of sunglasses to launch your collection.
+              Our flexible low-MOQ programme helps brands, retailers, distributors and e-commerce
+              businesses start with smaller quantities, test designs and scale successful products.
+            </p>
+          </div>
+          <div className="mt-9 grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {[
+              ["12 PCS", "Low MOQ", Boxes],
+              ["PRIVATE LABEL", "Your Brand", Tag],
+              ["CUSTOM", "Logo & Packaging", Palette],
+              ["GLOBAL", "B2B Supply", Globe2],
+            ].map(([value, label, Icon]) => {
+              const CapabilityIcon = Icon as typeof Boxes;
+              return (
+                <div
+                  key={String(value)}
+                  className="rounded-xl border border-white/15 bg-white/5 p-6 text-center"
+                >
+                  <CapabilityIcon className="mx-auto text-primary" size={22} />
+                  <div className="mt-4 font-display text-2xl">{String(value)}</div>
+                  <div className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-white/60">
+                    {String(label)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-8 text-center">
+            <button onClick={() => discuss("low_moq_section")} className="btn-gold">
+              Start Your Collection <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
@@ -264,7 +335,7 @@ function Home() {
               {
                 icon: CheckCircle2,
                 title: "Flexible MOQ",
-                text: "Start with a total order of 120 pieces and mix up to 10 models, with a minimum of 12 pieces per selected model/colour.",
+                text: "Start from 12 pieces for applicable ready designs, then scale successful products into larger repeat and bulk orders.",
               },
               {
                 icon: Palette,
@@ -301,7 +372,7 @@ function Home() {
           <figure className="group relative overflow-hidden rounded-2xl border border-border lg:col-span-7">
             <img
               src={oemImg}
-              alt="Eyewear product review and finishing"
+              alt="OEM sunglasses manufacturing and assembly"
               loading="lazy"
               className="h-full min-h-[420px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />
@@ -313,7 +384,7 @@ function Home() {
             <figure className="relative overflow-hidden rounded-2xl border border-border">
               <img
                 src={collectionImg}
-                alt="Eyewear collection assortment"
+                alt="Private label sunglasses design selection"
                 loading="lazy"
                 className="h-full min-h-48 w-full object-cover"
               />
@@ -324,7 +395,7 @@ function Home() {
             <figure className="relative overflow-hidden rounded-2xl border border-border">
               <img
                 src={customImg}
-                alt="Sunglasses logo and branding placement options"
+                alt="Private label sunglasses logo customisation"
                 loading="lazy"
                 className="h-full min-h-48 w-full object-cover"
               />
@@ -375,6 +446,11 @@ function Home() {
               </div>
             ))}
           </div>
+        </div>
+        <div className="mt-8">
+          <button onClick={() => discuss("customisation_section")} className="btn-gold">
+            Create Your Sunglasses Collection <ArrowRight size={16} />
+          </button>
         </div>
       </Section>
 
@@ -464,24 +540,24 @@ function Home() {
               Experienced Global Eyewear Manufacturing Partner
             </h2>
             <p className="mt-6 max-w-3xl">
-              From flexible 120-piece collection orders to large-volume programmes, we help brands
-              build and scale their eyewear business.
+              From low-MOQ private-label orders to large-volume programmes, we help brands build and
+              scale their eyewear business.
             </p>
             <p className="mt-4 max-w-3xl text-sm text-white/65">
-              Start with a flexible 120-piece collection and scale with an experienced eyewear
-              manufacturing partner as your business grows — from initial collection development to
-              requirements running into tens of thousands of pieces.
+              Start from 12 pieces for applicable ready designs and scale with an experienced
+              eyewear manufacturing partner as your business grows — from initial collection
+              development to requirements running into tens of thousands of pieces.
             </p>
           </div>
           <div className="grid gap-3">
             <div className="rounded-2xl border border-white/15 bg-white/5 p-7">
               <div className="eyebrow">Collection MOQ</div>
               <div className="mt-2 font-display text-3xl">{SITE.moqMedium}</div>
-              <p className="mt-3 text-sm">Minimum 12 pcs per selected model/colour.</p>
+              <p className="mt-3 text-sm">Start from just 12 pcs per model/colour.</p>
             </div>
             <div className="rounded-2xl border border-white/15 bg-white/5 p-7 text-sm text-white/70">
-              A 120-piece collection can include up to 10 models, giving buyers flexibility without
-              presenting 12 pieces as the total minimum order.
+              MOQ may vary for fully customised OEM developments depending on the design, material,
+              tooling and customisation requirements.
             </div>
           </div>
         </div>
@@ -530,7 +606,6 @@ function Home() {
                     </p>
                     <div className="mt-4 space-y-2 border-t border-border pt-4 text-xs font-semibold uppercase tracking-[0.1em] text-white/70">
                       <div>{SITE.moqCompact}</div>
-                      <div>Mix up to 10 models</div>
                       <div>Private label available</div>
                       <div>Custom branding available</div>
                     </div>
@@ -576,6 +651,48 @@ function Home() {
 
       <FounderSection f={founder} compact />
 
+      <Section
+        eyebrow="Sunglasses Manufacturer India"
+        title="OEM & Private Label Sunglasses Manufacturer in India"
+        description="Flexible sourcing for new collections, repeat orders and scalable international programmes."
+      >
+        <div className="mt-10 grid gap-6 text-sm leading-relaxed text-white/75 lg:grid-cols-3">
+          <p className="card-luxe p-7">
+            SunglassManufacturer.com provides OEM, private-label and wholesale sunglasses solutions
+            for brands, retailers, distributors and e-commerce businesses in India and international
+            markets. With extensive industry experience, we help businesses source, customise and
+            develop eyewear collections across multiple styles, materials, colours and price
+            segments.
+          </p>
+          <p className="card-luxe p-7">
+            Our private-label sunglasses programme enables businesses to select suitable designs and
+            customise them with brand logos, packaging and other branding elements. With a low MOQ
+            starting from 12 pieces, emerging brands and established businesses can develop
+            collections without committing to unnecessarily large opening quantities.
+          </p>
+          <p className="card-luxe p-7">
+            For larger programmes, our OEM sunglasses manufacturing capabilities support product
+            development, customisation, packaging and scalable production requirements. Whether you
+            are launching a new sunglasses brand or expanding an existing eyewear collection, our
+            focus is reliable B2B supply and long-term sourcing relationships.
+          </p>
+        </div>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link to="/private-label-sunglasses" className="btn-outline-ink">
+            Private Label Sunglasses
+          </Link>
+          <Link to="/oem-sunglasses-manufacturer" className="btn-outline-ink">
+            OEM Sunglasses
+          </Link>
+          <Link to="/custom-sunglasses-manufacturer" className="btn-outline-ink">
+            Custom Sunglasses
+          </Link>
+          <Link to="/wholesale-sunglasses" className="btn-outline-ink">
+            Wholesale Sunglasses
+          </Link>
+        </div>
+      </Section>
+
       <Section eyebrow="Frequently Asked" title="Answers for sourcing teams and brand owners.">
         <div className="mt-10 grid gap-x-12 gap-y-2 md:grid-cols-2">
           {faqs.map((faq) => (
@@ -614,14 +731,14 @@ function Home() {
 
 const faqs = [
   {
-    question: "What is the minimum order quantity?",
+    question: "What is your minimum order quantity for sunglasses?",
     answer:
-      "Our MOQ is 120 pieces per order. You can mix up to 10 models, with a minimum of 12 pieces per selected model/colour. This allows brands, retailers and distributors to build a broader eyewear collection without committing to 120 pieces of a single design.",
+      "Our low MOQ programme starts from 12 pieces for applicable designs. MOQ may vary for fully customised OEM developments depending on the design, material, tooling and customisation requirements.",
   },
   {
-    question: "Can I mix different sunglasses models in one order?",
+    question: "Can you manufacture sunglasses with my logo?",
     answer:
-      "Yes. A 120-piece order can include a mix of up to 10 models, subject to a minimum of 12 pieces per selected model/colour.",
+      "Yes. We offer private-label and custom branding options including temple logos, lens branding where suitable, cases, pouches, cleaning cloths and retail packaging.",
   },
   {
     question: "What is the difference between private label and custom OEM?",
@@ -629,19 +746,19 @@ const faqs = [
       "Private label starts with an existing product design and adds your brand identity and packaging. Custom OEM involves a more detailed development brief covering product references, materials, colours, components, branding, sampling and packaging.",
   },
   {
-    question: "Can you create branded packaging?",
+    question: "Do you supply sunglasses internationally?",
     answer:
-      "Yes. Packaging options can include cases, pouches, cleaning cloths, retail boxes, inserts and labelling, subject to the selected product and programme requirements.",
+      "Yes. We work with B2B buyers across international markets. Shipping options, documentation and commercial terms depend on the destination and order requirements.",
   },
   {
-    question: "How is product quality managed?",
+    question: "Can I start my own sunglasses brand?",
     answer:
-      "Quality requirements are reviewed through development, production checks and final inspection, focusing on frame and lens condition, finishing, functionality, logo execution, colour consistency and packaging.",
+      "Yes. Our private-label programme is designed for businesses that want to launch or expand an eyewear collection with custom branding and packaging.",
   },
   {
-    question: "Can you support both growing brands and large-volume buyers?",
+    question: "Do you handle bulk sunglasses orders?",
     answer:
-      "Yes. The sourcing approach is planned around the product, quantity and customisation scope, from first collections to larger repeat or volume programmes.",
+      "Yes. In addition to low-MOQ private-label orders, we support larger B2B and OEM requirements for brands, retailers, distributors and other business buyers.",
   },
   {
     question: "Can I submit a design or reference image?",

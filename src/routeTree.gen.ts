@@ -9,12 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WholesaleSunglassesRouteImport } from './routes/wholesale-sunglasses'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PrivateLabelSunglassesRouteImport } from './routes/private-label-sunglasses'
+import { Route as OemSunglassesManufacturerRouteImport } from './routes/oem-sunglasses-manufacturer'
 import { Route as OemRouteImport } from './routes/oem'
 import { Route as IndustriesRouteImport } from './routes/industries'
 import { Route as FounderRouteImport } from './routes/founder'
 import { Route as CustomizationRouteImport } from './routes/customization'
+import { Route as CustomSunglassesManufacturerRouteImport } from './routes/custom-sunglasses-manufacturer'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -27,6 +31,11 @@ import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
+const WholesaleSunglassesRoute = WholesaleSunglassesRouteImport.update({
+  id: '/wholesale-sunglasses',
+  path: '/wholesale-sunglasses',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WholesaleRoute = WholesaleRouteImport.update({
   id: '/wholesale',
   path: '/wholesale',
@@ -37,6 +46,17 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivateLabelSunglassesRoute = PrivateLabelSunglassesRouteImport.update({
+  id: '/private-label-sunglasses',
+  path: '/private-label-sunglasses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OemSunglassesManufacturerRoute =
+  OemSunglassesManufacturerRouteImport.update({
+    id: '/oem-sunglasses-manufacturer',
+    path: '/oem-sunglasses-manufacturer',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const OemRoute = OemRouteImport.update({
   id: '/oem',
   path: '/oem',
@@ -57,6 +77,12 @@ const CustomizationRoute = CustomizationRouteImport.update({
   path: '/customization',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomSunglassesManufacturerRoute =
+  CustomSunglassesManufacturerRouteImport.update({
+    id: '/custom-sunglasses-manufacturer',
+    path: '/custom-sunglasses-manufacturer',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -119,12 +145,16 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/collection': typeof CollectionRoute
   '/contact': typeof ContactRoute
+  '/custom-sunglasses-manufacturer': typeof CustomSunglassesManufacturerRoute
   '/customization': typeof CustomizationRoute
   '/founder': typeof FounderRoute
   '/industries': typeof IndustriesRoute
   '/oem': typeof OemRoute
+  '/oem-sunglasses-manufacturer': typeof OemSunglassesManufacturerRoute
+  '/private-label-sunglasses': typeof PrivateLabelSunglassesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
+  '/wholesale-sunglasses': typeof WholesaleSunglassesRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -137,12 +167,16 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRouteWithChildren
   '/collection': typeof CollectionRoute
   '/contact': typeof ContactRoute
+  '/custom-sunglasses-manufacturer': typeof CustomSunglassesManufacturerRoute
   '/customization': typeof CustomizationRoute
   '/founder': typeof FounderRoute
   '/industries': typeof IndustriesRoute
   '/oem': typeof OemRoute
+  '/oem-sunglasses-manufacturer': typeof OemSunglassesManufacturerRoute
+  '/private-label-sunglasses': typeof PrivateLabelSunglassesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
+  '/wholesale-sunglasses': typeof WholesaleSunglassesRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -157,12 +191,16 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/collection': typeof CollectionRoute
   '/contact': typeof ContactRoute
+  '/custom-sunglasses-manufacturer': typeof CustomSunglassesManufacturerRoute
   '/customization': typeof CustomizationRoute
   '/founder': typeof FounderRoute
   '/industries': typeof IndustriesRoute
   '/oem': typeof OemRoute
+  '/oem-sunglasses-manufacturer': typeof OemSunglassesManufacturerRoute
+  '/private-label-sunglasses': typeof PrivateLabelSunglassesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
+  '/wholesale-sunglasses': typeof WholesaleSunglassesRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -177,12 +215,16 @@ export interface FileRouteTypes {
     | '/blog'
     | '/collection'
     | '/contact'
+    | '/custom-sunglasses-manufacturer'
     | '/customization'
     | '/founder'
     | '/industries'
     | '/oem'
+    | '/oem-sunglasses-manufacturer'
+    | '/private-label-sunglasses'
     | '/sitemap.xml'
     | '/wholesale'
+    | '/wholesale-sunglasses'
     | '/admin'
     | '/blog/$slug'
     | '/category/$slug'
@@ -195,12 +237,16 @@ export interface FileRouteTypes {
     | '/blog'
     | '/collection'
     | '/contact'
+    | '/custom-sunglasses-manufacturer'
     | '/customization'
     | '/founder'
     | '/industries'
     | '/oem'
+    | '/oem-sunglasses-manufacturer'
+    | '/private-label-sunglasses'
     | '/sitemap.xml'
     | '/wholesale'
+    | '/wholesale-sunglasses'
     | '/admin'
     | '/blog/$slug'
     | '/category/$slug'
@@ -214,12 +260,16 @@ export interface FileRouteTypes {
     | '/blog'
     | '/collection'
     | '/contact'
+    | '/custom-sunglasses-manufacturer'
     | '/customization'
     | '/founder'
     | '/industries'
     | '/oem'
+    | '/oem-sunglasses-manufacturer'
+    | '/private-label-sunglasses'
     | '/sitemap.xml'
     | '/wholesale'
+    | '/wholesale-sunglasses'
     | '/_authenticated/admin'
     | '/blog/$slug'
     | '/category/$slug'
@@ -234,18 +284,29 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   CollectionRoute: typeof CollectionRoute
   ContactRoute: typeof ContactRoute
+  CustomSunglassesManufacturerRoute: typeof CustomSunglassesManufacturerRoute
   CustomizationRoute: typeof CustomizationRoute
   FounderRoute: typeof FounderRoute
   IndustriesRoute: typeof IndustriesRoute
   OemRoute: typeof OemRoute
+  OemSunglassesManufacturerRoute: typeof OemSunglassesManufacturerRoute
+  PrivateLabelSunglassesRoute: typeof PrivateLabelSunglassesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WholesaleRoute: typeof WholesaleRoute
+  WholesaleSunglassesRoute: typeof WholesaleSunglassesRoute
   CategorySlugRoute: typeof CategorySlugRoute
   ProductCodeRoute: typeof ProductCodeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wholesale-sunglasses': {
+      id: '/wholesale-sunglasses'
+      path: '/wholesale-sunglasses'
+      fullPath: '/wholesale-sunglasses'
+      preLoaderRoute: typeof WholesaleSunglassesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wholesale': {
       id: '/wholesale'
       path: '/wholesale'
@@ -258,6 +319,20 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/private-label-sunglasses': {
+      id: '/private-label-sunglasses'
+      path: '/private-label-sunglasses'
+      fullPath: '/private-label-sunglasses'
+      preLoaderRoute: typeof PrivateLabelSunglassesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oem-sunglasses-manufacturer': {
+      id: '/oem-sunglasses-manufacturer'
+      path: '/oem-sunglasses-manufacturer'
+      fullPath: '/oem-sunglasses-manufacturer'
+      preLoaderRoute: typeof OemSunglassesManufacturerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/oem': {
@@ -286,6 +361,13 @@ declare module '@tanstack/react-router' {
       path: '/customization'
       fullPath: '/customization'
       preLoaderRoute: typeof CustomizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom-sunglasses-manufacturer': {
+      id: '/custom-sunglasses-manufacturer'
+      path: '/custom-sunglasses-manufacturer'
+      fullPath: '/custom-sunglasses-manufacturer'
+      preLoaderRoute: typeof CustomSunglassesManufacturerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -397,12 +479,16 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   CollectionRoute: CollectionRoute,
   ContactRoute: ContactRoute,
+  CustomSunglassesManufacturerRoute: CustomSunglassesManufacturerRoute,
   CustomizationRoute: CustomizationRoute,
   FounderRoute: FounderRoute,
   IndustriesRoute: IndustriesRoute,
   OemRoute: OemRoute,
+  OemSunglassesManufacturerRoute: OemSunglassesManufacturerRoute,
+  PrivateLabelSunglassesRoute: PrivateLabelSunglassesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WholesaleRoute: WholesaleRoute,
+  WholesaleSunglassesRoute: WholesaleSunglassesRoute,
   CategorySlugRoute: CategorySlugRoute,
   ProductCodeRoute: ProductCodeRoute,
 }

@@ -49,13 +49,16 @@ export function Footer() {
               <Link to="/collection">Products</Link>
             </li>
             <li>
-              <Link to="/oem">OEM Manufacturing</Link>
+              <Link to="/oem-sunglasses-manufacturer">OEM Manufacturing</Link>
             </li>
             <li>
-              <Link to="/customization">Custom Branding</Link>
+              <Link to="/private-label-sunglasses">Private Label</Link>
             </li>
             <li>
-              <Link to="/wholesale">Wholesale</Link>
+              <Link to="/custom-sunglasses-manufacturer">Custom Sunglasses</Link>
+            </li>
+            <li>
+              <Link to="/wholesale-sunglasses">Wholesale</Link>
             </li>
             <li>
               <Link to="/industries">Industries</Link>
@@ -92,7 +95,7 @@ export function Footer() {
               onClick={() => openCatalogRequest({ category: "Sunglasses", source: "footer" })}
               className="btn-gold w-full justify-center rounded-lg"
             >
-              <BookOpen size={15} /> Discuss Your Project
+              <BookOpen size={15} /> Get Catalogue &amp; Pricing
             </button>
           </div>
         </div>

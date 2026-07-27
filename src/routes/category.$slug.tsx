@@ -118,7 +118,7 @@ function CategoryPage() {
               </Link>
               <div className="mt-3 space-y-1 text-xs font-semibold uppercase tracking-[0.1em] text-white/65">
                 <div>{SITE.moqCompact}</div>
-                <div>Mix up to 10 models</div>
+                <div>Custom logo available</div>
                 <div>Private label &amp; custom branding available</div>
               </div>
               <button

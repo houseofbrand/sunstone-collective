@@ -171,8 +171,8 @@ function ProductPage() {
             <BookOpen size={16} /> Get OEM Price
           </button>
           <p className="mt-3 text-xs text-muted-foreground">
-            Total order: 120 pieces. Mix up to 10 models, with at least 12 pieces per selected
-            model/colour.
+            Low MOQ starts from 12 pieces for applicable designs. Custom OEM requirements may have a
+            different MOQ based on the product and customisation scope.
           </p>
         </div>
       </section>

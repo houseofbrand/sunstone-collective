@@ -21,7 +21,7 @@ export const Route = createFileRoute("/oem")({
       },
       { property: "og:url", content: "/oem" },
     ],
-    links: [{ rel: "canonical", href: "/oem" }],
+    links: [{ rel: "canonical", href: "/oem-sunglasses-manufacturer" }],
   }),
 });
 

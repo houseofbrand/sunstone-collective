@@ -7,8 +7,8 @@ import { SITE } from "@/lib/site";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/collection", label: "Products" },
-  { to: "/oem", label: "OEM Manufacturing" },
-  { to: "/customization", label: "Custom Branding" },
+  { to: "/oem-sunglasses-manufacturer", label: "OEM Manufacturing" },
+  { to: "/private-label-sunglasses", label: "Private Label" },
   { to: "/blog", label: "Blog" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
@@ -78,7 +78,7 @@ export function Header() {
               borderRadius: "8px",
             }}
           >
-            <BookOpen size={16} /> Get OEM Catalogue
+            <BookOpen size={16} /> Get Catalogue &amp; Pricing
           </button>
         </div>
 
@@ -114,7 +114,7 @@ export function Header() {
                 className="inline-flex w-full items-center justify-center gap-2 bg-[#D5A34A] text-[#081A32]"
                 style={{ height: "46px", fontSize: "15px", fontWeight: 700, borderRadius: "8px" }}
               >
-                <BookOpen size={16} /> Get OEM Catalogue
+                <BookOpen size={16} /> Get Catalogue &amp; Pricing
               </button>
             </div>
           </div>

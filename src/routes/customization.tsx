@@ -21,7 +21,7 @@ export const Route = createFileRoute("/customization")({
       },
       { property: "og:url", content: "/customization" },
     ],
-    links: [{ rel: "canonical", href: "/customization" }],
+    links: [{ rel: "canonical", href: "/private-label-sunglasses" }],
   }),
 });
 

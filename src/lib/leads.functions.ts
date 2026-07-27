@@ -15,7 +15,7 @@ const inquirySchema = z.object({
   email: z.string().trim().email().max(200),
   country: z.string().trim().min(2).max(80),
   product_requirement: z.string().trim().min(2).max(500),
-  quantity: z.number().int().min(120).max(10_000_000).optional(),
+  quantity: z.number().int().min(12).max(10_000_000).optional(),
   business_type: z.enum(["Private Label", "Custom OEM / ODM", "Not Sure"]),
   target_price: z.string().trim().max(200).optional().or(z.literal("")),
   branding_requirements: z.string().trim().max(1000).optional().or(z.literal("")),
