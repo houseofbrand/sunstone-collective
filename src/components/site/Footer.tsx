@@ -19,7 +19,7 @@ export function Footer() {
             markets.
           </p>
           <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-white/65">
-            {SITE.moqMedium}
+            Low MOQ from 12 pcs · Private Label · Custom Branding · Worldwide B2B Supply
           </p>
           <div className="mt-6 space-y-2 text-sm text-white/85">
             <a

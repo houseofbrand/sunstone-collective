@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import customImg from "@/assets/brand-every-detail.png";
+import { waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/custom-sunglasses-manufacturer")({
   component: CustomSunglassesPage,
@@ -74,14 +75,24 @@ function CustomSunglassesPage() {
             support fashion brands, retailers and e-commerce businesses with custom sunglasses with
             logos, branded accessories, private-label packaging and OEM sunglasses development.
           </p>
-          <button
-            onClick={() =>
-              openCatalogRequest({ category: "Custom Sunglasses", source: "custom_seo" })
-            }
-            className="btn-gold mt-8"
-          >
-            Get OEM Quote <ArrowRight size={16} />
-          </button>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button
+              onClick={() =>
+                openCatalogRequest({ category: "Custom Sunglasses", source: "custom_seo" })
+              }
+              className="btn-gold"
+            >
+              Get OEM Quote <ArrowRight size={16} />
+            </button>
+            <a
+              href={waLink("Hello, I would like custom logo sunglasses and packaging options.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-outline-ink"
+            >
+              WhatsApp Us
+            </a>
+          </div>
         </div>
         <img
           src={customImg}
@@ -114,6 +125,20 @@ function CustomSunglassesPage() {
             <Link to="/oem-sunglasses-manufacturer" className="btn-outline-ink">
               Explore Custom OEM
             </Link>
+            <Link to="/category/women" className="btn-outline-ink">
+              Women&apos;s Product Examples
+            </Link>
+            <Link to="/category/men" className="btn-outline-ink">
+              Men&apos;s Product Examples
+            </Link>
+          </div>
+          <div className="mt-12 border-t border-border pt-10">
+            <h2 className="font-display text-2xl">Custom sunglasses FAQ</h2>
+            <h3 className="mt-6 font-display text-lg">Where can my logo be applied?</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed">
+              Depending on product suitability, branding can be applied to temples, lenses, metal
+              details, cases, pouches, cleaning cloths and retail packaging.
+            </p>
           </div>
         </div>
       </section>

@@ -168,8 +168,20 @@ function ProductPage() {
             }
             className="btn-gold mt-10 w-full justify-center rounded-lg py-3.5"
           >
-            <BookOpen size={16} /> Get OEM Price
+            <BookOpen size={16} /> Get Price &amp; Customisation Options
           </button>
+          <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-semibold uppercase tracking-[0.08em] text-white/70">
+            {[
+              "Private Label Available",
+              "Custom Logo Options",
+              "Custom Packaging Available",
+              "Bulk Orders Welcome",
+            ].map((item) => (
+              <div key={item} className="rounded-md border border-border bg-card px-3 py-2.5">
+                {item}
+              </div>
+            ))}
+          </div>
           <p className="mt-3 text-xs text-muted-foreground">
             Low MOQ starts from 12 pieces for applicable designs. Custom OEM requirements may have a
             different MOQ based on the product and customisation scope.

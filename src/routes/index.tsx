@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "OEM & private label sunglasses manufacturer in India for global brands, retailers and distributors. Custom logo, packaging, low MOQ from 12 pcs and worldwide supply.",
+          "OEM & private label sunglasses manufacturer in India for global brands, retailers and distributors. Custom logo, packaging, low MOQ from 12 pcs and worldwide B2B supply.",
       },
       {
         property: "og:title",
@@ -86,8 +86,8 @@ function Home() {
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-secondary-foreground">
               Launch or scale your eyewear brand with an experienced OEM and private-label
-              sunglasses manufacturer. Choose from ready designs, add your logo and packaging, and
-              start with a low MOQ from just 12 pcs.
+              sunglasses manufacturer. Choose from ready designs, add your logo and custom
+              packaging, and start with a low MOQ from just 12 pcs.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <button
@@ -145,16 +145,17 @@ function Home() {
               Start Small. Build Your Brand. Scale With Us.
             </h2>
             <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-white/75">
-              You don&apos;t need to commit to thousands of sunglasses to launch your collection.
-              Our flexible low-MOQ programme helps brands, retailers, distributors and e-commerce
-              businesses start with smaller quantities, test designs and scale successful products.
+              Launch your eyewear collection without committing to unnecessarily large opening
+              quantities. Our low-MOQ private-label programme allows brands, retailers, distributors
+              and e-commerce businesses to start with selected designs, add their branding and scale
+              successful products as demand grows.
             </p>
           </div>
           <div className="mt-9 grid grid-cols-2 gap-3 lg:grid-cols-4">
             {[
               ["12 PCS", "Low MOQ", Boxes],
-              ["PRIVATE LABEL", "Your Brand", Tag],
-              ["CUSTOM", "Logo & Packaging", Palette],
+              ["YOUR LOGO", "Private Label", Tag],
+              ["CUSTOM", "Packaging", Palette],
               ["GLOBAL", "B2B Supply", Globe2],
             ].map(([value, label, Icon]) => {
               const CapabilityIcon = Icon as typeof Boxes;
@@ -174,7 +175,7 @@ function Home() {
           </div>
           <div className="mt-8 text-center">
             <button onClick={() => discuss("low_moq_section")} className="btn-gold">
-              Start Your Collection <ArrowRight size={16} />
+              Get Catalogue &amp; Pricing <ArrowRight size={16} />
             </button>
           </div>
         </div>
@@ -334,8 +335,8 @@ function Home() {
               },
               {
                 icon: CheckCircle2,
-                title: "Flexible MOQ",
-                text: "Start from 12 pieces for applicable ready designs, then scale successful products into larger repeat and bulk orders.",
+                title: "Low MOQ",
+                text: "Start from just 12 pcs on applicable designs and build your collection with custom branding and packaging options.",
               },
               {
                 icon: Palette,
@@ -535,18 +536,14 @@ function Home() {
       <section className="mt-24 bg-[#081A32]">
         <div className="container-luxe grid items-center gap-14 py-20 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
-            <div className="eyebrow">From First Collection to Large-Scale Production</div>
+            <div className="eyebrow">Flexible Sourcing for Growing Brands</div>
             <h2 className="mt-3 max-w-4xl font-display text-3xl md:text-5xl">
-              Experienced Global Eyewear Manufacturing Partner
+              Start Small. Scale Big.
             </h2>
             <p className="mt-6 max-w-3xl">
-              From low-MOQ private-label orders to large-volume programmes, we help brands build and
-              scale their eyewear business.
-            </p>
-            <p className="mt-4 max-w-3xl text-sm text-white/65">
-              Start from 12 pieces for applicable ready designs and scale with an experienced
-              eyewear manufacturing partner as your business grows — from initial collection
-              development to requirements running into tens of thousands of pieces.
+              From low-MOQ private-label collections to larger OEM and bulk requirements, we support
+              businesses at different stages of their eyewear journey. Start with selected designs
+              and scale your order volumes as your business grows.
             </p>
           </div>
           <div className="grid gap-3">
@@ -660,21 +657,22 @@ function Home() {
           <p className="card-luxe p-7">
             SunglassManufacturer.com provides OEM, private-label and wholesale sunglasses solutions
             for brands, retailers, distributors and e-commerce businesses in India and international
-            markets. With extensive industry experience, we help businesses source, customise and
-            develop eyewear collections across multiple styles, materials, colours and price
-            segments.
+            markets. We help businesses source, customise and develop eyewear collections across a
+            wide range of styles, colours and product segments.
           </p>
           <p className="card-luxe p-7">
             Our private-label sunglasses programme enables businesses to select suitable designs and
-            customise them with brand logos, packaging and other branding elements. With a low MOQ
-            starting from 12 pieces, emerging brands and established businesses can develop
-            collections without committing to unnecessarily large opening quantities.
+            customise them with brand logos, cases, pouches, cleaning cloths and retail packaging.
+            Selected designs are available with a low MOQ starting from 12 pcs, making it easier for
+            emerging brands and established businesses to test new eyewear collections before
+            scaling their order volumes.
           </p>
           <p className="card-luxe p-7">
-            For larger programmes, our OEM sunglasses manufacturing capabilities support product
-            development, customisation, packaging and scalable production requirements. Whether you
-            are launching a new sunglasses brand or expanding an existing eyewear collection, our
-            focus is reliable B2B supply and long-term sourcing relationships.
+            For larger requirements, we support OEM and bulk sunglasses programmes covering product
+            development, customisation, packaging and scalable sourcing. Whether you are starting a
+            sunglasses brand, expanding an existing collection or sourcing eyewear for wholesale
+            distribution, our focus is on professional B2B support and long-term sourcing
+            relationships.
           </p>
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
@@ -733,7 +731,12 @@ const faqs = [
   {
     question: "What is your minimum order quantity for sunglasses?",
     answer:
-      "Our low MOQ programme starts from 12 pieces for applicable designs. MOQ may vary for fully customised OEM developments depending on the design, material, tooling and customisation requirements.",
+      "Our low-MOQ programme starts from 12 pcs for applicable designs. MOQ may vary for fully customised OEM developments depending on the design, materials, tooling, branding and packaging requirements. Contact us with your requirement for the applicable MOQ and pricing.",
+  },
+  {
+    question: "Can I order private-label sunglasses in small quantities?",
+    answer:
+      "Yes. Selected designs are available under our low-MOQ private-label programme starting from 12 pcs. Branding and packaging options depend on the selected product and order requirement.",
   },
   {
     question: "Can you manufacture sunglasses with my logo?",

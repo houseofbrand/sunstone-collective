@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import oemImg from "@/assets/oem-process.jpg";
+import { waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/oem-sunglasses-manufacturer")({
   component: OemManufacturerPage,
@@ -76,14 +77,24 @@ function OemManufacturerPage() {
             eyewear process connects design selection, materials, colours, lenses, branding,
             sampling, packaging, quality inspection and scalable international B2B supply.
           </p>
-          <button
-            onClick={() =>
-              openCatalogRequest({ category: "Custom OEM Sunglasses", source: "oem_seo" })
-            }
-            className="btn-gold mt-8"
-          >
-            Discuss Your OEM Project <ArrowRight size={16} />
-          </button>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button
+              onClick={() =>
+                openCatalogRequest({ category: "Custom OEM Sunglasses", source: "oem_seo" })
+              }
+              className="btn-gold"
+            >
+              Discuss Your OEM Project <ArrowRight size={16} />
+            </button>
+            <a
+              href={waLink("Hello, I would like to discuss a custom OEM sunglasses project.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-outline-ink"
+            >
+              WhatsApp Us
+            </a>
+          </div>
         </div>
         <img
           src={oemImg}
@@ -116,6 +127,26 @@ function OemManufacturerPage() {
             OEM developments may require a different MOQ depending on design, material, tooling and
             customisation requirements.
           </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/category/aviator" className="btn-outline-ink">
+              Aviator Product Examples
+            </Link>
+            <Link to="/category/polarized" className="btn-outline-ink">
+              Polarized Product Examples
+            </Link>
+            <Link to="/private-label-sunglasses" className="btn-outline-ink">
+              Compare Private Label
+            </Link>
+          </div>
+          <div className="mt-12 border-t border-border pt-10">
+            <h2 className="font-display text-2xl">OEM sunglasses FAQ</h2>
+            <h3 className="mt-6 font-display text-lg">Does every OEM project start at 12 pcs?</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed">
+              No. The 12-piece starting MOQ applies to selected ready private-label designs. Custom
+              OEM quantities depend on materials, tooling, branding, packaging and development
+              scope.
+            </p>
+          </div>
         </div>
       </section>
     </>

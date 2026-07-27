@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import collectionImg from "@/assets/collection-grid.jpg";
+import { waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/wholesale-sunglasses")({
   component: WholesaleSunglassesPage,
@@ -64,14 +65,24 @@ function WholesaleSunglassesPage() {
             We support genuine business buyers with product selection, B2B pricing, custom logo
             options, private-label packaging, repeat orders and scalable bulk sunglasses supply.
           </p>
-          <button
-            onClick={() =>
-              openCatalogRequest({ category: "Wholesale Sunglasses", source: "wholesale_seo" })
-            }
-            className="btn-gold mt-8"
-          >
-            Get Wholesale Catalogue &amp; Pricing <ArrowRight size={16} />
-          </button>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button
+              onClick={() =>
+                openCatalogRequest({ category: "Wholesale Sunglasses", source: "wholesale_seo" })
+              }
+              className="btn-gold"
+            >
+              Get Wholesale Catalogue &amp; Pricing <ArrowRight size={16} />
+            </button>
+            <a
+              href={waLink("Hello, I would like wholesale sunglasses catalogue and pricing.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-outline-ink"
+            >
+              WhatsApp Us
+            </a>
+          </div>
         </div>
         <img
           src={collectionImg}
@@ -113,6 +124,27 @@ function WholesaleSunglassesPage() {
           <Link to="/collection" className="btn-outline-ink mt-8">
             View Sunglasses Collections
           </Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/category/polarized" className="btn-outline-ink">
+              Polarized Sunglasses
+            </Link>
+            <Link to="/category/aviator" className="btn-outline-ink">
+              Aviator Sunglasses
+            </Link>
+            <Link to="/category/fashion" className="btn-outline-ink">
+              Fashion Sunglasses
+            </Link>
+          </div>
+          <div className="mt-12 border-t border-border pt-10">
+            <h2 className="font-display text-2xl">Wholesale sunglasses FAQ</h2>
+            <h3 className="mt-6 font-display text-lg">
+              Do you support both trial and bulk orders?
+            </h3>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed">
+              Yes. Selected designs begin from 12 pcs, while larger wholesale and repeat orders are
+              quoted around the product mix, branding, packaging and destination requirements.
+            </p>
+          </div>
         </div>
       </section>
     </>

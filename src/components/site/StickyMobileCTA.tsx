@@ -11,7 +11,7 @@ export function StickyMobileCTA() {
         onClick={() => openCatalogRequest({ category: "Sunglasses", source: "sticky_mobile_cta" })}
         className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#D5A34A] px-5 py-3.5 text-sm font-bold text-[#081A32] transition active:scale-[0.99]"
       >
-        <BookOpen size={17} /> Discuss Your Project
+        <BookOpen size={17} /> Get Catalogue &amp; Pricing
       </button>
     </div>
   );

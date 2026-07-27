@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { useDialogs } from "@/components/site/DialogsProvider";
 import customImg from "@/assets/brand-every-detail.png";
 import collectionImg from "@/assets/collection-grid.jpg";
+import { waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/private-label-sunglasses")({
   component: PrivateLabelPage,
@@ -94,6 +95,14 @@ function PrivateLabelPage() {
             <Link to="/collection" className="btn-outline-ink">
               Explore Designs
             </Link>
+            <a
+              href={waLink("Hello, I would like private-label sunglasses catalogue and pricing.")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-outline-ink"
+            >
+              WhatsApp Us
+            </a>
           </div>
         </div>
         <img
@@ -145,6 +154,27 @@ function PrivateLabelPage() {
           collection before expanding successful models. Larger private-label and repeat-order
           programmes can be planned around your product mix, branding, packaging and destination.
         </p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {[
+            ["/category/aviator", "Private Label Aviators"],
+            ["/category/square", "Square Sunglasses"],
+            ["/category/fashion", "Fashion Sunglasses"],
+          ].map(([to, label]) => (
+            <Link key={to} to={to} className="card-luxe p-6 font-display text-lg">
+              {label} <ArrowRight className="mt-3 text-primary" size={16} />
+            </Link>
+          ))}
+        </div>
+        <div className="mt-12 border-t border-border pt-10">
+          <h2 className="font-display text-2xl">Private-label sunglasses FAQ</h2>
+          <h3 className="mt-6 font-display text-lg">
+            Can I begin with a small private-label order?
+          </h3>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed">
+            Yes. Selected ready designs start from 12 pcs. Branding and packaging availability
+            depends on the chosen product and order requirement.
+          </p>
+        </div>
       </section>
     </>
   );
